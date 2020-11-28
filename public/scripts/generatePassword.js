@@ -3,67 +3,58 @@ Takes in parameters to adjust pwd options
 ie No symbols, no upper ,no lower
 and max length
 
-- DEFAULT will be max strength...
-Max length, and variety
-
-Options will be booleans
-
-
-Not going to use b/c it only looks random Math.random().toString(36).substring(2, 8);  -- Super Nerds can predict it
-
-UTF8 > Pwd Length = x, generate x UTF8 Chars (hex) > translate to display (should be true random)
- > Can charsets be excluded by range?  ie a-z is range x A-Z is range y etc...
-
- Show Bits of Entropy
- https://advancedweb.hu/what-is-the-optimal-password-length/
-
- Recommends 112 bits of Entripy  (22 Chars w/ only upper and lower ltrs)r
+- DEFAULT will be max strength with length of 64
+Symbols does not include escape char '\'
 */
 
 const randomInt = require('random-int');
 
-const generatePassword = (inputLength, lwrCase, upCase, numbers, symbolsSwitch) => {
+const generatePassword = (inputLength = 64, allowLowerCase = true, allowUpperCase = true, allowDigits = true, allowSymbols = true) => {
+
   let output = [];
-  // PARAMS length, lwrCase, upCase, numbers, symbols
-  // Update Intial Vals w. User Options
-  //Production Defualt should be 64
-  // Need to hand optoins better >> ?? Are they going to be coming in as an object?
-  let length = 64;
-  let allowLowerCase = true;
-  let allowUpperCase = true;
-  let allowNumbers = true;
-  let allowSymbols = true;
 
-  // Charsets
   const charset = {
-    1: 'abcdefghijklmnopqrstuvwxyz',
-    2: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-    3: '1234567890',
-    4: `!"#$%&'()*+,-./:;<=>?@[\]^_{|}~`
-  }
-// Options >> Create new array / string based on options
-  const lower = 'abcdefghijklmnopqrstuvwxyz'
-  const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  const digits = '1234567890'
-  const symbols = `!"#$%&'()*+,-./:;<=>?@[\]^_{|}~`
+    lower: 'abcdefghijklmnopqrstuvwxyz',
+    upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    digits: '1234567890',
+    symbols: `!"#$%&'()*+,-./:;<=>?@[]^_{|}~`
+  };
 
-  //Generate String
-  for (let i = 0; i < length; i++) {
-    //Random Num to choose charset (1-4)
-    chars = charset[randomInt(1, 4)]
-    //Based on length of string (range), pick random index > Push char output
-    const charPosn = randomInt(0, chars.length - 1);
-    output.push(chars.charAt(charPosn))
+  // Check Character Options >> True get dded to Chars
+  let chars = [];
+  if (allowLowerCase) {
+    for (let i = 0; i < charset.lower.length; i++) {
+      chars.push(charset.lower.charAt(i));
+    }
   }
-  //JOIN OUPUT to make 1 string
-  output = output.join("")
-  return output
+  if (allowUpperCase) {
+    for (let i = 0; i < charset.upper.length; i++) {
+      chars.push(charset.upper.charAt(i));
+    }
+  }
+  if (allowDigits) {
+    for (let i = 0; i < charset.digits.length; i++) {
+      chars.push(charset.digits.charAt(i));
+    }
+  }
+  if (allowSymbols) {
+    for (let i = 0; i < charset.symbols.length; i++) {
+      chars.push(charset.symbols.charAt(i));
+    }
+  }
+
+  //Error Checking, will not allow empty charset
+  if (chars.length === 0) {
+    return null;
+  }
+  //Generate String
+  for (let i = 0; i < inputLength; i++) {
+    const charPosn = randomInt(0, chars.length - 1);
+    output.push(chars[charPosn]); // Array
+  }
+  //Output as String
+  output = output.join("");
+  return output;
 };
 
-console.log(generatePassword());
-// const randomInt = require('random-int');
-
-// console.log(randomInt(1,4));
-// //=> 3
-
-// console.log(randomInt(1, 26));
+module.exports = generatePassword;
