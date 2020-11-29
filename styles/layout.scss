@@ -16,10 +16,43 @@ header {
   nav{
     display: flex;
     justify-content: space-between;
+
   }
 }
 
 .filter{
   display: flex;
   justify-content: flex-end;
+  background-color: rgb(75, 75, 75);
+}
+
+main{
+  background-color: white;
+  display: flex;
+  padding: 1em;
+  nav{
+
+  }
+  article{
+    width: 75%;
+    border-bottom: 3px,solid, red;
+    display: flex;
+    flex-direction: column;
+    div{
+      display:flex;
+      justify-content: space-around;
+
+    }
+    .urlInfo{
+      display: flex;
+      flex-direction: column;
+    }
+
+    span{
+      padding: 1rem;
+      &:hover{
+        background-color: lightblue;
+      }
+    }
+  }
 }
