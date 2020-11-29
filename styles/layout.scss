@@ -1,9 +1,25 @@
 // See: https://sass-lang.com/
+$headerColor: rgb(240, 65, 65);
+$mainBackgroundColor: grey;
+
 
 body {
-  background-color: #EEE;
+  background-color: $mainBackgroundColor;
 
   h1 {
     color: #244751;
   }
+}
+
+header {
+  background-color: $headerColor;
+  nav{
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.filter{
+  display: flex;
+  justify-content: flex-end;
 }
