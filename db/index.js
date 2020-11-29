@@ -1,14 +1,21 @@
 const { emit } = require('nodemon');
 const generatePassword = require('../public/scripts/generatePassword')
-
+require('dotenv').config({ path: '../.env' });
 const { Pool } = require('pg');
+
 const pool = new Pool({
-  user: 'labber',
-  password: 'labber',
-  host: 'localhost',
-  database: 'midterm'
-});
-console.log("WARNING .env not in use (DB Access)!!!")
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  database: process.env.DB_NAME,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS
+  });
+
+  pool
+  .connect()
+  .then((client) => console.log(`Connecting to DB ${process.env.DB_NAME}`))
+  .catch((err) => console.log(`Error connecting to ${process.env.DB_NAME}...`));
+
 
 //========= CREATE =========================
 const addUser = (formObject) => {
@@ -64,7 +71,7 @@ const addSite = (formObject) => {
     .then(res => console.log(`Added Site`, res.rows));
 }
 
-const addUserToOrg =(userId, orgId, canWrite = false) => {
+const addUserToOrg = (userId, orgId, canWrite = false) => {
   const queryString = (`
   INSERT INTO org_users
   (org_id, user_id, can_write)
@@ -72,9 +79,9 @@ const addUserToOrg =(userId, orgId, canWrite = false) => {
   ($1, $2, $3)
   RETURNING *;
   `);
-const values = [userId, orgId, canWrite];
-return pool.query(queryString, values)
-  .then(res => console.log(`Added user to org`, res.rows));
+  const values = [userId, orgId, canWrite];
+  return pool.query(queryString, values)
+    .then(res => console.log(`Added user to org`, res.rows));
 };
 
 //========= READ ===========================
@@ -201,7 +208,50 @@ const getOrgUsers = (orgId) => {
 
 //========= UPDATE =========================
 
+const updateSite = (siteProperty, newValue, siteId) => {
+  //Need to adapt for batch update (possibility of multiple values) <<<<<<<<<<<<<<<<<
+  const queryString = (`
+  UPDATE sites
+  SET $1 = $2
+  WHERE id = $3;
+  `);
+  const values = [siteProperty, newValue, siteId];
+  pool.query(queryString, values)
+    .then(res => console.log(`Update Site`, res.rows));
+}
 
+const updateOrg = (orgProperty, newValue, orgId) => {
+  const queryString = (`
+  UPDATE sites
+  SET $1 = $2
+  WHERE id = $3;
+  `);
+  const values = [orgProperty, newValue, orgId];
+  pool.query(queryString, values)
+    .then(res => console.log(`Update Org`, res.rows));
+}
+
+const updateUser = (userProperty, newValue, userId) => {
+  const queryString = (`
+  UPDATE sites
+  SET $1 = $2
+  WHERE id = $3;
+  `);
+  const values = [userProperty, newValue, userId];
+  pool.query(queryString, values)
+    .then(res => console.log(`Update User`, res.rows));
+}
+
+const updateOrgUsers = (orgUsersProperty, newValue, userId) => {
+  const queryString = (`
+  UPDATE sites
+  SET $1 = $2
+  WHERE id = $3;
+  `);
+  const values = [orgUsersProperty, newValue, userId];
+  pool.query(queryString, values)
+    .then(res => console.log(`Update Org Users`, res.rows));
+}
 
 //========= DELETE =========================
 // DELETE QUERIES REQUIRE 2 WHERE CONDITIONS TO MATCH
@@ -217,11 +267,11 @@ const deleteUser = (userId, email) => {
   const queryString = (`DELETE FROM users WHERE id = $1 AND email = $2;`);
   const values = [userId, email];
   pool.query(queryString, values)
-    .then(res => console.log(`Deleted Org`, res.rows));
+    .then(res => console.log(`Deleted user`, res.rows));
 }
 
-const deleteSite = (orgId, name) => {
-  const queryString = (`DELETE FROM sites WHERE id = $1 AND name = $2;`);
+const deleteOrg = (orgId, name) => {
+  const queryString = (`DELETE FROM organizations WHERE id = $1 AND name = $2;`);
   const values = [orgId, name];
   pool.query(queryString, values)
     .then(res => console.log(`Deleted Org`, res.rows));
@@ -255,6 +305,17 @@ module.exports = {
   getOrgWithId,
   getOrgUrls,
   getUrlWithTags,
-  getOrgUsers
+  getOrgUsers,
+  deleteSite,
+  deleteUser,
+  deleteOrg,
+  addUser,
+  addOrg,
+  addSite,
+  addUserToOrg,
+  updateSite,
+  updateOrg,
+  updateUser,
+  updateOrgUsers
 }
 
