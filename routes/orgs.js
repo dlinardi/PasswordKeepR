@@ -41,6 +41,29 @@ module.exports = (db) => {
             .status(500)
             .json({ error: err.message });
         });
+    })
+    .get("/:id/sites", (req, res) => {
+
+      const queryString = `
+        SELECT organizations.id as org_id, sites.id as site_id, url, login_name, account_email, tags, created_date, deleted_date, is_active
+        FROM sites
+        JOIN organizations ON organizations.id = org_id
+        WHERE organizations.id = $1
+        GROUP BY sites.id, organizations.id;
+        `;
+
+      const values = [`${req.params.id}`];
+
+      db.query(queryString, values)
+        .then(data => {
+          const orgs = data.rows;
+          res.json({ orgs });
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
     });
   return router;
 };
