@@ -37,9 +37,8 @@ module.exports = (db) => {
           if (data.rows.length === 0) {
             res.json({ error: `${req.params.id} is not a valid id.` });
           } else {
-            res.json({ users });
+            res.json({ orgs });
           }
-          res.json({ orgs });
         })
         .catch(err => {
           res
@@ -64,11 +63,6 @@ module.exports = (db) => {
       db.query(queryString, values)
         .then(data => {
           const orgs = data.rows;
-          if (data.rows.length === 0) {
-            res.json({ error: `${req.params.id} is not a valid id.` });
-          } else {
-            res.json({ users });
-          }
           res.json({ orgs });
         })
         .catch(err => {
