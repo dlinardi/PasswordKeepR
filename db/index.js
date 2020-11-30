@@ -103,10 +103,13 @@ const getUserWithEmail = (email) => {
 
 const getUserWithId = (id) => {
   console.log("Get user w. id:", id)
+
   const queryString = (`
     SELECT * FROM users WHERE id = $1;
   `);
+
   const values = [id];
+
   return Promise.resolve(pool.query(queryString, values)
     .then(res => {
       results = res.rows[0]

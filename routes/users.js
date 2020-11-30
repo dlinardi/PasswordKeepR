@@ -6,7 +6,10 @@
  */
 
 const express = require('express');
+const { database } = require('pg/lib/defaults');
 const router  = express.Router();
+
+// const { getUserWithId } = require('../db/index');
 
 module.exports = (db) => {
   router
@@ -23,7 +26,6 @@ module.exports = (db) => {
         });
     })
     .get("/:id", (req, res) => {
-
       const queryString = `
         SELECT id, first_name, last_name, email
         FROM users
@@ -35,7 +37,11 @@ module.exports = (db) => {
       db.query(queryString, values)
         .then(data => {
           const users = data.rows;
-          res.json({ users });
+          if (data.rows.length === 0) {
+            res.json({ error: `${req.params.id} is not a valid id.` });
+          } else {
+            res.json({ users });
+          }
         })
         .catch(err => {
           res
