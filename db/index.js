@@ -97,7 +97,7 @@ const getUserWithEmail = (email) => {
       results = res.rows[0]
       return results
     })
-    .catch(err => { console.log(err) })
+    .catch(err => console.error(e.stack))
   );
 }
 
