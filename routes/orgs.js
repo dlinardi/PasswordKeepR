@@ -7,3 +7,20 @@
 
 const express = require('express');
 const router  = express.Router();
+
+module.exports = (db) => {
+  router
+    .get("/", (req, res) => {
+      db.query(`SELECT * FROM organizations;`)
+        .then(data => {
+          const orgs = data.rows;
+          res.json({ orgs });
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+    });
+  return router;
+};
