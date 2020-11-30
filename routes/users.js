@@ -27,7 +27,9 @@ module.exports = (db) => {
       const queryString = `
         SELECT id, first_name, last_name, email
         FROM users
-        WHERE id = $1;`
+        WHERE id = $1;
+        `;
+
       const values = [`${req.params.id}`];
 
       db.query(queryString, values)
