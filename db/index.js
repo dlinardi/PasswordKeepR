@@ -9,9 +9,9 @@ const pool = new Pool({
   database: process.env.DB_NAME,
   user: process.env.DB_USER,
   password: process.env.DB_PASS
-  });
+});
 
-  pool
+pool
   .connect()
   .then((client) => console.log(`Connecting to DB ${process.env.DB_NAME}`))
   .catch((err) => console.log(`Error connecting to ${process.env.DB_NAME}...`));
@@ -116,22 +116,24 @@ const getUserWithId = (id) => {
   );
 }
 
-const emailExists = (email) => {
-  console.log("Checking if email exists:", email)
+const emailExists = (inputEmail) => {
+  console.log("Checking if email exists:", inputEmail)
   const queryString = (`
     SELECT email FROM users WHERE email = $1;
   `);
-  const values = [email];
+  const values = [inputEmail];
   return Promise.resolve(pool.query(queryString, values)
     .then(res => {
-      results = res.rows[0]
-      if (results.email === email){
-        return true;
-      } else {
+      results = res.rows[0];
+      if (!results) {
+        console.log("No Results")
         return false;
+      } else {
+        console.log('match true')
+        return true;
       }
     })
-    .catch(err => console.error(e.stack))
+    .catch(err => console.error(err.stack))
   );
 }
 
