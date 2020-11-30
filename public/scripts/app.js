@@ -13,9 +13,16 @@ $(document).ready(function () {
   console.log("DOC READY")
 
 
-$('.urlInfo').on('click', event => {
+$('#test').on('click',  function(event) {
   event.preventDefault();
-  copyToClipboard('TEST CLIP')
+
+  console.log($('#test:last-child'))
+  console.log("THIS",$(this))
+
+  //below work but hard coded
+  const toClip = $('#test')[0].lastElementChild.innerText;
+  // console.log($('#test').children('.pwd')[0].innerText)
+  // copyToClipboard($('#test').children('.pwd')[0].innerText)
   });
 
 });
