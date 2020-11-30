@@ -116,6 +116,25 @@ const getUserWithId = (id) => {
   );
 }
 
+const emailExists = (email) => {
+  console.log("Checking if email exists:", email)
+  const queryString = (`
+    SELECT email FROM users WHERE email = $1;
+  `);
+  const values = [email];
+  return Promise.resolve(pool.query(queryString, values)
+    .then(res => {
+      results = res.rows[0]
+      if (results.email === email){
+        return true;
+      } else {
+        return false;
+      }
+    })
+    .catch(err => console.error(e.stack))
+  );
+}
+
 const getUserOrgs = (userId) => {
   console.log("Get users Orgs:", userId)
   const queryString = (`
@@ -302,6 +321,7 @@ module.exports = {
   getUserWithEmail,
   getUserWithId,
   getUserOrgs,
+  emailExists,
   getOrgWithId,
   getOrgUrls,
   getUrlWithTags,
