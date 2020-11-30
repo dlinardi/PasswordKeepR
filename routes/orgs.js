@@ -21,6 +21,26 @@ module.exports = (db) => {
             .status(500)
             .json({ error: err.message });
         });
+    })
+    .get("/:id", (req, res) => {
+
+      const queryString = `
+        SELECT id, name, display_picture as image
+        FROM organizations
+        WHERE id = $1;`
+
+      const values = [`${req.params.id}`];
+
+      db.query(queryString, values)
+        .then(data => {
+          const orgs = data.rows;
+          res.json({ orgs });
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
     });
   return router;
 };
