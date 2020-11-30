@@ -13,16 +13,11 @@ $(document).ready(function () {
   console.log("DOC READY")
 
 
-$('#test').on('click',  function(event) {
+$('.urlInfo').on('click',  function(event) {
   event.preventDefault();
-
-  console.log($('#test:last-child'))
-  console.log("THIS",$(this))
-
-  //below work but hard coded
-  const toClip = $('#test')[0].lastElementChild.innerText;
-  // console.log($('#test').children('.pwd')[0].innerText)
-  // copyToClipboard($('#test').children('.pwd')[0].innerText)
+  // Targets .pwd Class of the Clicked urlInfo, will clip innerText
+  const toClip = $(this).children('.pwd')[0].innerText
+  copyToClipboard(toClip)
   });
 
 });
