@@ -42,6 +42,31 @@ module.exports = (db) => {
             .json({ error: err.message });
         });
     })
+    .get("/:id/users", (req, res) => {
+
+      const queryString = `
+        SELECT users.id as user_id, first_name, last_name, email, users.display_picture as image
+        FROM org_users
+        JOIN users ON users.id = user_id
+        JOIN organizations ON organizations.id = org_id
+        WHERE organizations.id = $1
+        GROUP BY users.id, organizations.id, org_users.can_write
+        ORDER BY can_write;
+        `;
+
+      const values = [`${req.params.id}`];
+
+      db.query(queryString, values)
+        .then(data => {
+          const orgs = data.rows;
+          res.json({ orgs });
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+    })
     .get("/:id/sites", (req, res) => {
 
       const queryString = `
