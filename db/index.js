@@ -88,7 +88,7 @@ const addSite = (formObject) => {
 const addUserToOrg = (userId, orgId, canWrite = false) => {
   const queryString = (`
   INSERT INTO org_users
-  (org_id, user_id, can_write)
+  (user_id, org_id, can_write)
   VALUES
   ($1, $2, $3)
   RETURNING *;
