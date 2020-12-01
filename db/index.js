@@ -365,20 +365,22 @@ const updateSite = (siteProperty, newValue, siteId) => {
     .then(res => console.log(`Update Site`, res.rows));
 }
 
-const updateOrg = (orgProperty, newValue, orgId) => {
+const updateOrg = (formObject) => {
   const queryString = (`
-  UPDATE sites
-  SET $1 = $2
-  WHERE id = $3;
+  UPDATE organizations
+  SET name = $1,
+  display_picture = $2
+  WHERE id = $3
+  RETURNING *;
   `);
-  const values = [orgProperty, newValue, orgId];
+  const values = [formObject['name'], formObject['url'], formObject['orgId']];
   pool.query(queryString, values)
     .then(res => console.log(`Update Org`, res.rows));
 }
 
 const updateUser = (userProperty, newValue, userId) => {
   const queryString = (`
-  UPDATE sites
+  UPDATE users
   SET $1 = $2
   WHERE id = $3;
   `);
@@ -389,7 +391,7 @@ const updateUser = (userProperty, newValue, userId) => {
 
 const updateOrgUsers = (orgUsersProperty, newValue, userId) => {
   const queryString = (`
-  UPDATE sites
+  UPDATE org_users
   SET $1 = $2
   WHERE id = $3;
   `);
