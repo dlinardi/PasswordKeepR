@@ -7,128 +7,187 @@
   <!--   <link rel="shortcut icon" href="../public/images/favicon.ico" /> -->
 
   <meta charset="utf-8">
+
   <!-- Styles --------------------------------------------------------------------->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
-  <!-- External JS   -------------------------------------------------------------->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
   <!-- Internal JS  --------------------------------------------------------------->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/copyToClipboard.js"></script>
 
+  <!-- External JS   -------------------------------------------------------------->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
+
+
 </head>
 
-
-<header>
-  <%- include('partials/_header') %>
-</header>
-
 <body>
+
+  <%- include('partials/_header') %>
+
   <!-- Search / Filter Nav Bar -->
-  <div class='filter'>
+  <!-- <div class='filter'>
     <span>
       <form action="" method="">
-        <!-- Ideally will be live search (Stretch) -->
+
         <textarea name="text" id="filter-text" placeholder="Filter by Tag: Work, Home, Personal, etc..."></textarea>
         <button class="hoverBtn" type="submit">Filter</button>
       </form>
     </span>
-  </div>
+  </div> -->
 
+  <div class="content-container">
 
+    <!-- Page-specific (main) content here -->
+    <main class="container">
 
-  <!-- Main Area -->
-  <main>
+      <!-- error/success popups -->
 
-    <!-- Side Bar -->
-    <!--____________------------======>>>>>>>>  Buttons don't have actions assigned yet <<<<<<<<<<<<-->
-    <nav>
-      <h1>Navigation</h2>
-        <p>NOTE Btn actions not hooked up yet</p>
-        <div>
-          <h2>Url Management</h2>
-          <div>New Site
-            <form action="" method="POST">
-              <input type="text" name="siteUrl" placeholder="http://mysite.internet">
-              <input type="text" name="loginName" placeholder="Login Username">
-              <input type="text" name="accountEmail" placeholder="ie Marketing@...">
-              <input type="text" name="tags" placeholder="Tags, comma separated">
-              <div></div>
-              <button type="submit" class="btn">Add Site</button>
-            </form>
-          </div>
-        </div>
-        <hr class="rounded">
-        <div>
-
-          <h2>Org Management</h2>
-          <div>New Organization
-            <form action="" method="POST">
-              <input type="text" name="orgName" placeholder="Organization Name">
-              <div></div>
-              <button type="submit" class="btn">Add Org</button>
-            </form>
-          </div>
-          <hr class="rounded">
-
-          <div>Invite User to Org
-            <form>
-              <label for="orgstoEdit">Organization:</label>
-              <select name="orgstoEdit" id=orgToEdit>
-                <option value="1">Org 1</option>
-                <option value="2">Org 2</option>
-                <option value="3">Org 3</option>
-              </select>
-              <div></div>
-              <input type="email" name="newUserEmail" placeholder="Email Address">
-              <div></div>
-              <button type="submit" id="userToOrg" class="btn ">Add To Org</button>
-            </form>
-          </div>
-          <hr class="rounded">
-          <div>Edit Org Details
-            <form action="" method="POST">
-              <label for="orgstoEdit">Organization:</label>
-              <select name="orgstoEdit" id=orgToEdit>
-                <option value="1">Org 1</option>
-                <option value="2">Org 2</option>
-                <option value="3">Org 3</option>
-              </select>
-              <div></div>
-              <input type="text" name="orgName" placeholder="Org Name">
-              <input type="text" name="orgDisplayUrl" placeholder="Display url">
-              <div></div>
-              <button type="submit" class="btn">Edit Org</button>
-            </form>
-          </div>
-        </div>
-        <!--____________------------======>>>>>>>>  Buttons don't have actions assigned yet <<<<<<<<<<<<-->
-    </nav>
-
-    <!-- Catagory Box / Bar -->
-    <article>
-      <h3>Category / or Org?</h3>
-
-      <div>
-        <span id="test" class="urlInfo">
-          <img src="'https://picsum.photos/200'">
-          <h4>Url Name</h4>
-          <span class="pwd">Password 1</span>
-        </span>
-
-        <span class="urlInfo">
-          <img src="'https://picsum.photos/200'">
-          <h4>Url 2 Name</h4>
-          <span class="pwd">Password 2</span>
+      <!-- <div class="invalid">
+        <span>
+          <span><i class="fas fa-exclamation-triangle"></i></span>
+          <span id="error-msg"></span>
         </span>
       </div>
 
-    </article>
-  </main>
+      <div class="success">
+        <span>
+          <span><i class="fas fa-check"></i></span>
+          <span id="success-msg"></span>
+        </span>
+      </div> -->
+
+      <section class="sites-container">
+
+        <article class="sites">
+
+          <header>
+            <span class="edit-delete">
+              <i class="fas fa-edit"></i>
+              <i class="fas fa-trash-alt"></i>
+            </span>
+            <img src="http://placehold.jp/300x100.png">
+          </header>
+
+          <footer>
+            <div class="card-details">
+              <span class="cardTitle">amazon.com</span>
+              <span class="pwd">4j2o04cx$:][(</span>
+            </div>
+            <div class="card-action">
+              <span><i class="far fa-copy"></i></span>
+            </div>
+          </footer>
+
+        </article>
+
+        <article class="sites">
+
+          <header>
+            <span class="edit-delete">
+              <i class="fas fa-edit"></i>
+              <i class="fas fa-trash-alt"></i>
+            </span>
+            <img src="http://placehold.jp/300x100.png">
+          </header>
+
+          <footer>
+            <div class="card-details">
+              <span class="cardTitle">amazon.com</span>
+              <span class="pwd">4j2o04cx$:][(</span>
+            </div>
+            <div class="card-action">
+              <span><i class="far fa-copy"></i></span>
+            </div>
+          </footer>
+
+        </article>
+
+        <article class="sites">
+
+          <header>
+            <span class="edit-delete">
+              <i class="fas fa-edit"></i>
+              <i class="fas fa-trash-alt"></i>
+            </span>
+            <img src="http://placehold.jp/300x100.png">
+          </header>
+
+          <footer>
+            <div class="card-details">
+              <span class="cardTitle">amazon.com</span>
+              <span class="pwd">4j2o04cx$:][(</span>
+            </div>
+            <div class="card-action">
+              <span><i class="far fa-copy"></i></span>
+            </div>
+          </footer>
+
+        </article>
+
+        <article class="sites">
+
+          <header>
+            <span class="edit-delete">
+              <i class="fas fa-edit"></i>
+              <i class="fas fa-trash-alt"></i>
+            </span>
+            <img src="http://placehold.jp/300x100.png">
+          </header>
+
+          <footer>
+            <div class="card-details">
+              <span class="cardTitle">amazon.com</span>
+              <span class="pwd">4j2o04cx$:][(</span>
+            </div>
+            <div class="card-action">
+              <span><i class="far fa-copy"></i></span>
+            </div>
+          </footer>
+
+        </article>
+
+        <article class="sites">
+
+          <header>
+            <span class="edit-delete">
+              <i class="fas fa-edit"></i>
+              <i class="fas fa-trash-alt"></i>
+            </span>
+            <img src="http://placehold.jp/300x100.png">
+          </header>
+
+          <footer>
+            <div class="card-details">
+              <span class="cardTitle">amazon.com</span>
+              <span class="pwd">4j2o04cx$:][(</span>
+            </div>
+            <div class="card-action">
+              <span><i class="far fa-copy"></i></span>
+            </div>
+          </footer>
+
+        </article>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- add new button -->
+  <!-- <span class="add-new">
+    <div id="new">
+      <i class="fas fa-plus"></i>
+    </div>
+  </span> -->
 
 
 </body>
