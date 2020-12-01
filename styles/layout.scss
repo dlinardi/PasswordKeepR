@@ -15,7 +15,6 @@ header#main-header {
   color: #fff;
   font-weight: 700;
   height: 100px;
-  margin-bottom: 50px;
 
   nav {
     display: flex;
@@ -27,12 +26,26 @@ header#main-header {
 }
 
 main.container {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
-  padding-left: 4vw; // temp center fix
-
-  section {
+  // background-color: lightblue;
+  // padding-left: 4vw; // temp center fix
+  section.sites-container {
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+
+    .org-bar {
+      width: 100%;
+      background-color: $darkGrey;
+      color: white;
+      padding: 1em;
+      display: flex;
+    }
+
   }
 }
 
@@ -100,6 +113,8 @@ article.sites {
 
       .cardTitle {
         font-weight: bold;
+        border-bottom: 3px $darkRed solid;
+        padding-bottom: 5px;
       }
 
       .pwd {
@@ -127,11 +142,4 @@ article.sites {
   }
 }
 
-section.sites-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-content: center;
-  flex-wrap: wrap;
 
-}
