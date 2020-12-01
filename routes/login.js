@@ -2,20 +2,16 @@ const express = require('express');
 const { database } = require('pg/lib/defaults');
 const router = express.Router();
 const login = require('../lib/loginUser.js');
-const reqAndCheckCookie = require('../lib/helper')
 
 module.exports = (db) => {
   router
     .get("/", (req, res) => {
-      const cookieId = req.session.userId;
-      if (!cookieId) {
+      if (!req.session.userId) {
         res.render('login');
-      } else {
-        res.redirect("/");
       }
+      res.redirect("/");
     })
     .post("/", (req, res) => {
-      console.log(req.body.email);
       login(req.body.email, req.body.password)
         .then(user => {
           console.log(user);
@@ -32,18 +28,3 @@ module.exports = (db) => {
     });
   return router;
 };
-
-
-// router.post('/login', (req, res) => {
-//   const {email, password} = req.body;
-//   login(email, password)
-//     .then(user => {
-//       if (!user) {
-//         res.send('No User (!User)');
-//         return;
-//       }
-//       req.session.userId = user.id;
-//       res.send({user: {name: user.name, email: user.email, id: user.id}});
-//     })
-//     .catch(e => res.send(e));
-// });

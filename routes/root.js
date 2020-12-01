@@ -8,17 +8,14 @@
 const express = require('express');
 const router  = express.Router();
 const dbHelpers = require('../db/index');
-const reqAndCheckCookie = require('../lib/helper')
 
 module.exports = (db) => {
   router
     .get("/", (req, res) => {
-      const cookieId = req.session.userId;
-      if (!cookieId) {
+      if (!req.session.userId) {
         res.redirect('/login');
-      } else {
-        res.render("index");
       }
+        res.render("index");
     })
     .post("/new", (req, res) => {
       const site = req.body;
