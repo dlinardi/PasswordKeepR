@@ -14,8 +14,8 @@
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
   <!-- External JS   -------------------------------------------------------------->
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+    integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
   <!-- Internal JS  --------------------------------------------------------------->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -47,19 +47,52 @@
   <main>
 
     <!-- Side Bar -->
+    <!--____________------------======>>>>>>>>  Buttons don't have actions assigned yet <<<<<<<<<<<<-->
     <nav>
       <h1>Navigation</h2>
+        <p>NOTE Btn actions not hooked up yet</p>
         <div>
           <h2>Url Management</h2>
           <li>Add Url</li>
-          <li></li>
+          <div>
+            <form action="" method="POST">
+              <input type="email" name="email" placeholder="Email">
+              <input type="text" name="first_name" placeholder="First Name">
+              <input type="text" name="last_name" placeholder="Last Name">
+              <input type="password" name="password" placeholder="Password">
+              <div></div>
+              <button type="submit" class="btn">Add User</button>
+            </form>
+          </div>
         </div>
         <div>
           <h2>Org Management</h2>
           <li>Add Organization</li>
-          <li>Change Org</li>
-
+          <div>
+            <form action="" method="POST">
+              <input type="text" name="orgName" placeholder="Create Organization Name">
+              <div></div>
+              <button type="submit" class="btn">Add Org</button>
+            </form>
+          </div>
+          <li>Edit Org</li>
+          <div>
+            <form action="" method="POST">
+              <label for="orgstoEdit">Orgs:</label>
+              <select name="orgstoEdit" id=orgToEdit>
+                <option value="1">Org 1</option>
+                <option value="2">Org 2</option>
+                <option value="3">Org 3</option>
+              </select>
+              <div></div>
+              <input type="text" name="orgName" placeholder="Edit Org Name">
+              <input type="text" name="orgDisplayUrl" placeholder="Edit display url">
+              <div></div>
+              <button type="submit" class="btn">Edit Org</button>
+            </form>
+          </div>
         </div>
+        <!--____________------------======>>>>>>>>  Buttons don't have actions assigned yet <<<<<<<<<<<<-->
     </nav>
 
     <!-- Catagory Box / Bar -->
