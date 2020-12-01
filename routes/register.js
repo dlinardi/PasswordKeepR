@@ -7,14 +7,14 @@ const reqAndCheckCookie = require('../lib/helper')
 module.exports = (db) => {
   router
     .get("/", (req, res) => {
-      if (reqAndCheckCookie) {
-        res.redirect("/");
-      } else {
+      const cookieId = req.session.userId;
+      if (!cookieId) {
         res.render('register');
+      } else {
+        res.redirect("/");
       }
     })
     .post("/", (req, res) => {
-      // console.log("req",req.body)
       registerUser(req.body)
         .then(user => {
           if (!user) {

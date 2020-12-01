@@ -13,10 +13,11 @@ const reqAndCheckCookie = require('../lib/helper')
 module.exports = (db) => {
   router
     .get("/", (req, res) => {
-      if (reqAndCheckCookie) {
-        res.render("index");
-      } else {
+      const cookieId = req.session.userId;
+      if (!cookieId) {
         res.redirect('/login');
+      } else {
+        res.render("index");
       }
     })
     .post("/new", (req, res) => {

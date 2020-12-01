@@ -7,10 +7,11 @@ const reqAndCheckCookie = require('../lib/helper')
 module.exports = (db) => {
   router
     .get("/", (req, res) => {
-      if (reqAndCheckCookie) {
-        res.redirect("/");
-      } else {
+      const cookieId = req.session.userId;
+      if (!cookieId) {
         res.render('login');
+      } else {
+        res.redirect("/");
       }
     })
     .post("/", (req, res) => {
@@ -24,7 +25,7 @@ module.exports = (db) => {
           }
           //Set cookie
           req.session.userId = user.id;
-          res.redirect(`http://192.168.1.198:8080/`);
+          res.redirect(`/`);
         })
         .catch(e => res.send(e));
 
