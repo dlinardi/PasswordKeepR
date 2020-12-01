@@ -36,6 +36,9 @@ module.exports = (db) => {
             .status(500)
             .json({ error: err.message });
         });
+    })
+    .post("/new", (req, res) => {
+      console.log(req.body);
     });
   return router;
 };
