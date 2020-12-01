@@ -175,7 +175,6 @@ const getUserOrgs = (userId) => {
   return Promise.resolve(pool.query(queryString, values)
     .then(res => {
       results = res.rows;
-      console.log(results)
       return results
     })
     .catch(err => { console.log(err) })
