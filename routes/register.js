@@ -6,10 +6,12 @@ const registerUser = require('../lib/registerUser');
 module.exports = (db) => {
   router
     .get("/", (req, res) => {
-      res.render("register");
+      if (!req.session.userId) {
+        res.render('register');
+      }
+      res.redirect("/");
     })
     .post("/", (req, res) => {
-      // console.log("req",req.body)
       registerUser(req.body)
         .then(user => {
           if (!user) {

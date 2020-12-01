@@ -6,10 +6,12 @@ const login = require('../lib/loginUser.js');
 module.exports = (db) => {
   router
     .get("/", (req, res) => {
-      res.render("login");
+      if (!req.session.userId) {
+        res.render('login');
+      }
+      res.redirect("/");
     })
     .post("/", (req, res) => {
-      console.log(req.body.email);
       login(req.body.email, req.body.password)
         .then(user => {
           console.log(user);
@@ -19,25 +21,10 @@ module.exports = (db) => {
           }
           //Set cookie
           req.session.userId = user.id;
-          res.redirect(`http://192.168.1.198:8080/`);
+          res.redirect(`/`);
         })
         .catch(e => res.send(e));
 
     });
   return router;
 };
-
-
-// router.post('/login', (req, res) => {
-//   const {email, password} = req.body;
-//   login(email, password)
-//     .then(user => {
-//       if (!user) {
-//         res.send('No User (!User)');
-//         return;
-//       }
-//       req.session.userId = user.id;
-//       res.send({user: {name: user.name, email: user.email, id: user.id}});
-//     })
-//     .catch(e => res.send(e));
-// });
