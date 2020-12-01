@@ -1,5 +1,7 @@
 // See: https://sass-lang.com/
-$headerColor: rgb(240, 65, 65);
+$headerColor: #C0392B;
+$white: #fff;
+$darkGray: #4F4F4F;
 $mainBackgroundColor: rgb(158, 158, 158);
 
 
@@ -13,26 +15,29 @@ body {
 
 header {
   background-color: $headerColor;
-  nav{
-    display: flex;
-    justify-content: space-between;
+  height: 100px;
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
+  nav {
+    height: 100%;
   }
+
 }
 
 .filter{
   display: flex;
   justify-content: flex-end;
-  background-color: rgb(75, 75, 75);
+  background-color: $darkGray;
 }
 
 main{
   background-color: white;
   display: flex;
   padding: 1em;
-  nav{
-
-  }
   article{
     width: 75%;
     border-bottom: 3px,solid, red;
