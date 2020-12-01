@@ -9,6 +9,12 @@ const bodyParser = require("body-parser");
 const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
+const cookieSession = require('cookie-session');
+
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1']
+}));
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -56,9 +62,9 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/login", (req, res) => {
-  res.render("login");
-});
+// app.get("/login", (req, res) => {
+//   res.render("login");
+// });
 
 app.get("/register", (req, res) => {
   res.render("register");
