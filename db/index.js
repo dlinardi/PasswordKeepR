@@ -32,13 +32,13 @@ const addUser = (formObject) => {
     formObject.last_name
   ];
   return Promise.resolve(pool.query(queryString, values)
-  .then(res => {
-    results = res.rows[0]
-    console.log("DB RESULT", results)
-    return results
-  })
-  .catch(err => console.error(e.stack))
-);
+    .then(res => {
+      results = res.rows[0]
+      console.log("DB RESULT", results)
+      return results
+    })
+    .catch(err => console.error(e.stack))
+  );
 
 
 
@@ -61,11 +61,16 @@ const addOrg = (orgName) => {
     orgName
   ];
   return pool.query(queryString, values)
-    .then(res => console.log(`Added org`, res.rows));
+    .then(res => {
+      results = res.rows[0]
+      return results
+    })
 }
 
 // Org ID wont be on the form, backend JS will need to add it
 const addSite = (formObject) => {
+  formObject.email = formObject['account_email'].toLowerCase();
+
   formObject.tags = formObject['tags'].toLowerCase();
   const queryString = (`
     INSERT INTO sites (url, login_name, account_email, tags, password, org_id)
@@ -141,6 +146,29 @@ const getUsers = () => {
   );
 }
 
+const getAllUserSites = (userId) => {
+  console.log("Get users Orgs:", userId)
+  const queryString = (`
+  SELECT sites.*, orgs.name AS org_name
+  FROM users
+  JOIN org_users on org_users.user_id = users.id
+  JOIN organizations orgs ON org_users.org_id = orgs.id
+  JOIN sites ON sites.org_id = orgs.id
+  WHERE users.id = $1
+  ORDER BY orgs.name;
+  `);
+  const values = [userId];
+  return Promise.resolve(pool.query(queryString, values)
+    .then(res => {
+      results = res.rows;
+      console.log(results)
+      return results
+    })
+    .catch(err => { console.log(err) })
+  );
+}
+
+
 const emailExists = (inputEmail) => {
   console.log("Checking if email exists:", inputEmail)
   const queryString = (`
@@ -181,6 +209,7 @@ const getUserOrgs = (userId) => {
   );
 }
 
+
 const getOrgWithId = (id) => {
   const queryString = `
         SELECT id, name, display_picture as image
@@ -188,6 +217,21 @@ const getOrgWithId = (id) => {
         WHERE id = $1;`
 
   return Promise.resolve(pool.query(queryString, [id])
+    .then(res => {
+      results = res.rows[0]
+      return results
+    })
+    .catch(err => { console.log(err) })
+  );
+}
+
+const getOrgIdwithName = (name) => {
+  const queryString = `
+        SELECT id,
+        FROM organizations
+        WHERE id = $1;`
+  const values = [name]
+  return Promise.resolve(pool.query(queryString, values)
     .then(res => {
       results = res.rows[0]
       return results
@@ -404,9 +448,11 @@ module.exports = {
   getUserWithId,
   getUserOrgs,
   getUsers,
+  getAllUserSites,
   emailExists,
   getOrgs,
   getOrgWithId,
+  getOrgIdwithName,
   getOrgUrls,
   getOrgUrlsWithSiteId,
   getUrlWithTags,
