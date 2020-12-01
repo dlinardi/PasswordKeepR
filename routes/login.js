@@ -1,14 +1,7 @@
-/*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
 const express = require('express');
 const { database } = require('pg/lib/defaults');
 const router = express.Router();
-const login = require('../lib/loginUser.js')
+const login = require('../lib/loginUser.js');
 
 module.exports = (db) => {
   router
@@ -16,21 +9,21 @@ module.exports = (db) => {
       res.render("login");
     })
     .post("/", (req, res) => {
-      console.log(req.body.email)
+      console.log(req.body.email);
       login(req.body.email, req.body.password)
         .then(user => {
-          console.log(user)
+          console.log(user);
           if (!user) {
             res.send('Login Failed');
             return;
           }
           //Set cookie
           req.session.userId = user.id;
-          res.redirect(`http://192.168.1.198:8080/`)
+          res.redirect(`http://192.168.1.198:8080/`);
         })
         .catch(e => res.send(e));
 
-    })
+    });
   return router;
 };
 
