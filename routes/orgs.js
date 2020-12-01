@@ -107,5 +107,22 @@ module.exports = (db) => {
           console.log(err);
         });
     })
+    .post("/:id/addUser", (req, res) => {
+      const { userId, canWrite } = req.body;
+      dbHelpers.addUserToOrg(userId, req.params.id, canWrite)
+        .then(user => {
+          console.log(user);
+        })
+        .catch(err => { console.log(err)});
+    })
+    .post("/:id/addSite", (req, res) => {
+      req.body.org_id = req.params.id;
+      const site = req.body;
+      dbHelpers.addSite(site)
+        .then(site => {
+          console.log(site);
+        })
+        .catch(err => { console.log(err)});
+    });
   return router;
 };
