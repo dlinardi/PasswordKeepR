@@ -11,10 +11,12 @@ const router  = express.Router();
 module.exports = (db) => {
   router
     .get("/", (req, res) => {
+      console.log("ROOT HIT")
       db.query(`SELECT * FROM organizations;`)
         .then(data => {
           const orgs = data.rows;
-          res.json({ orgs });
+          res.send('hi cowboy')
+          // res.json({ orgs });
         })
         .catch(err => {
           res
