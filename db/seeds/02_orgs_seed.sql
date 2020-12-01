@@ -1,7 +1,7 @@
 INSERT INTO organizations
 (name, display_picture)
 VALUES
-('Pfeffer Group', './images/logo.png'),
+('Pfeffer Group', 'https://picsum.photos/300/100'),
 ('Streich Group', './images/logo.png'),
 ('Feeney-Schmitt', './images/logo.png'),
 ('Baumbach Ltd', './images/logo.png'),
@@ -24,6 +24,6 @@ VALUES
 ('Franecki Group', './images/logo.png'),
 ('Franecki Inc', './images/logo.png'),
 ('Greens Space', './images/logo.png'),
-('Flowers By Irene', './images/logo.png'),
+('Flowers By Irene', 'https://picsum.photos/300/100'),
 ('Greens Space', './images/logo.png')
 ;

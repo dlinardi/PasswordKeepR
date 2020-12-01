@@ -24,22 +24,21 @@ module.exports = (db) => {
           console.log(err);
         });
     })
-    // .put("/edit", (req, res) => {
-
-    //   const { siteProperty, newValue, siteId } = req.body;
-    //   console.log(siteProperty, newValue, siteId);
-    //   dbHelpers.updateSite(siteProperty, newValue, siteId)
-    //     .then((siteProperty, newValue, siteId) => {
-    //       console.log(siteProperty, newValue, siteId);
-    //       console.log('success');
-    //       res.message('test');
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // })
-    // .delete("delete", (req, res) => {
-    //   console.log(req.body);
-    // });
+    .put("/edit", (req, res) => {
+      const { siteProperty, newValue, siteId } = req.body;
+      console.log(siteProperty, newValue, siteId);
+      dbHelpers.updateSite(siteProperty, newValue, siteId)
+        .then((siteProperty, newValue, siteId) => {
+          console.log(siteProperty, newValue, siteId);
+          console.log('success');
+          res.message('test');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .delete("delete", (req, res) => {
+      console.log(req.body);
+    });
   return router;
 };
