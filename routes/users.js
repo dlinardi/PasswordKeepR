@@ -6,7 +6,6 @@
  */
 
 const express = require('express');
-const { database } = require('pg/lib/defaults');
 const router  = express.Router();
 const dbHelpers = require('../db/index');
 
