@@ -29,7 +29,8 @@ header#main-header {
 main.container {
   display: flex;
   justify-content: center;
-  background-color: lightblue;
+  padding-left: 4vw; // temp center fix
+
   section {
     display: flex;
   }
