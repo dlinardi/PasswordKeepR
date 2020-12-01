@@ -1,58 +1,137 @@
 // See: https://sass-lang.com/
-$headerColor: rgb(240, 65, 65);
-$mainBackgroundColor: rgb(158, 158, 158);
-
+$white: #fff;
+$darkGrey: #4F4F4F;
+$lightGrey: #6E6E6E;
+$darkRed: #C0392B;
+$lightRed: #E74C3C;
 
 body {
-  background-color: $mainBackgroundColor;
-
-  h1 {
-    color: #244751;
-  }
+  background-color: $white;
 }
 
-header {
-  background-color: $headerColor;
-  nav{
+header#main-header {
+  display: flex;
+  background-color: $darkRed;
+  color: #fff;
+  font-weight: 700;
+  height: 100px;
+  margin-bottom: 50px;
+
+  nav {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-
+    height: 100%;
   }
+
 }
 
-.filter{
+main.container {
   display: flex;
-  justify-content: flex-end;
-  background-color: rgb(75, 75, 75);
-}
+  justify-content: center;
+  padding-left: 4vw; // temp center fix
 
-main{
-  background-color: white;
-  display: flex;
-  padding: 1em;
-  nav{
-    width:20%
-  }
-  article{
-    width: 75%;
-    border-bottom: 3px,solid, red;
+  section {
     display: flex;
-    flex-direction: column;
-    div{
-      display:flex;
-      justify-content: space-around;
+  }
+}
+
+article.sites {
+
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  width: 300px;
+  margin: 1em;
+
+  -webkit-transition: all ease-out 0.2s;
+  -moz-transition: all ease-out 0.2s;
+  -o-transition: all ease-out 0.2s;
+  transition: all ease-out 0.2s;
+
+  &:hover {
+    box-shadow: 4px 4px $darkGrey;
+    -webkit-transition: all ease-in 0.2s;
+    -moz-transition: all ease-in 0.2s;
+    -o-transition: all ease-in 0.2s;
+    transition: all ease-in 0.2s;
+  }
+
+  header {
+    height: 100%;
+    display: flex;
+    position: relative;
+
+    .edit-delete {
+      padding: 0.8em;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+
+      i {
+        padding: 0 0.2em;
+        &:hover {
+          cursor: pointer;
+          color: white;
+          -webkit-transition: all ease-out 0.2s;
+          -moz-transition: all ease-out 0.2s;
+          -o-transition: all ease-out 0.2s;
+          transition: all ease-out 0.2s;
+        }
+      }
 
     }
-    .urlInfo{
+
+  }
+
+  footer {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: $lightRed;
+
+    .card-details {
       display: flex;
       flex-direction: column;
-    }
+      justify-content: center;
+      flex-grow: 1;
+      padding: 1em;
 
-    span{
-      padding: 1rem;
-      &:hover{
-        background-color: lightblue;
+      .cardTitle {
+        font-weight: bold;
+      }
+
+      .pwd {
+        font-style: italic;
+      }
+
+    }
+    .card-action {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 1em;
+      font-size: 1.5em;
+      &:hover {
+        cursor: pointer;
+        background-color: $darkRed;
+        color: white;
+        -webkit-transition: all ease-out 0.7s;
+        -moz-transition: all ease-out 0.7s;
+        -o-transition: all ease-out 0.7s;
+        transition: all ease-out 0.7s;
       }
     }
+
   }
+}
+
+section.sites-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+  flex-wrap: wrap;
+
 }
