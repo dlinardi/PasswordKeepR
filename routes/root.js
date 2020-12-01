@@ -8,11 +8,16 @@
 const express = require('express');
 const router  = express.Router();
 const dbHelpers = require('../db/index');
+const reqAndCheckCookie = require('../lib/helper')
 
 module.exports = (db) => {
   router
     .get("/", (req, res) => {
-      res.render("index");
+      if (reqAndCheckCookie) {
+        res.render("index");
+      } else {
+        res.redirect('/login');
+      }
     })
     .post("/new", (req, res) => {
       const site = req.body;

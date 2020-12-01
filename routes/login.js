@@ -2,11 +2,16 @@ const express = require('express');
 const { database } = require('pg/lib/defaults');
 const router = express.Router();
 const login = require('../lib/loginUser.js');
+const reqAndCheckCookie = require('../lib/helper')
 
 module.exports = (db) => {
   router
     .get("/", (req, res) => {
-      res.render("login");
+      if (reqAndCheckCookie) {
+        res.redirect("/");
+      } else {
+        res.render('login');
+      }
     })
     .post("/", (req, res) => {
       console.log(req.body.email);
