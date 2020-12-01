@@ -18,7 +18,7 @@ module.exports = (db) => {
           }
           //Set cookie
           req.session.userId = user.id;
-          res.redirect(`http://192.168.1.198:8080/`);
+          res.redirect(`/`);
         })
         .catch(e => res.send(e));
 
