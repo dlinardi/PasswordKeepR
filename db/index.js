@@ -183,15 +183,14 @@ const getUserOrgs = (userId) => {
 }
 
 const getOrgWithId = (id) => {
-  console.log("Get org w. id:", id)
-  const queryString = (`
-    SELECT * FROM organizations WHERE id = $1;
-  `);
-  const values = [id];
-  return Promise.resolve(pool.query(queryString, values)
+  const queryString = `
+        SELECT id, name, display_picture as image
+        FROM organizations
+        WHERE id = $1;`
+
+  return Promise.resolve(pool.query(queryString, [id])
     .then(res => {
       results = res.rows[0]
-      console.log(results);
       return results
     })
     .catch(err => { console.log(err) })
@@ -199,11 +198,36 @@ const getOrgWithId = (id) => {
 }
 
 const getOrgUrls = (id) => {
-  console.log("Get URLs w. Org id:", id)
-  const queryString = (`
-    SELECT * FROM sites WHERE org_id = $1;
-  `);
-  const values = [id];
+  const queryString = `
+    SELECT organizations.id as org_id, sites.id as site_id, url, login_name, account_email, tags, created_date, deleted_date, is_active
+    FROM sites
+    JOIN organizations ON organizations.id = org_id
+    WHERE organizations.id = $1
+    GROUP BY sites.id, organizations.id;
+    `;
+
+  return Promise.resolve(pool.query(queryString, [id])
+    .then(res => {
+      results = res.rows;
+      console.log(results);
+      return results
+    })
+    .catch(err => { console.log("!!! ", err) })
+  );
+}
+
+const getOrgUrlsWithSiteId = (orgId, siteId) => {
+
+  const queryString = `
+    SELECT organizations.id as org_id, sites.id as site_id, url, login_name, account_email, tags, created_date, deleted_date, is_active
+    FROM sites
+    JOIN organizations ON organizations.id = org_id
+    WHERE organizations.id = $1 AND sites.id = $2
+    GROUP BY sites.id, organizations.id;
+    `
+
+  const values = [orgId, siteId];
+
   return Promise.resolve(pool.query(queryString, values)
     .then(res => {
       results = res.rows;
@@ -231,23 +255,55 @@ const getUrlWithTags = (tag, org_id) => {
   );
 }
 
+const getOrgs = () => {
+  return Promise.resolve(pool.query(`SELECT * FROM organizations;`)
+    .then(res => {
+      results = res.rows;
+      return results
+    })
+    .catch(err => { console.log(err) })
+  );
+}
+
 const getOrgUsers = (orgId) => {
-  console.log("Get Users w. Org id:", orgId)
-  const queryString = (`
-    SELECT users.*
-    FROM users
-    JOIN org_users on org_users.user_id = users.id
-    JOIN organizations orgs ON org_users.org_id = orgs.id
-    WHERE orgs.id = $1;
-  `);
-  const values = [orgId];
+  const queryString = `
+    SELECT users.id as user_id, first_name, last_name, email, users.display_picture as image
+    FROM org_users
+    JOIN users ON users.id = user_id
+    JOIN organizations ON organizations.id = org_id
+    WHERE organizations.id = $1
+    GROUP BY users.id, organizations.id, org_users.can_write
+    ORDER BY can_write;`;
+
+  return Promise.resolve(pool.query(queryString, [orgId])
+    .then(res => {
+      results = res.rows;
+      return results
+    })
+    .catch(err => { console.log(err) })
+  );
+}
+
+const getOrgUsersWithId = (orgId, userId) => {
+
+  const queryString = `
+    SELECT users.id as user_id, first_name, last_name, email, users.display_picture as image
+    FROM org_users
+    JOIN users ON users.id = user_id
+    JOIN organizations ON organizations.id = org_id
+    WHERE organizations.id = $1 AND users.id = $2
+    GROUP BY users.id, organizations.id, org_users.can_write
+    ORDER BY can_write;
+    `;
+
+  const values = [orgId, userId];
+
   return Promise.resolve(pool.query(queryString, values)
     .then(res => {
       results = res.rows;
-      console.log(results);
       return results
     })
-    .catch(err => { console.log("!!! ", err) })
+    .catch(err => { console.log(err) })
   );
 }
 
@@ -350,10 +406,13 @@ module.exports = {
   getUserOrgs,
   getUsers,
   emailExists,
+  getOrgs,
   getOrgWithId,
   getOrgUrls,
+  getOrgUrlsWithSiteId,
   getUrlWithTags,
   getOrgUsers,
+  getOrgUsersWithId,
   deleteSite,
   deleteUser,
   deleteOrg,
