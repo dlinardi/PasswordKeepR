@@ -102,17 +102,25 @@ const getUserWithEmail = (email) => {
 }
 
 const getUserWithId = (id) => {
-  console.log("Get user w. id:", id)
+  const queryString = `
+        SELECT id, first_name, last_name, email
+        FROM users
+        WHERE id = $1;
+        `;
 
-  const queryString = (`
-    SELECT * FROM users WHERE id = $1;
-  `);
-
-  const values = [id];
-
-  return Promise.resolve(pool.query(queryString, values)
+  return Promise.resolve(pool.query(queryString, [id])
     .then(res => {
       results = res.rows[0]
+      return results
+    })
+    .catch(err => { console.log(err) })
+  );
+}
+
+const getUsers = () => {
+  return Promise.resolve(pool.query('SELECT id, first_name, last_name, email FROM users;')
+    .then(res => {
+      results = res.rows
       return results
     })
     .catch(err => { console.log(err) })
@@ -326,6 +334,7 @@ module.exports = {
   getUserWithEmail,
   getUserWithId,
   getUserOrgs,
+  getUsers,
   emailExists,
   getOrgWithId,
   getOrgUrls,
