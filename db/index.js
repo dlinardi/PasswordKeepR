@@ -31,8 +31,22 @@ const addUser = (formObject) => {
     formObject.first_name,
     formObject.last_name
   ];
-  return pool.query(queryString, values)
-    .then(res => console.log(`Added User`, res.rows));
+  return Promise.resolve(pool.query(queryString, values)
+  .then(res => {
+    results = res.rows[0]
+    console.log("DB RESULT", results)
+    return results
+  })
+  .catch(err => console.error(e.stack))
+);
+
+
+
+  // return Promise.resolve(pool.query(queryString, values)
+  //   .then(res => {
+  //     console.log(`Added User`, res.rows[0])
+  //     return res.rows[0].id
+  //   }));
 }
 
 const addOrg = (orgName) => {

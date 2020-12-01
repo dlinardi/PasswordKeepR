@@ -43,6 +43,9 @@ const usersRoutes = require("./routes/users");
 const orgsRoutes = require("./routes/orgs");
 const widgetsRoutes = require("./routes/widgets");
 const loginRoutes = require("./routes/login");
+const registerRoutes = require("./routes/register");
+
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 
@@ -51,6 +54,7 @@ app.use("/api/users", usersRoutes(db));
 app.use("/api/orgs", orgsRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/login", loginRoutes(db));
+app.use("/register", registerRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
 
@@ -62,13 +66,9 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-// app.get("/login", (req, res) => {
-//   res.render("login");
+// app.get("/register", (req, res) => {
+//   res.render("register");
 // });
-
-app.get("/register", (req, res) => {
-  res.render("register");
-});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
