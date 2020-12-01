@@ -6,7 +6,6 @@
  */
 
 const express = require('express');
-const { database } = require('pg/lib/defaults');
 const router  = express.Router();
 const dbHelpers = require('../db/index');
 
@@ -37,6 +36,9 @@ module.exports = (db) => {
             .status(500)
             .json({ error: err.message });
         });
+    })
+    .post("/new", (req, res) => {
+      console.log(req.body);
     });
   return router;
 };
