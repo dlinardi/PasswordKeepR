@@ -14,7 +14,7 @@ module.exports = (db) => {
     .get("/", (req, res) => {
       dbHelpers.getOrgs()
         .then(orgs => {
-          res.json({ orgs });
+          res.json(orgs);
         })
         .catch(err => {
           res
@@ -29,7 +29,7 @@ module.exports = (db) => {
           if (!orgs) {
             res.json({ error: `${req.params.id} is not a valid id.` });
           } else {
-            res.json({ orgs });
+            res.json(orgs);
           }
         })
         .catch(err => {
@@ -59,7 +59,7 @@ module.exports = (db) => {
           if (!orgs) {
             res.json({ error: `${req.params.id} or ${req.params.user_id} is not a valid id.` });
           } else {
-            res.json({ orgs });
+            res.json(orgs);
           }
         })
         .catch(err => {
@@ -74,7 +74,7 @@ module.exports = (db) => {
           if (!orgs) {
             res.json({ error: `${req.params.id} is not a valid id.` });
           } else {
-            res.json({ orgs });
+            res.json(orgs);
           }
         })
         .catch(err => {
@@ -89,7 +89,7 @@ module.exports = (db) => {
           if (!orgs) {
             res.json({ error: `${req.params.id} or ${req.params.sites_id} is not a valid id.` });
           } else {
-            res.json({ orgs });
+            res.json(orgs);
           }
         })
         .catch(err => {
