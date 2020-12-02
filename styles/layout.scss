@@ -110,6 +110,19 @@ main.container {
   // justify-content: center;
   // padding: initial;
 
+  section.search-filter {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+
+    .search input {
+      border: 2px $darkGrey solid;
+      outline: none;
+      padding: 0.5em;
+    }
+
+  }
+
   section.sites-container {
     display: flex;
     flex-wrap: wrap;
