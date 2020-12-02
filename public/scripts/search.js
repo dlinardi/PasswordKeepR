@@ -6,9 +6,9 @@ const search = (searchQuery) => {
     method: "POST",
     data: $(searchQuery).serialize()
   })
-  .then(() => {
-    console.log('made it here')
-    loadSearchResults();
+  .then((sites) => {
+    console.log('sites json', sites);
+    loadSearchResults(sites);
   })
   .catch(error => console.log(error));
 
