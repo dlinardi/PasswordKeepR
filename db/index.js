@@ -155,7 +155,7 @@ const getAllUserSites = (userId) => {
     JOIN organizations orgs ON org_users.org_id = orgs.id
     JOIN sites ON sites.org_id = orgs.id
     WHERE users.id = $1
-    ORDER BY orgs.name;
+    ORDER BY orgs.name, sites.url;
     `;
 
   return Promise.resolve(pool.query(queryString, [userId])

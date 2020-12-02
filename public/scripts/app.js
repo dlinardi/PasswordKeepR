@@ -6,13 +6,16 @@ $(document).ready(function () {
 
   $(document).on('click', '.card-action', function (event) {
     // Targets .pwd Class of the Clicked urlInfo, will clip innerText
-    console.log("THIS>>",$(this))
+    console.log(Cookies.get(userId))
+
     const toClip = $(this).parent().find('.pwd')[0].innerText
-    console.log(toClip)
     copyToClipboard(toClip)
   });
 
   //(action, userId)
-  loadSites(renderSites, 2);
+  // alert( Cookies.get("example") );
+
+  let userId = 2
+  loadSites(renderAllSites, userId);
 
 });
