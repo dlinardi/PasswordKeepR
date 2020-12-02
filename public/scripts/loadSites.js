@@ -15,7 +15,7 @@ const renderAllSites = function (sites) {
     //Render Org Bar:  If !currOrg > Update Curr Org, and render Bar, proceed w. sites
     if (site.org_id !== currOrg) {
       currOrg = site.org_id
-      $('.container').prepend(createOrgElement(site));
+      $('#vault').prepend(createOrgElement(site));
     }
 
     //render Sites for org
@@ -26,6 +26,6 @@ const renderAllSites = function (sites) {
 
 const renderSites = (sites) => {
   for (const site of sites) {
-    $('main').append(createSiteElement(site));
+    $('#vault').append(createSiteElement(site));
   }
 };

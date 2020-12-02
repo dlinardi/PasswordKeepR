@@ -50,7 +50,7 @@ const createOrgElement = (siteObj) => {
   const container = $(`<section id="${org_id}" class="sites-container">`)
   const bar = $(`<div class="org-bar">`);
   const barDetails = $('<div class="orgs-in-bar">');
-  const barActions = $(' <div class="new-org">');
+  const barActions = $(' <div class="new-site">');
 
   //Div 1 (orgs-in-bar)
   const detailsSpan = $(`<span class="specific-org">${org_name}</span>`);

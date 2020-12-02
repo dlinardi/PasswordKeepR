@@ -22,10 +22,10 @@ $(document).ready(function () {
     // loadSites(renderAllSites);
 
     if (userInput) {
-      $('.sites-container').empty();
+      $('.sites-container').remove();
       search(userInput);
     } else {
-      $('.sites-container').empty();
+      $('.sites-container').remove();
       loadSites(renderAllSites);
     }
 
