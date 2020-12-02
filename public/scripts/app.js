@@ -1,15 +1,3 @@
-// $(() => {
-//   $.ajax({
-//     method: "GET",
-//     url: "/api/users"
-//   }).done((users) => {
-//     for(user of users) {
-//       $("<div>").text(user.name).appendTo($("body"));
-//     }
-//   });;
-// });
-// const { editForms } = require('./editForms')
-
 
 $(document).ready(function () {
   console.log("DOC READY")
@@ -23,11 +11,7 @@ $(document).ready(function () {
     // copyToClipboard(toClip)
   });
 
-  //GET the latest Tweet
-  $.ajax("/api/orgs/18/sites")
-    .then(res => {
-      action(res);
-    });
+  loadSites(renderSites());
 
-  loadSites(console.log);
+
 });

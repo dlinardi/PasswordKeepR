@@ -1,55 +1,73 @@
-const createOrg = function () {
+/*
+  org_id: 18,
+  site_id: 77,
+  url: "http://www.picard.com",
+  login_name: "frenner@white.biz",
+  account_email: "frenner@white.biz",
+  tags: "nothing to see, work",
+  created_date: "2020-10-09T00:00:00.000Z",
+  deleted_date: null,
+  is_active: true
+  }
+  ]
+  } */
 
-}
+const createSiteElement = (siteObj) => {
+  const {
+    org_id,
+    site_id,
+    url,
+    login_name,
+    account_email,
+    tags,
+    created_date,
+    deleted_date,
+    is_active
+  } = siteObj;
 
-const createSite = function () {
+  // creating structure of tweet container
+  const tweet = $('<article class="tweet">');
+  const tweetHeader = $('<header>');
+  const tweetData = $('<div class="tweet-data">');
+  const tweetFooter = $('<footer>');
 
-}
+  const avatar = $(`<img src="${userObject.avatars}">`);
+  const nameAvatar = $('<span class="tweeter-name">');
+  const name = $('<span>').text(userObject.name);
+  nameAvatar.append(avatar);
+  nameAvatar.append(name);
 
-module.exports = createElement;
+  const handle = $('<span class="tweeter-handle">').text(userObject.handle);
 
+  tweetHeader.append(nameAvatar);
+  tweetHeader.append(handle);
 
+  const content = $('<p>').text(contentObject.text);
 
+  tweetData.append(content);
 
-// const createTweetElement = function(post) {
-//   // Not a good way of doing it, should break down into chunks
+  const momentCreated = moment(tweetObj.created_at).fromNow();
 
-//   const $tweet = $(`
-// <article class="tweet">
-// <header>
-// <span><img src=${post.user.avatars}><p>${post.user.name}</p></span>
-// <span class="hide">${post.user.handle}</span>
-// </header>
-// <p class='tweet-contents'>${escapeStr(post.content.text)}</p>
-// <footer>
-// <span>${moment(post.created_at).fromNow()}</span>
-// <span class="icons">
-//   <i class="fas fa-flag hoverBtn" title="Flag Inappropriate"></i>
-//   <i class="fas fa-retweet hoverBtn" title="Re-Twit"></i>
-//   <i class="fas fa-heart hoverBtn" title="Heart it Up"></i>
-// </span>
-// </footer>
-// </article>
-// `);
+  const created = $('<span>').text(momentCreated);
+  const reactIcons = $('<span class="social-icons">');
 
-//   $('#tweets-container').prepend($tweet);
-// };
+  const flag = $('<i class="fas fa-flag">');
+  const repost = $('<i class="fas fa-retweet">');
+  const heart = $('<i class="fas fa-heart">');
 
+  // append all social icons to reactIcons span container
+  reactIcons.append(flag);
+  reactIcons.append(repost);
+  reactIcons.append(heart);
 
-// const renderTweets = function(inputData) {
-//   // empty then in section
-//   $('#tweets-container').empty();
-//   // Reverses JSON to give newest first (should be switchable)
-//   const revData = inputData; //.reverse()
-//   for (post of revData) {
-//     createTweetElement(post);
-//   }
-// };
+  // append all footer content to footer
+  tweetFooter.append(created);
+  tweetFooter.append(reactIcons);
 
-// const loadTweets = function(action) {
-//   //GET the latest Tweet
-//   $.ajax("/tweets/")
-//     .then(res => {
-//       action(res);
-//     });
-// };
+  // append all tweet content to tweet container
+  tweet.append(tweetHeader);
+  tweet.append(tweetData);
+  tweet.append(tweetFooter);
+
+  return tweet;
+};
