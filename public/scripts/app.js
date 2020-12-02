@@ -1,12 +1,8 @@
-
 $(document).ready(function () {
   console.log("DOC READY")
 
-
   loadSites(renderAllSites);
 
-//(action, userId)
-  // alert( Cookies.get("example") );
 
   $(document).on('click', '.card-action', function (event) {
     // Targets .pwd Class of the Clicked urlInfo, will clip innerText
@@ -14,5 +10,10 @@ $(document).ready(function () {
     copyToClipboard(toClip)
   });
 
+  $('#search-vault').on('input', function () {
+    const userInput = $(this).val();
+
+    searchResults(userInput);
+  })
 
 });

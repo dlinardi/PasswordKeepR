@@ -27,6 +27,22 @@ module.exports = (db) => {
           console.log(err);
         });
     })
+    .get("/search", (req, res) => {
+      const { userId } = req.session;
+      dbHelpers.getAllUserSitesBySearch('2' ,search)
+        .then(searchResult => {
+          res.json(searchResult);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .post("/search", (req, res) => {
+      const search = req.body;
+
+
+
+    })
     .put("/edit", (req, res) => {
       const { siteProperty, newValue, siteId } = req.body;
       console.log(siteProperty, newValue, siteId);
