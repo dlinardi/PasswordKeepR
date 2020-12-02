@@ -23,15 +23,10 @@ module.exports = (db) => {
         });
     })
     .get("/sites", (req, res) => {
-      let { userId } = req.session;
-      console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>> USER ID",userId)
+      const { userId } = req.session;
       dbHelpers.getAllUserSites(userId)
         .then(users => {
-          // if (!users) {
-          //   res.json({ error: `${userId} is not a valid id.` });
-          // } else {
           res.json(users);
-          // }
         })
         .catch(err => {
           res
