@@ -148,17 +148,17 @@ const getUsers = () => {
 
 const getAllUserSites = (userId) => {
   console.log("Get users Orgs:", userId)
-  const queryString = (`
-  SELECT sites.*, orgs.name AS org_name
-  FROM users
-  JOIN org_users on org_users.user_id = users.id
-  JOIN organizations orgs ON org_users.org_id = orgs.id
-  JOIN sites ON sites.org_id = orgs.id
-  WHERE users.id = $1
-  ORDER BY orgs.name;
-  `);
-  const values = [userId];
-  return Promise.resolve(pool.query(queryString, values)
+  const queryString = `
+    SELECT sites.*, orgs.name AS org_name
+    FROM users
+    JOIN org_users on org_users.user_id = users.id
+    JOIN organizations orgs ON org_users.org_id = orgs.id
+    JOIN sites ON sites.org_id = orgs.id
+    WHERE users.id = $1
+    ORDER BY orgs.name;
+    `;
+
+  return Promise.resolve(pool.query(queryString, [userId])
     .then(res => {
       results = res.rows;
       console.log(results)
@@ -242,7 +242,7 @@ const getOrgIdwithName = (name) => {
 
 const getOrgUrls = (id) => {
   const queryString = `
-    SELECT organizations.id as org_id, sites.id as site_id, url, login_name, account_email, tags, created_date, deleted_date, is_active
+    SELECT organizations.id as org_id, sites.id as site_id, url, login_name, account_email, password, tags, created_date, deleted_date, is_active
     FROM sites
     JOIN organizations ON organizations.id = org_id
     WHERE organizations.id = $1
@@ -258,6 +258,7 @@ const getOrgUrls = (id) => {
     .catch(err => { console.log("!!! ", err) })
   );
 }
+
 
 const getOrgUrlsWithSiteId = (orgId, siteId) => {
 
