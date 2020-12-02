@@ -1,8 +1,8 @@
 
-const loadSites = (action, userId) => {
+const loadSites = (action) => {
   $
     .ajax(
-      `/api/users/${userId}/sites`,
+      `/api/users/sites`,
       { method: "GET" }
     )
     .then(sites => {

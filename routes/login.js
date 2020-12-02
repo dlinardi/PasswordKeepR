@@ -6,7 +6,9 @@ const login = require('../lib/loginUser.js');
 module.exports = (db) => {
   router
     .get("/", (req, res) => {
-      if (!req.session.userId) {
+      let userId = req.session.userId
+      console.log(">>>>>>>>>>>>>>>>>>>>>>>>",userId)
+      if (!userId) {
         res.render('login');
       }
       res.redirect("/");
@@ -28,3 +30,4 @@ module.exports = (db) => {
     });
   return router;
 };
+

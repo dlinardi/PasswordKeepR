@@ -82,3 +82,6 @@ const createOrgElement = (siteObj) => {
   return container;
 }
 
+const createAddSiteForm = () => {
+
+};

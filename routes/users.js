@@ -6,7 +6,7 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const dbHelpers = require('../db/index');
 
 module.exports = (db) => {
@@ -22,14 +22,16 @@ module.exports = (db) => {
             .json({ error: err.message });
         });
     })
-    .get("/:id", (req, res) => {
-      dbHelpers.getUserWithId(req.params.id)
+    .get("/sites", (req, res) => {
+      let { userId } = req.session;
+      console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>> USER ID",userId)
+      dbHelpers.getAllUserSites(userId)
         .then(users => {
-          if (!users) {
-            res.json({ error: `${req.params.id} is not a valid id.` });
-          } else {
-            res.json(users);
-          }
+          // if (!users) {
+          //   res.json({ error: `${userId} is not a valid id.` });
+          // } else {
+          res.json(users);
+          // }
         })
         .catch(err => {
           res
@@ -37,8 +39,8 @@ module.exports = (db) => {
             .json({ error: err.message });
         });
     })
-    .get("/:id/sites", (req, res) => {
-      dbHelpers.getAllUserSites(req.params.id)
+    .get("/:id", (req, res) => {
+      dbHelpers.getUserWithId(req.params.id)
         .then(users => {
           if (!users) {
             res.json({ error: `${req.params.id} is not a valid id.` });
