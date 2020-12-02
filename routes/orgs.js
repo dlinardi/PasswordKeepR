@@ -44,7 +44,7 @@ module.exports = (db) => {
           if (!orgs) {
             res.json({ error: `${req.params.id} is not a valid id.` });
           } else {
-            res.json({ orgs });
+            res.json(orgs);
           }
         })
         .catch(err => {
