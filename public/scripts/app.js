@@ -11,7 +11,7 @@ $(document).ready(function () {
     console.log(toClip)
     copyToClipboard(toClip)
   });
-// Org 18
-loadSites(renderSites, 18);
+
+  loadSites(renderSites, 18);
 
 });
