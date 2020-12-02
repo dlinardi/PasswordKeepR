@@ -161,7 +161,7 @@ const getAllUserSites = (userId) => {
   return Promise.resolve(pool.query(queryString, [userId])
     .then(res => {
       results = res.rows;
-      console.log(results)
+      // console.log(results)
       return results
     })
     .catch(err => { console.log(err) })

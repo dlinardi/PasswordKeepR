@@ -12,6 +12,7 @@ $(document).ready(function () {
     copyToClipboard(toClip)
   });
 
-  loadSites(renderSites, 18);
+  //(action, userId)
+  loadSites(renderSites, 2);
 
 });
