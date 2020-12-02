@@ -14,7 +14,7 @@ module.exports = (db) => {
     .get("/", (req, res) => {
       dbHelpers.getUsers()
         .then(users => {
-          res.json({ users });
+          res.json(users);
         })
         .catch(err => {
           res
@@ -28,7 +28,22 @@ module.exports = (db) => {
           if (!users) {
             res.json({ error: `${req.params.id} is not a valid id.` });
           } else {
-            res.json({ users });
+            res.json(users);
+          }
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+    })
+    .get("/:id/sites", (req, res) => {
+      dbHelpers.getAllUserSites(req.params.id)
+        .then(users => {
+          if (!users) {
+            res.json({ error: `${req.params.id} is not a valid id.` });
+          } else {
+            res.json(users);
           }
         })
         .catch(err => {

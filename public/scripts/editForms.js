@@ -1,6 +1,6 @@
 
 
-// const editForms = () => {
+const editForms = () => {
 
 //   $('#userToOrg').on('click', function (event) {
 //     event.preventDefault();
@@ -12,6 +12,5 @@
 //       data: $('form').serialize()
 //     })
 //   }
-// }
+}
 
-module.exports = { editForms }

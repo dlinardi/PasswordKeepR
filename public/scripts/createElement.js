@@ -1,73 +1,45 @@
-/*
-  org_id: 18,
-  site_id: 77,
-  url: "http://www.picard.com",
-  login_name: "frenner@white.biz",
-  account_email: "frenner@white.biz",
-  tags: "nothing to see, work",
-  created_date: "2020-10-09T00:00:00.000Z",
-  deleted_date: null,
-  is_active: true
-  }
-  ]
-  } */
 
 const createSiteElement = (siteObj) => {
-  const {
-    org_id,
-    site_id,
-    url,
-    login_name,
-    account_email,
-    tags,
-    created_date,
-    deleted_date,
-    is_active
-  } = siteObj;
+  const { url, login_name, password } = siteObj;
 
   // creating structure of tweet container
-  const tweet = $('<article class="tweet">');
-  const tweetHeader = $('<header>');
-  const tweetData = $('<div class="tweet-data">');
-  const tweetFooter = $('<footer>');
+  const card = $('<article class="sites">');
+  const cardHeader = $('<header>');
+  const cardFooter = $('<footer>');
 
-  const avatar = $(`<img src="${userObject.avatars}">`);
-  const nameAvatar = $('<span class="tweeter-name">');
-  const name = $('<span>').text(userObject.name);
-  nameAvatar.append(avatar);
-  nameAvatar.append(name);
+  const updateIcons = $('<span class="edit-delete">');
 
-  const handle = $('<span class="tweeter-handle">').text(userObject.handle);
+  const editIcon = $('<i class="fas fa-edit"></i>');
+  const deleteIcon = $('<i class="fas fa-trash-alt"></i>');
 
-  tweetHeader.append(nameAvatar);
-  tweetHeader.append(handle);
+  updateIcons.append(editIcon);
+  updateIcons.append(deleteIcon);
 
-  const content = $('<p>').text(contentObject.text);
+  const cardImage = $('<img src="http://placehold.jp/350x116.png">');
 
-  tweetData.append(content);
+  cardHeader.append(updateIcons);
+  cardHeader.append(cardImage);
 
-  const momentCreated = moment(tweetObj.created_at).fromNow();
+  const cardDetail = $('<div class="card-details">');
+  const cardTitle = $(`<span class="cardTitle">${url}</span>`);
+  const cardAccName = $(`<span class="accountName">${login_name}</span>`);
+  const cardPass = $(`<span class="pwd">${password}</span>`);
 
-  const created = $('<span>').text(momentCreated);
-  const reactIcons = $('<span class="social-icons">');
+  cardDetail.append(cardTitle);
+  cardDetail.append(cardAccName);
+  cardDetail.append(cardPass);
 
-  const flag = $('<i class="fas fa-flag">');
-  const repost = $('<i class="fas fa-retweet">');
-  const heart = $('<i class="fas fa-heart">');
+  const cardAction = $('<div class="card-action">');
+  const copyIcon = $('<span><i class="far fa-copy"></i></span>');
 
-  // append all social icons to reactIcons span container
-  reactIcons.append(flag);
-  reactIcons.append(repost);
-  reactIcons.append(heart);
+  cardAction.append(copyIcon);
 
   // append all footer content to footer
-  tweetFooter.append(created);
-  tweetFooter.append(reactIcons);
+  cardFooter.append(cardDetail);
+  cardFooter.append(cardAction);
 
-  // append all tweet content to tweet container
-  tweet.append(tweetHeader);
-  tweet.append(tweetData);
-  tweet.append(tweetFooter);
+  card.append(cardHeader);
+  card.append(cardFooter);
 
-  return tweet;
+  return card;
 };

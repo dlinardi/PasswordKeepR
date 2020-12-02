@@ -11,7 +11,6 @@ $(document).ready(function () {
     // copyToClipboard(toClip)
   });
 
-  loadSites(renderSites());
-
+  loadSites(renderSites, 18);
 
 });
