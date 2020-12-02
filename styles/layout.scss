@@ -5,32 +5,63 @@ $lightGrey: #6E6E6E;
 $darkRed: #C0392B;
 $lightRed: #E74C3C;
 
+@mixin strong-text {
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 700;
+}
+
+@mixin regular-text {
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 400;
+}
+
+@mixin light-text {
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 200;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @include regular-text;
+}
+
 body {
   background-color: $white;
 }
 
 header#main-header {
-  display: flex;
   background-color: $darkRed;
   color: #fff;
-  font-weight: 700;
   height: 100px;
 
   nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     height: 100%;
+
+    a.navbar-brand {
+      @include strong-text;
+      font-size: 2.2em;
+    }
+
   }
 
 }
 
 main.container {
   margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  // background-color: lightblue;
-  // padding-left: 4vw; // temp center fix
+
+  // if we want to implement css grids later on vvvvvvv
+
+  // display: grid;
+  // grid-template-columns: repeat(auto-fit, minmax(300px, max-content));
+  // grid-gap: 20px;
+  // justify-content: center;
+  // padding: initial;
+
   section.sites-container {
     display: flex;
     flex-wrap: wrap;
@@ -40,10 +71,57 @@ main.container {
 
     .org-bar {
       width: 100%;
-      background-color: $darkGrey;
+      background-color: $lightRed;
       color: white;
-      padding: 1em;
+      // padding: 0 1em;
       display: flex;
+      margin: 0 10px;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .orgs-in-bar {
+        display: flex;
+        justify-content: flex-start;
+
+        .specific-org {
+          margin-right: 1.5em;
+          padding: 1em;
+          // &:hover {
+          //   background-color: $darkRed;
+          //   cursor: pointer;
+          // }
+
+          i {
+            padding-right: 0.8em;
+          }
+        }
+
+      }
+
+      .new-org span {
+        padding: 1em;
+        &:hover {
+          background-color: $darkRed;
+          cursor: pointer;
+        }
+
+        a {
+          color: white;
+
+          .btn:focus {
+            outline: none;
+            box-shadow: none;
+          }
+        }
+
+        i {
+          margin-left: 0.4em;
+          font-size: 0.8em;
+        }
+
+      }
+
     }
 
   }
@@ -53,9 +131,9 @@ article.sites {
 
   display: flex;
   flex-direction: column;
-  height: 200px;
-  width: 300px;
-  margin: 1em;
+  height: 233px;
+  width: 350px;
+  margin: 10px;
 
   -webkit-transition: all ease-out 0.2s;
   -moz-transition: all ease-out 0.2s;
