@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
   <!-- Internal JS  --------------------------------------------------------------->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -60,26 +60,31 @@
         </span>
       </div> -->
 
+      <section class="search-filter">
+        <span class="search">
+          <input type="search" name="search-vault" id="search-vault" placeholder="Search">
+        </span>
+        <span class="filter">
+          <a class="btn btn-dark dropdown-toggle" onclick="this.blur();" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Filter
+          </a>
+      ​
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+      ​
+        </span>
+      </section>
+
       <section class="sites-container">
 
         <div class="org-bar">
           <div class="orgs-in-bar">
             <span class="specific-org"><i class="fas fa-user"></i>Personal</span>
-            <!-- <span class="specific-org"><i class="fas fa-user"></i>Personal</span> -->
           </div>
-          <div class="new-org">
-            <!-- <span>
-            <a class="btn dropdown-toggle" onclick="this.blur();" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Filter
-            </a>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-
-            </span> -->
+          <div class="new-site">
             <span>
               <a class="btn" href="#" onclick="this.blur();" role="button">
                 Add Site <i class="fas fa-plus"></i>
