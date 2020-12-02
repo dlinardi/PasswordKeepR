@@ -113,12 +113,20 @@ main.container {
   section.search-filter {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 10px;
 
-    .search input {
+    input[type="search"] {
       border: 2px $darkGrey solid;
       outline: none;
       padding: 0.5em;
+      cursor: text;
+      overflow: hidden;
+      text-align: initial;
+      text-overflow: ellipsis;
+      user-select: none;
+      vertical-align: middle;
+      white-space: nowrap;
     }
 
   }
