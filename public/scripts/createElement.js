@@ -47,7 +47,7 @@ const createSiteElement = (siteObj) => {
 const createOrgElement = (siteObj) => {
   const { org_name, org_id } = siteObj;
   // creating structure of site container
-  const container = $(`<section class="sites-container ${org_id}">`)
+  const container = $(`<section id="${org_id}" class="sites-container">`)
   const bar = $(`<div class="org-bar">`);
   const barDetails = $('<div class="orgs-in-bar">');
   const barActions = $(' <div class="new-org">');

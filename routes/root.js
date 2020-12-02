@@ -27,21 +27,20 @@ module.exports = (db) => {
           console.log(err);
         });
     })
-    .get("/search", (req, res) => {
+    .get("/search/:query", (req, res) => {
       const { userId } = req.session;
-      dbHelpers.getAllUserSitesBySearch('2' ,search)
-        .then(searchResult => {
-          res.json(searchResult);
+      const { query } = req.params;
+      dbHelpers.getAllUserSitesBySearch(userId, query)
+        .then(result => {
+          res.json(result);
         })
         .catch((err) => {
           console.log(err);
         });
     })
     .post("/search", (req, res) => {
-      const search = req.body;
-
-
-
+      const searchString = req.body;
+      res.redirect(`/search/${searchString}`);
     })
     .put("/edit", (req, res) => {
       const { siteProperty, newValue, siteId } = req.body;

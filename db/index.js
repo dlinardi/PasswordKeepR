@@ -171,20 +171,21 @@ const getAllUserSites = (userId) => {
 const getAllUserSitesBySearch = (userId, searchString) => {
   console.log("Get users Orgs:", userId)
   const queryString = `
-    SELECT sites.*, orgs.name AS org_name
-    FROM users
-    JOIN org_users on org_users.user_id = users.id
-    JOIN organizations orgs ON org_users.org_id = orgs.id
-    JOIN sites ON sites.org_id = orgs.id
-    WHERE users.id = $1 AND tags LIKE $2
-    ORDER BY orgs.name, sites.url;
+  SELECT sites.*, orgs.name AS org_name, org_users.*
+  FROM users
+  JOIN org_users on org_users.user_id = users.id
+  JOIN organizations orgs ON org_users.org_id = orgs.id
+  JOIN sites ON sites.org_id = orgs.id
+  WHERE users.id = $1
+  AND tags LIKE $2
+  ORDER BY orgs.name, sites.url;
     `;
 
-  const values = [userId, searchString]
+  const values = [userId, `%${searchString}%`]
   return Promise.resolve(pool.query(queryString, values)
     .then(res => {
       results = res.rows;
-      console.log(results)
+      // console.log(results)
       return results
     })
     .catch(err => { console.log(err) })

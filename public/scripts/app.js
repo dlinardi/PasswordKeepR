@@ -13,7 +13,23 @@ $(document).ready(function () {
   $('#search-vault').on('input', function () {
     const userInput = $(this).val();
 
-    searchResults(userInput);
+    // while(userInput) {
+    //   $('.sites-container').empty();
+    //   search(userInput);
+    // }
+
+    // $('.sites-container').empty();
+    // loadSites(renderAllSites);
+
+    if (userInput) {
+      $('.sites-container').empty();
+      search(userInput);
+    } else {
+      $('.sites-container').empty();
+      loadSites(renderAllSites);
+    }
+
+
   })
 
 });

@@ -1,15 +1,24 @@
-const search = (searchQuery) => {
+const loadSearchResults = (searchQuery, action) => {
+  $
+  .ajax({
+    url: `/search/${searchQuery}`,
+    method: "GET"
+  })
+  .then((sites) => {
+    action(sites);
+  })
+  .catch(error => console.log(error));
+};
 
+const search = (searchQuery) => {
   $
   .ajax({
     url: "/search",
     method: "POST",
     data: $(searchQuery).serialize()
   })
-  .then((sites) => {
-    console.log('sites json', sites);
-    loadSearchResults(sites);
+  .then(() => {
+    loadSearchResults(searchQuery, renderAllSites);
   })
   .catch(error => console.log(error));
-
 };
