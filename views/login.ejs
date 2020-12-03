@@ -1,61 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <title>keepr- Login</title>
-  <!-- Favicon wont update/ display -->
-  <!--   <link rel="shortcut icon" href="../public/images/favicon.ico" /> -->
+  <head>
+    <title>keepr - login</title>
+    <!-- Favicon wont update/ display -->
+    <!--   <link rel="shortcut icon" href="../public/images/favicon.ico" /> -->
 
-  <meta charset="utf-8">
-  <!-- Styles --------------------------------------------------------------------->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- External JS   -------------------------------------------------------------->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,200;0,400;0,700;1,200;1,400&display=swap" rel="stylesheet">
 
+    <!-- Styles --------------------------------------------------------------------->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
-  <!-- Internal JS  --------------------------------------------------------------->
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type="text/javascript" src="/scripts/editForms.js"></script>
-  <script type="text/javascript" src="/scripts/copyToClipboard.js"></script>
+    <!-- Internal JS  --------------------------------------------------------------->
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/copyToClipboard.js"></script>
+    <script type="text/javascript" src="/scripts/loadSites.js"></script>
+    <script type="text/javascript" src="/scripts/createElement.js"></script>
+    <script type="text/javascript" src="/scripts/editForms.js"></script>
+    <script type="text/javascript" src="/scripts/search.js"></script>
 
-</head>
+    <!-- External JS   -------------------------------------------------------------->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
 
-<body>
+  </head>
 
-  <header>
+  <body>
+
     <%- include('partials/_header') %>
-  </header>
 
-  <main>
-    <h3>Login to your keepr</h3>
-    <form action="/login" method="POST">
-      <div class="form-group">
-        <label for="emailInput">Email address</label>
-        <input type="email" class="form-control" name="email"
-          placeholder="Enter email">
-      </div>
-      <div class="form-group">
-        <label for="passwordInput">Password</label>
-        <input type="password" class="form-control" name="password" placeholder="Password">
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-  </main>
+    <div class="content-container">
+      <main class="container justify-content-center">
+        <section class="login-container">
+          <!-- error/success popups -->
 
-  <!-- Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-</body>
+          <!-- <div class="invalid">
+            <span>
+              <span><i class="fas fa-exclamation-triangle"></i></span>
+              <span id="error-msg"></span>
+            </span>
+          </div>
 
+          <div class="success">
+            <span>
+              <span><i class="fas fa-check"></i></span>
+              <span id="success-msg"></span>
+            </span>
+          </div> -->
+          <header class="login-header">
+            <h3>Login to your keepr</h3>
+          </header>
+
+          <form action="/login" method="POST">
+            <div class="form-group">
+              <!-- <label for="emailInput">Email address</label> -->
+              <input type="email" class="form-control" name="email"
+              placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <!-- <label for="passwordInput">Password</label> -->
+              <input type="password" class="form-control" name="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+          <span class="divider">or</span>
+
+          <form action="/register" method="GET">
+            <button id="create-acc" type="submit" class="btn btn-primary">Create an Account</button>
+          </form>
+
+        </section>
+
+      </main>
+    </div>
+  </body>
 </html>
+
