@@ -87,8 +87,17 @@ const createOrgElement = (siteObj) => {
         <input  type="text" name="tags" placeholder="Tags">
         <button type="submit" name="${org_id}" class="btn btn-primary addSiteBtn">Add Site</button>
         </form>
+
+        <form>
+        <input type="checkbox" checked="true" name="upperCase" value="true">
+        <input type="checkbox" checked="true" name="lowerCase" value="true">
+        <input type="checkbox" checked="true" name="symbols" value="true">
+        <input type="checkbox" checked="true" name="digits" value="true">
+        <input type="text" name="length" value="20">
+        </form>
+
     </div>
-  `)
+`)
   bar.append(`
   <div>
       <form id="formAddUser_${org_id}">
