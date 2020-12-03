@@ -430,3 +430,27 @@ footer.card-list {
   display: flex;
   flex-wrap: wrap;
 }
+
+table.table {
+
+  thead th {
+    font-weight: 700;
+    border-top: none;
+  }
+
+  td form input#emailInputTable {
+    padding: 0.4em;
+    width: 80%;
+  }
+
+  button.tableShareForm {
+    padding: 0.4em;
+    width: 80%;
+  }
+
+  tbody tr.invite-user-row {
+    background-color: rgb(245, 245, 245);
+  }
+
+}
+

@@ -183,13 +183,7 @@ const createOrgElement = (siteObj) => {
           <button type="submit" name="${org_id}" class="btn btn-primary addSiteBtn">Add Site</button>
         </form>
     </div>`);
-    barEditForm.append(`
-    <div class="${org_id}-share-form" style="display: none;">
-        <form id="formAddUser_${org_id}">
-        <input type="email" name="userEmail" placeholder="Email">
-        <button type="submit" name="${org_id}" class="btn btn-primary addUserBtn">Invite</button>
-        </form>
-    </div>`);
+    barEditForm.append(`<div class="${org_id}-share-form" style="display: none;">`);
 
   const footer = $(`<footer class="card-list" id="${org_id}">`);
 
@@ -200,14 +194,31 @@ const createOrgElement = (siteObj) => {
             <tr>
               <th scope="col">Name</th>
               <th scope="col">Email</th>
-              <th scope="col">Delete</th>
+              <th scope="col"></th>
             </tr>
           </thead>
   `);
   const tableBody = $(`<tbody>`);
 
   userTable.append(tableHead);
-  userTable.append(tableBody)
+  userTable.append(tableBody);
+
+
+
+  tableBody.append(`
+    <tr class="invite-user-row">
+      <td>
+      <i>Add new user to organization:</i>
+      </td>
+      <td>
+        <form class="inline" id="formAddUser_${org_id}">
+          <input id="emailInputTable" type="email" name="userEmail" placeholder="Email">
+        </form>
+      </td>
+      <td>
+          <button type="submit" name="${org_id}" class="btn btn-outline-success tableShareForm addUserBtn">Invite</button>
+      </td>
+    </tr>`);
 
   for (let user of orgUsers) {
     // console.log("URSER", user, `<td>${user['last_name']}, ${user.first_name}</td>`)
@@ -216,7 +227,7 @@ const createOrgElement = (siteObj) => {
     let uDelete = $(`
     <td>
     <form>
-      <button type="delete" class="btn btn-outline-danger">Delete</button>
+      <button type="delete" class="btn btn-outline-danger tableShareForm">Delete</button>
     </form>
     </td>
     `)
@@ -227,6 +238,7 @@ const createOrgElement = (siteObj) => {
     userRows.append(uDelete)
     tableBody.append(userRows);
   }
+
 
   barEditForm.append(userTable);
 
