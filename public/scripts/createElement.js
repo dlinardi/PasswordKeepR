@@ -78,6 +78,26 @@ const createOrgElement = (siteObj) => {
   bar.append(barDetails);
   bar.append(barActions);
 
+  bar.append(`
+    <div>
+        <form id="formAddSite_${org_id}">
+        <input  type="text" name="url" placeholder="Site URL">
+        <input  type="email" name="account_email" placeholder="Associated Email">
+        <input  type="text" name="login_name" placeholder="Login Name">
+        <input  type="text" name="tags" placeholder="Tags">
+        <button type="submit" name="${org_id}" class="btn btn-primary addSiteBtn">Submit</button>
+        </form>
+    </div>
+  `)
+//   bar.append(`
+//   <div>
+//       <form>
+//       <input class="form-control" type="email" name="email" placeholder="Email">
+//       <button type="submit" name="${org_id}" class="btn btn-primary addUserBtn">Submit</button>
+//       </form>
+//   </div>
+// `)
+
   container.append(bar);
   return container;
 }

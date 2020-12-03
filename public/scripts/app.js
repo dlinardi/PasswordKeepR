@@ -20,15 +20,20 @@ $(document).ready(function () {
     copyToClipboard(toClip)
   });
 
-  $(document).on('click', '.add', function (event) {
+  $(document).on('click', '.addSiteBtn', function (event) {
+    event.preventDefault();
     const org_id = $(this)[0].name
     console.log(org_id)
-    //POST FORM
+    // POST FORM
     $.ajax({
       method: 'POST',
       url: `/api/orgs/${org_id}/addSite`,
-      data: $('form').serialize()
+      data: $(`#formAddSite_${org_id}`).serialize()
     })
+    .then(
+
+
+    )
 
 
     // formObject.url,
