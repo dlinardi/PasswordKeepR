@@ -1,6 +1,13 @@
 <header id="main-header">
   <nav class="navbar navbar-dark">
     <a class="navbar-brand" href="/">keepr</a>
-    <button type="submit" class="btn btn-dark">Login</button>
+
+    <% if (userId) { %>
+
+    <% } else { %>
+      <button type="submit" class="btn btn-dark" href="/login">Login</button>
+      <button type="submit" class="btn btn-dark" href="/register">Register</button>
+    <% } %>
+
   </nav>
 </header>
