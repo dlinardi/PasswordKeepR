@@ -94,7 +94,6 @@ const createOrgElement = (siteObj) => {
       <form id="formAddUser_${org_id}">
       <input type="email" name="userEmail" placeholder="Email">
       <button type="submit" name="${org_id}" class="btn btn-primary addUserBtn">Invite</button>
-
       </form>
   </div>
 `)

@@ -47,10 +47,19 @@ $(document).ready(function () {
       url: `/api/orgs/${org_id}/addUser`,
       data: $(`#formAddUser_${org_id}`).serialize()
     })
-      .then(window.alert('User Added to Org'))
+      .then(window.alert('User Added to Org?'))
   });
 
-
+  $(document).on('click', '.addOrgBtn', function (event) {
+    event.preventDefault();
+    // POST FORM
+    $.ajax({
+      method: 'POST',
+      url: `/api/orgs/new`,
+      data: $(`#formAddOrg`).serialize()
+    })
+    .then(loadAllSites(renderOrgWSites))
+  });
 
 
 });

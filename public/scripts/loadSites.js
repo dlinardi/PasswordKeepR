@@ -1,4 +1,5 @@
 const loadAllSites = (action) => {
+  console.log('loadAll')
   $.ajax(`/api/users/sites`,
       { method: "GET" }
     )
@@ -18,6 +19,9 @@ const loadOrgSites = (orgId, action) => {
     .catch(error => console.log(error));
 };
 const renderOrgWSites = function (sites) {
+
+  $('#vault').empty()
+
   let currOrg = null;
   for (const site of sites) {
     //Render Org Bar:  If !currOrg > Update Curr Org, and render Bar, proceed w. sites
@@ -31,6 +35,9 @@ const renderOrgWSites = function (sites) {
 }
 
 const renderOrgSites = (sites) => {
+
+  $('#vault').empty()
+
   for (const site of sites) {
     $('#vault').append(createSiteElement(site));
   }

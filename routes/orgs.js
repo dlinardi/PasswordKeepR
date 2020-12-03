@@ -8,6 +8,8 @@
 const express = require('express');
 const router = express.Router();
 const dbHelpers = require('../db/index');
+const newOrg = require('../lib/newOrg');
+
 
 module.exports = (db) => {
   router
@@ -99,10 +101,16 @@ module.exports = (db) => {
         });
     })
     .post("/new", (req, res) => {
-      dbHelpers.addOrg(req.body.orgName)
-        .then(org => {
-          console.log(org);
-        })
+      //Get Cookie for User ID
+      const { userId } = req.session;
+      console.log(">>>>>>>>>>>>>>>>>>>>>>ORG/NEW.body", req.body)
+      newOrg(userId, req.body.org_name)
+
+
+      // dbHelpers.addOrg(req.body.org_name)
+      //   .then(org => {
+      //     console.log(org);
+      //   })
         .catch((err) => {
           console.log(err);
         });
