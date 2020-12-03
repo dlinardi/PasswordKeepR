@@ -189,9 +189,9 @@ const createOrgElement = (siteObj) => {
 
   //   //Users in Org Form
   //   //FOR DIRECTLY MADE HERE...
-  const userTable = $(`
-        <h4>Users of Org</h4>
-        <table class="table">
+
+  const userTable = $(`<table class="table">`);
+  const tableHead = $(`
           <thead>
             <tr>
               <th scope="col">Name</th>
@@ -199,15 +199,17 @@ const createOrgElement = (siteObj) => {
               <th scope="col">Delete</th>
             </tr>
           </thead>
+  `);
+  const tableBody = $(`<tbody>`);
 
-          <tbody >
-          <tr id="orgUsers_${org_id}" class="table">
-  `)
+
+
+  userTable.append(tableHead);
+  userTable.append(tableBody)
 
 
   // $(populateTable(orgUsers)).appendTo(`#orgUsers_${org_id}`)
 
-  bar.append(userTable)
 
   for (let user of orgUsers) {
     // console.log("URSER", user, `<td>${user['last_name']}, ${user.first_name}</td>`)
@@ -223,17 +225,17 @@ const createOrgElement = (siteObj) => {
 
     $( "<p>Test</p>" ).appendTo( `bar` );
     // uName.appendTo(`#orgUsers_${org_id}`)
+    const userRows = $(`<tr id="orgUsers_${org_id}" class="table">`);
 
-    // userTable.html(uName)
-    // userTable.append(uEmail)
-    // userTable.append(uDelete)
 
+    userRows.append(uName)
+    userRows.append(uEmail)
+    userRows.append(uDelete)
+    tableBody.append(userRows);
     console.log("APPENDED...")
   }
 
-
-
-
+bar.append(userTable)
   bar.append(`
   <div>
   <form id="formAddUser_${org_id}">

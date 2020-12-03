@@ -173,7 +173,7 @@ const values = [userId];
   return Promise.resolve(pool.query(queryString, values)
     .then(res => {
       results = res.rows;
-      console.log("==============QAllSites",results)
+      // console.log("==============QAllSites",results)
       return results
     })
     .catch(err => { console.log(err) })
@@ -353,7 +353,7 @@ const getOrgUsers = (orgId) => {
     JOIN organizations ON organizations.id = org_id
     WHERE organizations.id = $1
     GROUP BY users.id, organizations.id, org_users.can_write
-    ORDER BY can_write;`;
+    ORDER BY last_name;`;
 
   return Promise.resolve(pool.query(queryString, [orgId])
     .then(res => {

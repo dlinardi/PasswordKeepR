@@ -1,0 +1,49 @@
+<h4>Users of Org</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+
+
+  <!--
+    .get("/:id/users", (req, res) => {
+
+    const getOrgUsers = (orgId) => {
+    const queryString = `
+      SELECT users.id as user_id, first_name, last_name, email, users.display_picture as image
+ -->
+
+
+  <tbody>
+    <!-- Check if the user is logged in-->
+    <% if(userId){ %>
+    <!-- Iterate over object, IF userID matched DataBase ID use the info-->
+    <% for(let user in usersOfOrg) { %>
+    <tr>
+      <td><%= user.last_name + ", " + user.first_name %></td>
+      <td><%= user.email %></td>
+      <td>
+        <form method="GET" action="/urls/<%= url %>">
+          <button type="edit" class="btn btn-outline-primary">Edit</button>
+        </form>
+      </td>
+      <td>
+        <form method="POST" action="/urls/<%= url %>?_method=DELETE">
+          <button type="delete" class="btn btn-outline-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    <% } %>
+    <% } %>
+  </tbody>
+  <div>
+    <form id="formAddUser_${org_id}">
+    <input type="email" name="userEmail" placeholder="Email">
+    <button type="submit" name="${org_id}" class="btn btn-primary addUserBtn">Invite</button>
+    </form>
+</div>
+</table>
