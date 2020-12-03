@@ -1,5 +1,5 @@
 //Test DATA FOR USERS
-let orgUsers = [
+let orgUsersTEST = [
   {
     user_id: 55,
     first_name: "Jaiden",
@@ -124,7 +124,7 @@ const createSiteElement = (siteObj) => {
   return card;
 };
 
-const createOrgElement = (siteObj) => {
+const createOrgElement = (siteObj, orgUsers) => {
   const { org_name, org_id } = siteObj;
   // creating structure of site container
   const container = $(`<section class="sites-container ${org_id}">`)
