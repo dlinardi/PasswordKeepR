@@ -10,8 +10,9 @@ module.exports = (db) => {
       const templateVars = { userId };
 
       if (!userId) {
-        res.render('register', templateVars);
+        return res.render('register', templateVars);
       }
+
       res.redirect("/");
     })
     .post("/", (req, res) => {

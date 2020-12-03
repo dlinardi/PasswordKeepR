@@ -10,7 +10,7 @@ module.exports = (db) => {
       const templateVars = { userId };
 
       if (!userId) {
-        res.render('login', templateVars);
+        return res.render('login', templateVars);
       }
       res.redirect("/");
     })

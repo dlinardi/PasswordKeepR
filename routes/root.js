@@ -23,12 +23,12 @@ module.exports = (db) => {
             const email = user.email;
             const templateVars = { userId, email };
 
-            res.render("index", templateVars);
+            return res.render("index", templateVars);
           })
           .catch(err => console.log(err));
+      } else {
+        return res.redirect("/login");
       }
-
-      res.redirect("/login");
     })
     .post("/new", (req, res) => {
       const site = req.body;
