@@ -65,12 +65,12 @@ const createOrgElement = (siteObj) => {
   // detailsSpan.append(orgName);
 
   //Div 2 (new-org)
-  const addSpan = $('<span class="add-site-button">');
-  const addBtn = $(`<a class="btn add" name="${org_id}_add_site" onclick="this.blur();" role="button">Add Site <i class="fas fa-plus"></i></a>`)
+  const addSpan = $(`<span name="${org_id}" id="${org_id}-add-form" class="add-site-button">`);
+  const addBtn = $(`<a class="btn add" name="add_site" onclick="this.blur();" role="button">Add Site <i class="fas fa-plus"></i></a>`)
   addSpan.append(addBtn);
 
-  const shareSpan = $('<span class="share-org-button">');
-  const shareBtn = $(`<a class="btn share" name="${org_id}_share_org" onclick="this.blur();" role="button"> Share <i class="fas fa-plus"></i></a>`);
+  const shareSpan = $(`<span name="${org_id}" id="${org_id}-share-form" class="share-org-button">`);
+  const shareBtn = $(`<a class="btn share" name="share_org" onclick="this.blur();" role="button"> Share <i class="fas fa-plus"></i></a>`);
   shareSpan.append(shareBtn);
 
   //Build Divs
@@ -83,7 +83,7 @@ const createOrgElement = (siteObj) => {
   bar.append(barActions);
 
   barEditForm.append(`
-    <div class="add-site-form">
+    <div class="contain_${org_id}-add-form" style="display: none;">
         <form id="formAddSite_${org_id}">
           <input  type="text" name="url" placeholder="Site URL">
           <input  type="email" name="account_email" placeholder="Associated Email">
@@ -104,7 +104,7 @@ const createOrgElement = (siteObj) => {
         </form>
     </div>`);
     barEditForm.append(`
-    <div class="share-org-form">
+    <div class="share-org-form_${org_id}">
         <form id="formAddUser_${org_id}">
         <input type="email" name="userEmail" placeholder="Email">
         <button type="submit" name="${org_id}" class="btn btn-primary addUserBtn">Invite</button>

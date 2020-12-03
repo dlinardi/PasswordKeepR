@@ -65,10 +65,15 @@ $(document).ready(function () {
 
   $('.add-site-form').css('display', 'none');
 
-  $('.add-site-button').click(function (e) {
+  $(document).on('click', '.add-site-button', function (e) {
     e.preventDefault();
+    const org_id = $(this)[0].id
 
-    $('.add-site-form').css('display', 'flex');
+    console.log(org_id);
+
+    const formContainer = $(`.contain_${org_id}`);
+
+    formContainer.slideToggle();
 
   });
 
