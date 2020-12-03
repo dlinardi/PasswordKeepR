@@ -44,8 +44,9 @@ const createSiteElement = (siteObj) => {
   return card;
 };
 
+//Make Org Obj
 const createOrgElement = (siteObj) => {
-  const { org_name, org_id } = siteObj;
+  const { org_name, org_id, org_users } = siteObj;
   // creating structure of site container
   const container = $(`<section id="${org_id}" class="sites-container">`)
   const bar = $(`<div class="org-bar">`);
@@ -78,6 +79,7 @@ const createOrgElement = (siteObj) => {
   bar.append(barDetails);
   bar.append(barActions);
 
+  //Site
   bar.append(`
     <div>
         <form id="formAddSite_${org_id}">
@@ -102,20 +104,177 @@ const createOrgElement = (siteObj) => {
     </div>
 `)
 
-//Users in Org Form
+  let orgUsers = [
+    {
+      user_id: 55,
+      first_name: "Jaiden",
+      last_name: "Cantrell",
+      email: "kingma@icloud.com",
+      image: "./images/profile-hex.png"
+    },
+    {
+      user_id: 53,
+      first_name: "Saul",
+      last_name: "Holloway",
+      email: "jonadab@icloud.com",
+      image: "./images/profile-hex.png"
+    },
+    {
+      user_id: 45,
+      first_name: "Jamari",
+      last_name: "Kane",
+      email: "shazow@live.com",
+      image: "./images/profile-hex.png"
+    },
+    {
+      user_id: 103,
+      first_name: "Emely",
+      last_name: "Kelly",
+      email: "ilial@gmail.com",
+      image: "./images/profile-hex.png"
+    },
+    {
+      user_id: 20,
+      first_name: "Talan",
+      last_name: "Meza",
+      email: "glenz@outlook.com",
+      image: "./images/profile-hex.png"
+    },
+    {
+      user_id: 102,
+      first_name: "Zoe",
+      last_name: "Norton",
+      email: "duchamp@gmail.com",
+      image: "./images/profile-hex.png"
+    },
+    {
+      user_id: 54,
+      first_name: "Xander",
+      last_name: "Santiago",
+      email: "mbswan@verizon.net",
+      image: "./images/profile-hex.png"
+    },
+    {
+      user_id: 52,
+      first_name: "Jimmy",
+      last_name: "Steele",
+      email: "andale@msn.com",
+      image: "./images/profile-hex.png"
+    },
+    {
+      user_id: 2,
+      first_name: "Suzy",
+      last_name: "Test2",
+      email: "test2@test.ca",
+      image: "./images/profile-hex.png"
+    },
+    {
+      user_id: 87,
+      first_name: "Melina",
+      last_name: "Velazquez",
+      email: "sisyphus@att.net",
+      image: "./images/profile-hex.png"
+    },
+    {
+      user_id: 56,
+      first_name: "Anahi",
+      last_name: "Walls",
+      email: "mglee@hotmail.com",
+      image: "./images/profile-hex.png"
+    }
+  ]
+  // bar.append(createOrgUsers(test))
+
+  // Function to create and append Edit Org Table
+
+  //   //Users in Org Form
+  //   //FOR DIRECTLY MADE HERE...
+  const userTable = $(`
+        <h4>Users of Org</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+
+          <tbody >
+          <tr id="orgUsers_${org_id}" class="table">
+  `)
+
+
+  // $(populateTable(orgUsers)).appendTo(`#orgUsers_${org_id}`)
+
+  bar.append(userTable)
+
+  for (let user of orgUsers) {
+    // console.log("URSER", user, `<td>${user['last_name']}, ${user.first_name}</td>`)
+    let uName = $(`<td>${user.last_name}, ${user.first_name}</td>`)
+    let uEmail = $(`<td>${user.email}</td>`)
+    let uDelete = $(`
+    <td>
+    <form >
+    <button type="delete" class="btn btn-outline-danger">Delete</button>
+    </form>
+    </td>
+    `)
+
+    $( "<p>Test</p>" ).appendTo( `bar` );
+    // uName.appendTo(`#orgUsers_${org_id}`)
+
+    // userTable.html(uName)
+    // userTable.append(uEmail)
+    // userTable.append(uDelete)
+
+    console.log("APPENDED...")
+  }
+
+
+
+
   bar.append(`
   <div>
-      <form id="formAddUser_${org_id}">
-      <input type="email" name="userEmail" placeholder="Email">
-      <button type="submit" name="${org_id}" class="btn btn-primary addUserBtn">Invite</button>
-      </form>
-  </div>
+  <form id="formAddUser_${org_id}">
+  <input type="email" name="userEmail" placeholder="Email">
+  <button type="submit" name="${org_id}" class="btn btn-primary addUserBtn">Invite</button>
+  </form>
+</div>
 `)
+
+  //Call Up Org Users Partial  << Cant get working - just prints the characters (HTML Escape chars?)
+  // bar.append($(`<%- include('partials/_header') %>`))
 
   container.append(bar);
   return container;
 }
 
-const createAddSiteForm = () => {
+const populateTable = (orgUsers) => {
 
-};
+  //Takes JSON objects
+  let output = $(`<tr>`)
+
+  for (let user of orgUsers) {
+    // console.log("URSER", user, `<td>${user['last_name']}, ${user.first_name}</td>`)
+    let uName = $(`<td>${user.last_name}, ${user.first_name}</td>`)
+    let uEmail = $(`<td>${user.email}</td>`)
+    let uDelete = $(`
+    <td>
+    <form >
+    <button type="delete" class="btn btn-outline-danger">Delete</button>
+    </form>
+    </td>
+    `)
+
+    userTable.append(uName)
+    userTable.append(uEmail)
+    userTable.append(uDelete)
+
+    console.log("APPENDED...")
+  }
+
+  console.log("DONE LOOP", output)
+  return output
+
+}

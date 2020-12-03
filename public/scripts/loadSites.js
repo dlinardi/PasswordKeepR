@@ -18,6 +18,8 @@ const loadOrgSites = (orgId, action) => {
     })
     .catch(error => console.log(error));
 };
+
+//Everything in root (All Orgs and Sites for a User)
 const renderOrgWSites = function (sites) {
 
   $('#vault').empty()
@@ -34,6 +36,7 @@ const renderOrgWSites = function (sites) {
   }
 }
 
+//Sites for ONE org
 const renderOrgSites = (sites) => {
 
   $('#vault').empty()
@@ -41,4 +44,10 @@ const renderOrgSites = (sites) => {
   for (const site of sites) {
     $('#vault').append(createSiteElement(site));
   }
+};
+
+//Render Only ONE ORG (Puts on Top)
+//For Edit condister Replace With or All
+const renderOrg = (org) => {
+  $('#vault').prepend(createOrgElement(org));
 };
