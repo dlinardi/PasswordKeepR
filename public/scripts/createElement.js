@@ -104,7 +104,7 @@ const createOrgElement = (siteObj) => {
         </form>
     </div>`);
     barEditForm.append(`
-    <div class="share-org-form_${org_id}">
+    <div class="contain_${org_id}-share-form" style="display: none;">
         <form id="formAddUser_${org_id}">
         <input type="email" name="userEmail" placeholder="Email">
         <button type="submit" name="${org_id}" class="btn btn-primary addUserBtn">Invite</button>

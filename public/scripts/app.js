@@ -62,28 +62,22 @@ $(document).ready(function () {
   });
 
   // show add site form / show share org form
-
-  $('.add-site-form').css('display', 'none');
+  // WORK IN PROGRESS >>>>>>>
 
   $(document).on('click', '.add-site-button', function (e) {
     e.preventDefault();
-    const org_id = $(this)[0].id
-
+    const org_id = $(this)[0].id;
     console.log(org_id);
-
     const formContainer = $(`.contain_${org_id}`);
-
     formContainer.slideToggle();
-
   });
 
-  $('.share-org-form').css('display', 'none');
-
-  $('.share-org-button').click(function (e) {
+  $(document).on('click', '.share-org-button', function (e) {
     e.preventDefault();
-
-    $('.add-site-form').css('display', 'flex');
-
+    const org_id = $(this)[0].id;
+    console.log(org_id);
+    const formContainer = $(`.contain_${org_id}`);
+    formContainer.slideToggle();
   });
 
 });
