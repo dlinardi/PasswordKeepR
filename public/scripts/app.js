@@ -61,5 +61,24 @@ $(document).ready(function () {
     .then(loadAllSites(renderOrgWSites))
   });
 
+  // show add site form / show share org form
+
+  $('.add-site-form').css('display', 'none');
+
+  $('.add-site-button').click(function (e) {
+    e.preventDefault();
+
+    $('.add-site-form').css('display', 'flex');
+
+  });
+
+  $('.share-org-form').css('display', 'none');
+
+  $('.share-org-button').click(function (e) {
+    e.preventDefault();
+
+    $('.add-site-form').css('display', 'flex');
+
+  });
 
 });

@@ -47,8 +47,12 @@ const createSiteElement = (siteObj) => {
 const createOrgElement = (siteObj) => {
   const { org_name, org_id } = siteObj;
   // creating structure of site container
-  const container = $(`<section id="${org_id}" class="sites-container">`)
+  const container = $(`<section class="sites-container ${org_id}">`)
+  const header = $(`<header class="org-site-head">`)
+
   const bar = $(`<div class="org-bar">`);
+  const barEditForm = $('<div class="org-edit-form">');
+
   const barDetails = $('<div class="orgs-in-bar">');
   const barActions = $(' <div class="new-site">');
 
@@ -61,12 +65,12 @@ const createOrgElement = (siteObj) => {
   // detailsSpan.append(orgName);
 
   //Div 2 (new-org)
-  const addSpan = $('<span>');
-  const addBtn = $(`<a class="btn add" name="${org_id}" href="#" onclick="this.blur();" role="button">Add Site <i class="fas fa-plus"></i></a>`)
+  const addSpan = $('<span class="add-site-button">');
+  const addBtn = $(`<a class="btn add" name="${org_id}_add_site" onclick="this.blur();" role="button">Add Site <i class="fas fa-plus"></i></a>`)
   addSpan.append(addBtn);
 
-  const shareSpan = $('<span>');
-  const shareBtn = $(`<a class="btn share" name="${org_id}" href="#" onclick="this.blur();" role="button"> Share <i class="fas fa-plus"></i></a>`);
+  const shareSpan = $('<span class="share-org-button">');
+  const shareBtn = $(`<a class="btn share" name="${org_id}_share_org" onclick="this.blur();" role="button"> Share <i class="fas fa-plus"></i></a>`);
   shareSpan.append(shareBtn);
 
   //Build Divs
@@ -78,39 +82,42 @@ const createOrgElement = (siteObj) => {
   bar.append(barDetails);
   bar.append(barActions);
 
-  bar.append(`
-    <div>
+  barEditForm.append(`
+    <div class="add-site-form">
         <form id="formAddSite_${org_id}">
-        <input  type="text" name="url" placeholder="Site URL">
-        <input  type="email" name="account_email" placeholder="Associated Email">
-        <input  type="text" name="login_name" placeholder="Login Name">
-        <input  type="text" name="tags" placeholder="Tags">
-      <div>
-      <label for="lowerCase">Lower Case Letters</label>
-      <input type="checkbox" checked="true" name="lowerCase" value="true">
-      <label for="upperCase">Upper Case Letters</label>
-      <input type="checkbox" checked="true" name="upperCase" value="true">
-      <label for="digits">Numbers</label>
-      <input type="checkbox" checked="true" name="numbers" value="true">
-      <label for="symbols">Symbols</label>
-      <input type="checkbox" checked="true" name="symbols" value="true">
-        <input type="text" name="length" value="20">
-     </div>
-        <button type="submit" name="${org_id}" class="btn btn-primary addSiteBtn">Add Site</button>
+          <input  type="text" name="url" placeholder="Site URL">
+          <input  type="email" name="account_email" placeholder="Associated Email">
+          <input  type="text" name="login_name" placeholder="Login Name">
+          <input  type="text" name="tags" placeholder="Tags">
+          <div>
+            <label for="lowerCase">Lower Case Letters</label>
+            <input type="checkbox" checked="true" name="lowerCase" value="true">
+            <label for="upperCase">Upper Case Letters</label>
+            <input type="checkbox" checked="true" name="upperCase" value="true">
+            <label for="digits">Numbers</label>
+            <input type="checkbox" checked="true" name="numbers" value="true">
+            <label for="symbols">Symbols</label>
+            <input type="checkbox" checked="true" name="symbols" value="true">
+            <input type="text" name="length" value="20">
+          </div>
+          <button type="submit" name="${org_id}" class="btn btn-primary addSiteBtn">Add Site</button>
         </form>
+    </div>`);
+    barEditForm.append(`
+    <div class="share-org-form">
+        <form id="formAddUser_${org_id}">
+        <input type="email" name="userEmail" placeholder="Email">
+        <button type="submit" name="${org_id}" class="btn btn-primary addUserBtn">Invite</button>
+        </form>
+    </div>`);
 
-    </div>
-`)
-  bar.append(`
-  <div>
-      <form id="formAddUser_${org_id}">
-      <input type="email" name="userEmail" placeholder="Email">
-      <button type="submit" name="${org_id}" class="btn btn-primary addUserBtn">Invite</button>
-      </form>
-  </div>
-`)
+  const footer = $(`<footer class="card-list" id="${org_id}">`);
 
-  container.append(bar);
+  header.prepend(bar);
+  header.append(barEditForm);
+  container.append(header);
+  container.append(footer);
+
   return container;
 }
 
