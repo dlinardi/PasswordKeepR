@@ -85,15 +85,18 @@ const createOrgElement = (siteObj) => {
         <input  type="email" name="account_email" placeholder="Associated Email">
         <input  type="text" name="login_name" placeholder="Login Name">
         <input  type="text" name="tags" placeholder="Tags">
-        <button type="submit" name="${org_id}" class="btn btn-primary addSiteBtn">Add Site</button>
-        </form>
-
-        <form>
-        <input type="checkbox" checked="true" name="upperCase" value="true">
-        <input type="checkbox" checked="true" name="lowerCase" value="true">
-        <input type="checkbox" checked="true" name="symbols" value="true">
-        <input type="checkbox" checked="true" name="digits" value="true">
+      <div>
+      <label for="lowerCase">Lower Case Letters</label>
+      <input type="checkbox" checked="true" name="lowerCase" value="true">
+      <label for="upperCase">Upper Case Letters</label>
+      <input type="checkbox" checked="true" name="upperCase" value="true">
+      <label for="digits">Numbers</label>
+      <input type="checkbox" checked="true" name="numbers" value="true">
+      <label for="symbols">Symbols</label>
+      <input type="checkbox" checked="true" name="symbols" value="true">
         <input type="text" name="length" value="20">
+     </div>
+        <button type="submit" name="${org_id}" class="btn btn-primary addSiteBtn">Add Site</button>
         </form>
 
     </div>

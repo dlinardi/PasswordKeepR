@@ -83,7 +83,7 @@ const addSite = (formObject) => {
     formObject.login_name,
     formObject.account_email,
     formObject.tags,
-    generatePassword(),
+    generatePassword(formObject.length, formObject.lowerCase, formObject.UpperCase, formObject.numbers, formObject.symbols),
     formObject.org_id
   ];
   return pool.query(queryString, values)
