@@ -148,7 +148,7 @@ main.container {
       color: white;
       // padding: 0 1em;
       display: flex;
-      margin: 0 10px;
+      // margin: 0 10px;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
@@ -391,4 +391,42 @@ section.register-container {
     font-weight: 700;
   }
 
+}
+
+// org-bar edit action styling
+
+header.org-site-head {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin: 0 10px;
+
+  div.org-edit-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  div.add-site-form {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  div.share-org-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+}
+
+footer.card-list {
+  display: flex;
+  flex-wrap: wrap;
 }
