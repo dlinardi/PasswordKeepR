@@ -18,7 +18,7 @@ const search = (searchQuery) => {
     data: $(searchQuery).serialize()
   })
   .then(() => {
-    loadSearchResults(searchQuery, renderAllSites);
+    loadSearchResults(searchQuery, renderOrgWSites);
   })
   .catch(error => console.log(error));
 };

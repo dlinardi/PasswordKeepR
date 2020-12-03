@@ -1,5 +1,4 @@
-
-const loadSites = (action) => {
+const loadAllSites = (action) => {
   $.ajax(`/api/users/sites`,
       { method: "GET" }
     )
@@ -9,7 +8,16 @@ const loadSites = (action) => {
     .catch(error => console.log(error));
 };
 
-const renderAllSites = function (sites) {
+const loadOrgSites = (orgId, action) => {
+  $.ajax(`/api/orgs/${orgId}/sites`,
+      { method: "GET" }
+    )
+    .then(sites => {
+      action(sites);
+    })
+    .catch(error => console.log(error));
+};
+const renderOrgWSites = function (sites) {
   let currOrg = null;
   for (const site of sites) {
     //Render Org Bar:  If !currOrg > Update Curr Org, and render Bar, proceed w. sites
@@ -17,14 +25,12 @@ const renderAllSites = function (sites) {
       currOrg = site.org_id
       $('#vault').prepend(createOrgElement(site));
     }
-
     //render Sites for org
     $(`#${site.org_id}`).append(createSiteElement(site));
-
   }
 }
 
-const renderSites = (sites) => {
+const renderOrgSites = (sites) => {
   for (const site of sites) {
     $('#vault').append(createSiteElement(site));
   }

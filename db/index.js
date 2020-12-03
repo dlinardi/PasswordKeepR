@@ -90,7 +90,7 @@ const addSite = (formObject) => {
     .then(res => console.log(`Added Site`, res.rows));
 }
 
-const addUserToOrg = (userId, orgId, canWrite = false) => {
+const addUserToOrg = (userId, orgId, canWrite = true) => {
   const queryString = (`
   INSERT INTO org_users
   (user_id, org_id, can_write)

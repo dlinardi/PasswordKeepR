@@ -6,7 +6,7 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const dbHelpers = require('../db/index');
 
 module.exports = (db) => {
@@ -108,22 +108,25 @@ module.exports = (db) => {
         });
     })
     .post("/:id/addUser", (req, res) => {
-      const { userId, canWrite } = req.body;
-      dbHelpers.addUserToOrg(userId, req.params.id, canWrite)
-        .then(user => {
-          console.log(user);
+      const { userEmail } = req.body;
+      dbHelpers.getUserWithEmail(userEmail)
+        .then((user) => {
+          dbHelpers.addUserToOrg(user.id, req.params.id, true)
+            .then(user => {
+              console.log(user);
+            })
         })
-        .catch(err => { console.log(err)});
+        .catch(err => { console.log(err) });
     })
     .post("/:id/addSite", (req, res) => {
       req.body.org_id = req.params.id;
       const site = req.body;
-      console.log("ROUTE>>",site)
+      console.log("ROUTE>>", site)
       dbHelpers.addSite(site)
         .then(site => {
           console.log(site);
         })
-        .catch(err => { console.log(err)});
+        .catch(err => { console.log(err) });
     });
   return router;
 };
