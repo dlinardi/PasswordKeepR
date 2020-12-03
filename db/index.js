@@ -387,6 +387,25 @@ const getOrgUsersWithId = (orgId, userId) => {
   );
 }
 
+const getOrgsOfUser = (userId) => {
+
+  const queryString = `
+    SELECT organizations.name as org_name
+    FROM org_users
+    JOIN users ON users.id = user_id
+    JOIN organizations ON organizations.id = org_id
+    WHERE users.id = $1
+    ORDER BY users.id
+    `;
+
+  return Promise.resolve(pool.query(queryString, [userId])
+    .then(res => {
+      results = res.rows;
+      return results
+    })
+    .catch(err => { console.log(err) })
+  );
+}
 
 //========= UPDATE =========================
 
@@ -498,6 +517,7 @@ module.exports = {
   getUrlWithTags,
   getOrgUsers,
   getOrgUsersWithId,
+  getOrgsOfUser,
   deleteSite,
   deleteUser,
   deleteOrg,

@@ -43,9 +43,9 @@
   <section class="nav-org-bar">
 
     <div class="orgs-in-bar">
-      <span class="specific-org"><i class="fas fa-users"></i>Personal</span>
-      <span class="specific-org"><i class="fas fa-users"></i>Family Vault</span>
-      <span class="specific-org"><i class="fas fa-users"></i>Lighthouse Labs</span>
+      <% for(const org of userOrgs) { %>
+        <span class="specific-org"><i class="fas fa-users"></i><%= org %></span>
+      <% } %>
     </div>
 
     <div class="new-org">
