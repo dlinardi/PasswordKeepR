@@ -13,23 +13,22 @@ module.exports = (db) => {
   router
     .get("/", (req, res) => {
       const { userId } = req.session;
-      let user;
 
-      // get user obj back from session id
-      dbHelpers.getUserWithId(userId)
-        .then(result => {
-          user = result;
-          const email = user.email;
-          const templateVars = { userId, email };
+      if (userId) {
+        let user;
+        // get user obj back from session id
+        dbHelpers.getUserWithId(userId)
+          .then(result => {
+            user = result;
+            const email = user.email;
+            const templateVars = { userId, email };
 
-          if (userId) {
             res.render("index", templateVars);
-          }
+          })
+          .catch(err => console.log(err));
+      }
 
-          res.redirect("/login");
-        })
-        .catch(err => console.log(err));
-
+      res.redirect("/login");
     })
     .post("/new", (req, res) => {
       const site = req.body;
