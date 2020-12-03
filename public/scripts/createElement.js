@@ -145,11 +145,11 @@ const createOrgElement = (siteObj) => {
   // detailsSpan.append(orgName);
 
   //Div 2 (new-org)
-  const addSpan = $(`<span name="${org_id}" id="${org_id}-add-form" class="add-site-button">`);
+  const addSpan = $(`<span name="${org_id}" class="add-site-button">`);
   const addBtn = $(`<a class="btn add" name="add_site" onclick="this.blur();" role="button">Add Site <i class="fas fa-plus"></i></a>`)
   addSpan.append(addBtn);
 
-  const shareSpan = $(`<span name="${org_id}" id="${org_id}-share-form" class="share-org-button">`);
+  const shareSpan = $(`<span name="${org_id}" class="share-org-button">`);
   const shareBtn = $(`<a class="btn share" name="share_org" onclick="this.blur();" role="button"> Share <i class="fas fa-plus"></i></a>`);
   shareSpan.append(shareBtn);
 
@@ -163,7 +163,7 @@ const createOrgElement = (siteObj) => {
   bar.append(barActions);
 
   barEditForm.append(`
-    <div class="contain_${org_id}-add-form" style="display: none;">
+    <div class="${org_id}-add-form" style="display: none;">
         <form id="formAddSite_${org_id}">
           <input  type="text" name="url" placeholder="Site URL">
           <input  type="email" name="account_email" placeholder="Associated Email">
@@ -184,7 +184,7 @@ const createOrgElement = (siteObj) => {
         </form>
     </div>`);
     barEditForm.append(`
-    <div class="contain_${org_id}-share-form" style="display: none;">
+    <div class="${org_id}-share-form" style="display: none;">
         <form id="formAddUser_${org_id}">
         <input type="email" name="userEmail" placeholder="Email">
         <button type="submit" name="${org_id}" class="btn btn-primary addUserBtn">Invite</button>
@@ -194,7 +194,7 @@ const createOrgElement = (siteObj) => {
   const footer = $(`<footer class="card-list" id="${org_id}">`);
 
   // create user table for every org
-  const userTable = $(`<table class="table">`);
+  const userTable = $(`<table class="table ${org_id}-table" style="display: none;">`);
   const tableHead = $(`
           <thead>
             <tr>
@@ -215,8 +215,8 @@ const createOrgElement = (siteObj) => {
     let uEmail = $(`<td>${user.email}</td>`)
     let uDelete = $(`
     <td>
-    <form >
-    <button type="delete" class="btn btn-outline-danger">Delete</button>
+    <form>
+      <button type="delete" class="btn btn-outline-danger">Delete</button>
     </form>
     </td>
     `)

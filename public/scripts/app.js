@@ -66,17 +66,19 @@ $(document).ready(function () {
 
   $(document).on('click', '.add-site-button', function (e) {
     e.preventDefault();
-    const org_id = $(this)[0].id;
-    console.log(org_id);
-    const formContainer = $(`.contain_${org_id}`);
+    const org_id = $(this).attr("name");
+
+    const formContainer = $(`.${org_id}-add-form`);
     formContainer.slideToggle();
   });
 
   $(document).on('click', '.share-org-button', function (e) {
     e.preventDefault();
-    const org_id = $(this)[0].id;
-    console.log(org_id);
-    const formContainer = $(`.contain_${org_id}`);
+    const org_id = $(this).attr("name");
+    const table = $(`.${org_id}-table`);
+    const formContainer = $(`.${org_id}-share-form`);
+
+    table.slideToggle();
     formContainer.slideToggle();
   });
 
