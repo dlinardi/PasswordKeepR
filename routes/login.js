@@ -6,8 +6,8 @@ const login = require('../lib/loginUser.js');
 module.exports = (db) => {
   router
     .get("/", (req, res) => {
-      let userId = req.session.userId
-      console.log(">>>>>>>>>>>>>>>>>>>>>>>>",userId)
+      let userId = req.session.userId;
+
       if (!userId) {
         res.render('login');
       }

@@ -12,10 +12,13 @@ const dbHelpers = require('../db/index');
 module.exports = (db) => {
   router
     .get("/", (req, res) => {
-      if (!req.session.userId) {
+      const { userId } = req.session;
+      const templateVars = { userId };
+
+      if (!userId) {
         res.redirect('/login');
       }
-        res.render("index");
+        res.render("index", templateVars);
     })
     .post("/new", (req, res) => {
       const site = req.body;
