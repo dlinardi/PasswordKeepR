@@ -104,6 +104,8 @@ const createOrgElement = (siteObj) => {
     </div>
 `)
 
+
+//Test DATA FOR USERS
   let orgUsers = [
     {
       user_id: 55,
@@ -183,12 +185,9 @@ const createOrgElement = (siteObj) => {
       image: "./images/profile-hex.png"
     }
   ]
-  // bar.append(createOrgUsers(test))
-
-  // Function to create and append Edit Org Table
 
   //   //Users in Org Form
-  //   //FOR DIRECTLY MADE HERE...
+  //   //FORM DIRECTLY MADE HERE...
 
   const userTable = $(`<table class="table">`);
   const tableHead = $(`
@@ -208,7 +207,6 @@ const createOrgElement = (siteObj) => {
   userTable.append(tableBody)
 
 
-  // $(populateTable(orgUsers)).appendTo(`#orgUsers_${org_id}`)
 
 
   for (let user of orgUsers) {
@@ -223,19 +221,15 @@ const createOrgElement = (siteObj) => {
     </td>
     `)
 
-    $( "<p>Test</p>" ).appendTo( `bar` );
-    // uName.appendTo(`#orgUsers_${org_id}`)
     const userRows = $(`<tr id="orgUsers_${org_id}" class="table">`);
-
-
     userRows.append(uName)
     userRows.append(uEmail)
     userRows.append(uDelete)
     tableBody.append(userRows);
-    console.log("APPENDED...")
   }
 
-bar.append(userTable)
+  bar.append(userTable)
+  //Invite User button
   bar.append(`
   <div>
   <form id="formAddUser_${org_id}">
@@ -250,33 +244,4 @@ bar.append(userTable)
 
   container.append(bar);
   return container;
-}
-
-const populateTable = (orgUsers) => {
-
-  //Takes JSON objects
-  let output = $(`<tr>`)
-
-  for (let user of orgUsers) {
-    // console.log("URSER", user, `<td>${user['last_name']}, ${user.first_name}</td>`)
-    let uName = $(`<td>${user.last_name}, ${user.first_name}</td>`)
-    let uEmail = $(`<td>${user.email}</td>`)
-    let uDelete = $(`
-    <td>
-    <form >
-    <button type="delete" class="btn btn-outline-danger">Delete</button>
-    </form>
-    </td>
-    `)
-
-    userTable.append(uName)
-    userTable.append(uEmail)
-    userTable.append(uDelete)
-
-    console.log("APPENDED...")
-  }
-
-  console.log("DONE LOOP", output)
-  return output
-
 }
