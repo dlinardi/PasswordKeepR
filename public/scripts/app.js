@@ -61,5 +61,23 @@ $(document).ready(function () {
     .then(loadAllSites(renderOrgWSites))
   });
 
+  // show add site form / show share org form
+  // WORK IN PROGRESS >>>>>>>
+
+  $(document).on('click', '.add-site-button', function (e) {
+    e.preventDefault();
+    const org_id = $(this)[0].id;
+    console.log(org_id);
+    const formContainer = $(`.contain_${org_id}`);
+    formContainer.slideToggle();
+  });
+
+  $(document).on('click', '.share-org-button', function (e) {
+    e.preventDefault();
+    const org_id = $(this)[0].id;
+    console.log(org_id);
+    const formContainer = $(`.contain_${org_id}`);
+    formContainer.slideToggle();
+  });
 
 });
