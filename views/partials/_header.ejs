@@ -3,9 +3,14 @@
     <a class="navbar-brand" href="/">keepr</a>
 
     <% if (userId) { %>
-      <form action="/logout" method="POST">
-        <button type="submit" class="btn btn-dark">Logout</button>
-      </form>
+      <div class="nav-login-register">
+        <span>
+           <%= email %>
+        </span>
+        <form action="/logout" method="POST">
+          <button type="submit" class="btn btn-dark">Logout</button>
+        </form>
+      </div>
     <% } else { %>
       <div class="nav-login-register">
         <form action="/login" method="GET">
