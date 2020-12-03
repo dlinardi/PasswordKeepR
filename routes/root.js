@@ -21,11 +21,17 @@ module.exports = (db) => {
           .then(result => {
             user = result;
             const email = user.email;
-            const templateVars = { userId, email };
 
-            return res.render("index", templateVars);
-          })
-          .catch(err => console.log(err));
+            dbHelpers.getOrgsOfUser(userId)
+              .then(orgs => {
+                let userOrgs = [];
+                for (const name of orgs) {
+                  userOrgs.push(name.org_name);
+                }
+                const templateVars = { userId, email, userOrgs };
+                return res.render("index", templateVars);
+              }).catch(err => console.log(err));
+          }).catch(err => console.log(err));
       } else {
         return res.redirect("/login");
       }
