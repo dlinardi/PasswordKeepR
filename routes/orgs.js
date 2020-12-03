@@ -118,6 +118,7 @@ module.exports = (db) => {
     .post("/:id/addSite", (req, res) => {
       req.body.org_id = req.params.id;
       const site = req.body;
+      console.log("ROUTE>>",site)
       dbHelpers.addSite(site)
         .then(site => {
           console.log(site);

@@ -27,10 +27,10 @@ module.exports = (db) => {
           console.log(err);
         });
     })
-    .get("/search/:query", (req, res) => {
+    .get("/search/:string", (req, res) => {
       const { userId } = req.session;
-      const { query } = req.params;
-      dbHelpers.getAllUserSitesBySearch(userId, query)
+      const { string } = req.params;
+      dbHelpers.getAllUserSitesBySearch(userId, string)
         .then(result => {
           res.json(result);
         })

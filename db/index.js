@@ -69,7 +69,7 @@ const addOrg = (orgName) => {
 
 // Org ID wont be on the form, backend JS will need to add it
 const addSite = (formObject) => {
-  formObject.email = formObject['account_email'].toLowerCase();
+  formObject.account_email = formObject['account_email'].toLowerCase();
 
   formObject.tags = formObject['tags'].toLowerCase();
   const queryString = (`
@@ -169,7 +169,7 @@ const getAllUserSites = (userId) => {
 }
 
 const getAllUserSitesBySearch = (userId, searchString) => {
-  console.log("Get users Orgs:", userId)
+  console.log("Search for user, for...:", userId, searchString)
   const queryString = `
   SELECT sites.*, orgs.name AS org_name, org_users.*
   FROM users

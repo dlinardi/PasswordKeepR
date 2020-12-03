@@ -3,24 +3,8 @@ $(document).ready(function () {
 
   loadSites(renderAllSites);
 
-
-  $(document).on('click', '.card-action', function (event) {
-    // Targets .pwd Class of the Clicked urlInfo, will clip innerText
-    const toClip = $(this).parent().find('.pwd')[0].innerText
-    copyToClipboard(toClip)
-  });
-
   $('#search-vault').on('input', function () {
     const userInput = $(this).val();
-
-    // while(userInput) {
-    //   $('.sites-container').empty();
-    //   search(userInput);
-    // }
-
-    // $('.sites-container').empty();
-    // loadSites(renderAllSites);
-
     if (userInput) {
       $('.sites-container').remove();
       search(userInput);
@@ -28,8 +12,33 @@ $(document).ready(function () {
       $('.sites-container').remove();
       loadSites(renderAllSites);
     }
-
-
   })
+
+  $(document).on('click', '.card-action', function (event) {
+    // Targets .pwd Class of the Clicked urlInfo, will clip innerText
+    const toClip = $(this).parent().find('.pwd')[0].innerText
+    copyToClipboard(toClip)
+  });
+
+  $(document).on('click', '.add', function (event) {
+    const org_id = $(this)[0].name
+    console.log(org_id)
+    //POST FORM
+    $.ajax({
+      method: 'POST',
+      url: `/api/orgs/${org_id}/addSite`,
+      data: $('form').serialize()
+    })
+
+
+    // formObject.url,
+    // formObject.login_name,
+    // formObject.account_email,
+    // formObject.tags,
+    // formObject.org_id
+  });
+
+
+
 
 });
