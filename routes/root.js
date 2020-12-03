@@ -15,10 +15,14 @@ module.exports = (db) => {
       const { userId } = req.session;
       const templateVars = { userId };
 
-      if (!userId) {
-        res.redirect('/login');
-      }
+      console.log(userId);
+
+      if (userId) {
         res.render("index", templateVars);
+      }
+
+      res.redirect("/login");
+
     })
     .post("/new", (req, res) => {
       const site = req.body;

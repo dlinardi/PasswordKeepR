@@ -6,8 +6,11 @@ const registerUser = require('../lib/registerUser');
 module.exports = (db) => {
   router
     .get("/", (req, res) => {
-      if (!req.session.userId) {
-        res.render('register');
+      const { userId } = req.session;
+      const templateVars = { userId };
+
+      if (!userId) {
+        res.render('register', templateVars);
       }
       res.redirect("/");
     })
