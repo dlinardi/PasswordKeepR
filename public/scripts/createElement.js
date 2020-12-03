@@ -101,6 +101,8 @@ const createOrgElement = (siteObj) => {
 
     </div>
 `)
+
+//Users in Org Form
   bar.append(`
   <div>
       <form id="formAddUser_${org_id}">
