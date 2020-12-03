@@ -1,7 +1,12 @@
 $(document).ready(function () {
   console.log("DOC READY")
 
-  loadAllSites(renderOrgWSites);
+  fetch(2);
+  // fetchRenderOrgBars(2);
+// ==================================
+
+
+  // loadAllSites(renderOrgWSites);
 
   $('#search-vault').on('input', function () {
     const userInput = $(this).val();
@@ -79,5 +84,8 @@ $(document).ready(function () {
     const formContainer = $(`.contain_${org_id}`);
     formContainer.slideToggle();
   });
+
+
+
 
 });

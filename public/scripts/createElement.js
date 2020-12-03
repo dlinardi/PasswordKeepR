@@ -125,6 +125,8 @@ const createSiteElement = (siteObj) => {
 };
 
 const createOrgElement = (siteObj, orgUsers) => {
+  console.log("CREATING ELEMENT", siteObj, orgUsers)
+
   const { org_name, org_id } = siteObj;
   // creating structure of site container
   const container = $(`<section class="sites-container ${org_id}">`)

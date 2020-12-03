@@ -180,6 +180,33 @@ const values = [userId];
   );
 }
 
+
+const getEverything = (userId) => {
+  console.log("Get all Sites for user:", userId)
+
+  //Outer Join to show orgs w/o sites
+    const queryString =`
+    SELECT sites.url, sites.login_name, sites.account_email, sites.password, sites.tags, orgs.name AS org_name, orgs.id AS org_id
+    FROM users
+    JOIN org_users on org_users.user_id = users.id
+    left outer JOIN organizations orgs ON org_users.org_id = orgs.id
+    left outer  JOIN sites ON sites.org_id = orgs.id
+    WHERE users.id = $1
+    ORDER BY orgs.name, sites.url;
+    `;
+const values = [userId];
+
+  return Promise.resolve(pool.query(queryString, values)
+    .then(res => {
+      results = res.rows;
+      // console.log("==============QAllSites",results)
+      return results
+    })
+    .catch(err => { console.log(err) })
+  );
+}
+
+
 const getAllUserSitesBySearch = (userId, searchString) => {
   console.log("Search for user, for...:", userId, searchString)
   const queryString = `
@@ -205,6 +232,7 @@ const getAllUserSitesBySearch = (userId, searchString) => {
 }
 
 
+
 const emailExists = (inputEmail) => {
   console.log("Checking if email exists:", inputEmail)
   const queryString = (`
@@ -227,7 +255,7 @@ const emailExists = (inputEmail) => {
 }
 
 const getUserOrgs = (userId) => {
-  console.log("Get users Orgs:", userId)
+  console.log("Get orgs of user:", userId)
   const queryString = (`
   SELECT orgs.*
   FROM users

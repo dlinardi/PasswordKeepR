@@ -49,6 +49,24 @@ module.exports = (db) => {
             .json({ error: err.message });
         });
     })
+    .get("/:id/orgs", (req, res) => {
+      dbHelpers.getUserOrgs(req.params.id)
+        .then(users => {
+          if (!users) {
+            res.json({ error: `${req.params.id} is not a valid id.` });
+          } else {
+            res.json(users);
+          }
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+    })
+
+
+
     .post("/new", (req, res) => {
       console.log(req.body);
     });
