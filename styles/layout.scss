@@ -75,12 +75,8 @@ header#main-header {
       form {
         margin-left: 0.5em;
       }
-
-
     }
-
   }
-
 }
 
 section.nav-org-bar {
@@ -128,7 +124,6 @@ section.nav-org-bar {
       font-size: 0.8em;
     }
   }
-
 }
 
 main.container {
@@ -420,7 +415,7 @@ header.org-site-head {
   div.org-edit-form {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-top: 10px;
   }
@@ -428,8 +423,56 @@ header.org-site-head {
   div.add-site-form {
     display: none;
     flex-direction: column;
-    align-items: center;
+    padding: 1em;
     justify-content: center;
+    align-items: center;
+
+    h4 {
+      font-weight: 700;
+    }
+
+
+
+    form div.site-details-container {
+      padding-bottom: 1.5em;
+
+      h4 {
+        padding-bottom: 0.5em;
+      }
+    }
+
+    input[type="text"], input[type="email"], input[type="url"] {
+      padding: 0.4em;
+      border: 2px $darkGrey solid;
+      outline: none;
+      padding: 0.5em;
+      cursor: text;
+      overflow: hidden;
+      text-align: initial;
+      text-overflow: ellipsis;
+      user-select: none;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    input#length {
+      margin-right: 0.5em;
+    }
+
+    .form-check-label {
+      padding-right: 1.2em;
+    }
+
+    button {
+      background-color: $darkRed;
+      border-color: $darkRed;
+      margin-top: 0.5em;
+      &:hover{
+        background-color: $lightRed;
+        border-color: $darkRed;
+      }
+    }
+
   }
 
   div.share-org-form {
@@ -468,6 +511,3 @@ table.table {
   }
 
 }
-
-
-

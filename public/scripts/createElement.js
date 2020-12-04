@@ -166,23 +166,32 @@ const createOrgElement = (siteObj) => {
     <div class="${org_id}-add-form add-site-form" style="display: none;">
       <form id="formAddSite_${org_id}">
         <div class="site-details-container">
-          <input  type="text" name="url" placeholder="Site URL">
-          <input  type="email" name="account_email" placeholder="Associated Email">
-          <input  type="text" name="login_name" placeholder="Login Name">
-          <input  type="text" name="tags" placeholder="Tags">
+          <h4 class="add-new-title">Site Details</h4>
+          <input type="url" name="url" placeholder="Site URL">
+          <input type="email" name="account_email" placeholder="Associated Email">
+          <input type="text" name="login_name" placeholder="Login Name">
+          <input type="text" name="tags" placeholder="Tags">
         </div>
         <div class="pass-gen-container">
-          <label for="lowerCase">Lower Case Letters</label>
-          <input type="checkbox" checked="true" name="lowerCase" value="true">
-          <label for="upperCase">Upper Case Letters</label>
-          <input type="checkbox" checked="true" name="upperCase" value="true">
-          <label for="digits">Numbers</label>
-          <input type="checkbox" checked="true" name="numbers" value="true">
-          <label for="symbols">Symbols</label>
-          <input type="checkbox" checked="true" name="symbols" value="true">
-          <input type="text" name="length" value="20">
+          <h4 class="add-new-title">Password Generation Criteria</h4>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="lowerCase" checked="true" name="lowerCase" value="true">
+            <label class="form-check-label" for="lowerCase">Lower Case Letters</label>
+
+            <input class="form-check-input" type="checkbox" id="upperCase" checked="true" name="upperCase" value="true">
+            <label class="form-check-label" for="upperCase">Upper Case Letters</label>
+
+            <input class="form-check-input" type="checkbox" id="numbers" checked="true" name="numbers" value="true">
+            <label class="form-check-label" for="numbers">Numbers</label>
+
+            <input class="form-check-input" type="checkbox" id="symbols" checked="true" name="symbols" value="true">
+            <label class="form-check-label" for="symbols">Symbols</label>
+
+            <input type="text" id="length" name="length" value="20" maxlength="2" size="2">
+            <label class="form-check-label" for="length">Length</label>
+          </div>
         </div>
-        <button type="submit" name="${org_id}" class="btn btn-primary addSiteBtn">Add Site</button>
+        <button type="submit" name="${org_id}" class="btn btn-success addSiteBtn">Add Site</button>
       </form>
     </div>`);
     barEditForm.append(`<div class="${org_id}-share-form" style="display: none;">`);
