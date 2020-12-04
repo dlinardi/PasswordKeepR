@@ -33,6 +33,7 @@ $(document).ready(function () {
       url: `/api/orgs/${org_id}/addSite`,
       data: $(`.formAddSite_${org_id}`).serialize()
     })
+      .then($('.add-site-form').hide())
       .then(loadRenderOrg(org_id))
   });
 
@@ -185,6 +186,7 @@ $(document).ready(function () {
     const editForm = $(`.${org_id}-edit-form`);
     const shareForm = $(`.${org_id}-share-form`);
 
+    $('.add-site-form').hide();
     addForm.fadeToggle();
     shareForm.hide();
     table.hide();
@@ -200,6 +202,7 @@ $(document).ready(function () {
     const editForm = $(`.${org_id}-edit-form`);
     const shareForm = $(`.${org_id}-share-form`);
 
+    $('.add-site-form').hide();
     shareForm.fadeToggle();
     table.fadeToggle();
     addForm.hide();
