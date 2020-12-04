@@ -88,7 +88,7 @@ const createOrgElement = (orgObj, orgUsers) => {
 
     barEditForm.append(`
     <div class="${id}-add-form add-site-form" style="display: none;">
-      <form id="formAddSite_${id}">
+      <form class="formAddSite_${id}">
         <div class="site-details-container">
           <h4 class="add-new-title">Site Details</h4>
           <input type="url" name="url" placeholder="Site URL">
@@ -99,19 +99,19 @@ const createOrgElement = (orgObj, orgUsers) => {
         <div class="pass-gen-container">
           <h4 class="add-new-title">Password Generation Criteria</h4>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="lowerCase" checked="true" name="lowerCase" value="true">
+            <input class="form-check-input" type="checkbox" checked="true" name="lowerCase" value="true">
             <label class="form-check-label" for="lowerCase">Lower Case Letters</label>
 
-            <input class="form-check-input" type="checkbox" id="upperCase" checked="true" name="upperCase" value="true">
+            <input class="form-check-input" type="checkbox" checked="true" name="upperCase" value="true">
             <label class="form-check-label" for="upperCase">Upper Case Letters</label>
 
-            <input class="form-check-input" type="checkbox" id="numbers" checked="true" name="numbers" value="true">
+            <input class="form-check-input" type="checkbox" checked="true" name="numbers" value="true">
             <label class="form-check-label" for="numbers">Numbers</label>
 
-            <input class="form-check-input" type="checkbox" id="symbols" checked="true" name="symbols" value="true">
+            <input class="form-check-input" type="checkbox" checked="true" name="symbols" value="true">
             <label class="form-check-label" for="symbols">Symbols</label>
 
-            <input type="text" id="length" name="length" value="20" maxlength="2" size="2">
+            <input class="site-detail-length" type="text" name="length" value="20" maxlength="2" size="2">
             <label class="form-check-label" for="length">Length</label>
           </div>
         </div>
@@ -120,9 +120,9 @@ const createOrgElement = (orgObj, orgUsers) => {
     </div>`);
     barEditForm.append(`
     <div class="contain_${id}-share-form" style="display: none;">
-        <form id="formAddUser_${id}">
-        <input type="email" name="userEmail" placeholder="Email">
-        <button type="submit" name="${id}" class="btn btn-primary addUserBtn">Invite</button>
+        <form class="formAddUser">
+          <input type="email" name="userEmail" placeholder="Email">
+          <button type="submit" name="${id}" class="btn btn-primary addUserBtn">Invite</button>
         </form>
     </div>`);
     barEditForm.append(`<div class="${id}-share-form" style="display: none;">`);
@@ -151,12 +151,12 @@ const createOrgElement = (orgObj, orgUsers) => {
         <i>Add new user to organization:</i>
         </td>
         <td>
-          <form class="inline" id="formAddUser_${id}">
-            <input id="emailInputTable" type="email" name="userEmail" placeholder="Email">
+          <form class="inline formAddUser">
+            <input type="email" name="userEmail" class="emailInputTable" placeholder="Email">
           </form>
         </td>
         <td>
-            <button type="submit" name="${id}" class="btn btn-outline-success tableShareForm addUserBtn">Invite</button>
+            <button type="submit" class="btn btn-outline-success tableShareForm addUserBtn">Invite</button>
         </td>
       </tr>`);
 

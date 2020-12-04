@@ -495,7 +495,7 @@ header.org-site-head {
       white-space: nowrap;
     }
 
-    input#length {
+    input.site-detail-length {
       margin-right: 0.5em;
     }
 
@@ -536,7 +536,7 @@ table.table {
     border-top: none;
   }
 
-  td form input#emailInputTable {
+  td form input.emailInputTable {
     padding: 0.4em;
     width: 80%;
   }
