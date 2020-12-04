@@ -87,7 +87,7 @@ $(document).ready(function () {
         console.log("SITE", site)
         const { url, account_email, login_name, tags, password } = site[0];
 
-        $('.org-edit-form').append(`
+        $(`#${orgId}.org-edit-form`).append(`
         <div class="${orgId}-edit-form add-site-form" style="display: none;">
           <form class="formEditSite_${orgId}">
             <div class="site-details-container">
@@ -122,7 +122,7 @@ $(document).ready(function () {
                 <button type="submit" name="${orgId}" class="btn btn-success editSiteBtn">Update</button>
               </span>
               <span>
-                <input class="form-check-input" type="checkbox" checked="false" name="password-checkbox" value="false">
+                <input class="form-check-input" type="checkbox" checked="false" name="genNewPass" value="false">
                 <label class="form-check-label" for="password-checkbox">Generate New Password?</label>
               </span>
             </div>

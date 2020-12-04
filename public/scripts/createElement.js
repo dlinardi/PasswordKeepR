@@ -56,7 +56,7 @@ const createOrgElement = (orgObj, orgUsers) => {
     const header = $(`<header class="org-site-head">`)
 
     const bar = $(`<div class="org-bar">`);
-    const barEditForm = $('<div class="org-edit-form">');
+    const barEditForm = $(`<div class="org-edit-form" id="${id}">`);
 
     const barDetails = $('<div class="orgs-in-bar">');
     const barActions = $(' <div class="new-site">');
