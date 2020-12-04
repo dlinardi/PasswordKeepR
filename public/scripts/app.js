@@ -117,13 +117,13 @@ $(document).ready(function () {
                 <label class="form-check-label" for="length">Length</label>
               </div>
             </div>
-            <div class="form-check form-check-inline update-actions" name="${siteId}">
-              <span>
+            <div class="form-check form-check-inline update-actions">
+              <span name="${siteId}">
                 <button type="submit" name="${orgId}" class="btn btn-success editSiteBtn">Update</button>
               </span>
               <span>
-                <input class="form-check-input" type="checkbox" checked="false" name="genNewPass" value="false">
-                <label class="form-check-label" for="password-checkbox">Generate New Password?</label>
+                <input class="form-check-input" type="checkbox" name="genNewPass" checked="false" value="true">
+                <label class="form-check-label" for="genNewPass">Generate New Password?</label>
               </span>
             </div>
           </form>

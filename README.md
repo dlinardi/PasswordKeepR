@@ -7,6 +7,10 @@
 - Allows users to add other members to their organizations.
 - Allows an organization to invite users to view their **keepr** vault.
 
+### Known Issues
+- Creating a New Organization requires a refresh in order to show new content
+- User Removal is working, but server sending a 500 status error
+
 ## Screenshots
 !["#"]()
 
@@ -19,18 +23,18 @@
 5. Go to <http://localhost:8080/> in your browser.
 
 ### Setting Up A Database
-1. psql -c "CREATE DATABASE <database name>"
-2. Using .env.example crate a .env file in the root directory with your database's informtion.
-ie) 
-DB_HOST=localhost
-DB_USER=username
-DB_PASS=password
-DB_NAME=mydatabase
-# Uncomment and set to true for Heroku
-# DB_SSL=true if heroku
-DB_PORT=5432
-3. npm run db:reset
-
+1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
+2. Update the .env file with your correct local information 
+  - username: `labber` 
+  - password: `labber` 
+  - database: `midterm`
+3. Install dependencies: `npm i`
+4. Fix to binaries for sass: `npm rebuild node-sass`
+5. Reset database: `npm run db:reset`
+  - Check the db folder to see what gets created and seeded in the SDB
+7. Run the server: `npm run local`
+  - Note: nodemon is used, so you should not have to restart your server
+8. Visit `http://localhost:8080/`
 
 ## Server Dependencies
 
@@ -45,37 +49,12 @@ DB_PORT=5432
 - pg
 - pg-native
 
-### Known Issues
-===================================================================================================
-
-Tweeter is a simple, single-page Twitter clone.  
-
-Front-end was artisinally hand crafted using HTML, AJAX, CSS, jQuery; 
-
-Back-end provided by Lighthouse Labs using Node, Express and MongoDB. 
-
-
 ## Front-End (Called in HTML)
 
 - Viewport
+- Bootstrap
+- AJAX
 - JQuery
 - Bootstrap
 - fontAwesome
 - Google Font API
-
-### Known Issues
-- Creating a New Organization requires a refresh in order to show new content
-- User Removal is working, but server sending a 500 status error
-
-#### Features
-- Single Page Application - No refresh required; all the information POST and GET are triggered within actions on the site.
-- Responsive Design - Designed to support various display sizes, and transition between various sizes on the fly.
-
-
-- Write a Tweet - Will open a text area and shift focus; the box will close as the user scrolls out of view (draft tweets will remain).
-- Tweet Validation - Will not post empty tweets, or tweets over 140 characters.
-- Tweet Character Counter - As the user types the couter will give automatically update with remaining characters. (Will show when past the limit)
-- Scroll to Top Button will appear as the user start scrolling down.
-
-#### To be Added
-- Filter dropdown button populates search bar with tags generated from User's Current Organizations.

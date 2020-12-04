@@ -137,21 +137,23 @@ module.exports = (db) => {
         })
         .catch(err => { console.log(err) });
     })
+
+
     .post("/:id/sites/edit/:siteId", (req, res) => {
-      const { userId, siteId } = req.params;
+      const { siteId } = req.params;
       const form = req.body
-      console.log("R===============================>>>>\n\n", form,"\n\n====================")
+      console.log("ROUTE>>>>>>>>>>>>",req.params, siteId)
       dbHelpers.updateSite(siteId, form, true)
-        .then(res => {
-          console.log(user);
+        .then(result => {
+          return result;
         })
         .catch(err => { console.log(err) });
     })
     .post("/:orgId/users/delete:userId", (req, res) => {
       const { userId, orgId } = req.params;
       dbHelpers.deleteUserFromOrg(userId, orgId)
-        .then(res => {
-          console.log(user);
+        .then(result => {
+          return result;
         })
         .catch(err => { console.log(err) });
     });
