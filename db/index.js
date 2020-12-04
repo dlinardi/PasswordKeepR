@@ -515,7 +515,9 @@ const deleteSite = (siteId, orgId) => {
   const queryString = (`DELETE FROM sites WHERE id = $1 AND org_id = $2;`);
   const values = [siteId, orgId];
   pool.query(queryString, values)
-    .then(res => console.log(`Deleted Site`, res.rows));
+    .then((res) => {
+      return `Deleted site ${siteId} from Org ${orgId}`;
+    })
 }
 
 const deleteUser = (userId, email) => {

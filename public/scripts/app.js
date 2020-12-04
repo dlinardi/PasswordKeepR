@@ -160,6 +160,22 @@ $(document).ready(function () {
   });
 
 
+ //DELETE SITE
+  $(document).on('click', '.cardDelete', function (e) {
+    e.preventDefault();
+    const orgId = $(this).attr("name");
+    const siteId = $(this).parent().attr("name");
+
+    $.ajax({
+      method: 'POST',
+      url: `/api/orgs/${orgId}/sites/delete/${siteId}`,
+      data: $(`.formEditSite_${orgId}`).serialize()
+    })
+      .then(loadRenderOrg(orgId));
+
+  });
+
+
 
   // show add site form / show share org form
 

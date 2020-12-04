@@ -11,7 +11,7 @@ const createSiteElement = (siteObj) => {
   const updateIcons = $(`<span class="edit-delete" name="${site_id}">`);
 
   const editIcon = $(`<i class="fas fa-edit cardEdit" name="${org_id}"></i>`);
-  const deleteIcon = $('<i class="fas fa-trash-alt cardDelete"></i>');
+  const deleteIcon = $(`<i class="fas fa-trash-alt cardDelete" name="${org_id}"></i>`);
 
   updateIcons.append(editIcon);
   updateIcons.append(deleteIcon);

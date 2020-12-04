@@ -129,19 +129,18 @@ module.exports = (db) => {
         .catch(err => { console.log(err) });
     })
     .post("/:id/sites/delete/:siteId", (req, res) => {
-      const { userId, orgId } = req.params;
-      dbHelpers.deleteSite(userId, orgId)
-        .then(res => {
-          console.log(user);
-        })
-        .catch(err => { console.log(err) });
+      const { siteId, id } = req.params;
+      dbHelpers.deleteSite(siteId, id)
+        // .then(res => {
+        //   console.log(res);
+        // })
+        // .catch(err => { console.log(err) });
     })
 
 
     .post("/:id/sites/edit/:siteId", (req, res) => {
       const { siteId } = req.params;
       const form = req.body
-      console.log("ROUTE>>>>>>>>>>>>",req.params, siteId)
       dbHelpers.updateSite(siteId, form, true)
         .then(result => {
           return result;
