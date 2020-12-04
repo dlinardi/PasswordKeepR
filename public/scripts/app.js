@@ -33,10 +33,7 @@ $(document).ready(function () {
       url: `/api/orgs/${org_id}/addSite`,
       data: $(`.formAddSite_${org_id}`).serialize()
     })
-      // .then(loadOrgSites(org_id,renderOrgSites))
-      .then($(`.site-tiles.${org_id}`).remove())
       .then(loadRenderOrg(org_id))
-    //=======^^^^^^^^^^^^^^^^^^^^^^^================== NEED to render Only org rather than whole container
   });
 
   $(document).on('click', '.addUserBtn', function (event) {
@@ -160,7 +157,7 @@ $(document).ready(function () {
   });
 
 
- //DELETE SITE
+  //DELETE SITE
   $(document).on('click', '.cardDelete', function (e) {
     e.preventDefault();
     const orgId = $(this).attr("name");

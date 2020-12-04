@@ -92,7 +92,6 @@ const renderOrgSites = (sites, orgId) => {
 
   $(`#list-${orgId}`).empty()
   for (const site of sites) {
-    console.log("SITE", sites, orgId)
     $(`#list-${orgId}`).append(createSiteElement(site));
   }
 };
@@ -136,13 +135,9 @@ const loadRenderAll = () => {
 }
 
 const loadRenderOrg = (orgId) => {
-  $(`#vault`).empty()
       $.ajax(`/api/orgs/${orgId}/sites`, { method: "GET" })  //Fetch Sites for that Org and Render
         .then((sites) => {
-          //Empty Org Container???
-          console.log("Rendering Sites!!!!", sites)
-          renderOrgSites(sites)
-
+          renderOrgSites(sites, orgId)
         })
 }
 
