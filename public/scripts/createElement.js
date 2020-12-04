@@ -146,11 +146,11 @@ const createOrgElement = (siteObj) => {
 
   //Div 2 (new-org)
   const addSpan = $(`<span name="${org_id}" class="add-site-button">`);
-  const addBtn = $(`<a class="btn add" name="add_site" onclick="this.blur();" role="button">Add Site <i class="fas fa-plus"></i></a>`)
+  const addBtn = $(`<a class="btn add" name="add_site" onclick="this.blur();" role="button">Add Site <i class="fas fa-address-card"></i></a>`)
   addSpan.append(addBtn);
 
   const shareSpan = $(`<span name="${org_id}" class="share-org-button">`);
-  const shareBtn = $(`<a class="btn share" name="share_org" onclick="this.blur();" role="button"> Share <i class="fas fa-plus"></i></a>`);
+  const shareBtn = $(`<a class="btn share" name="share_org" onclick="this.blur();" role="button"> Share <i class="fas fa-share"></i></a>`);
   shareSpan.append(shareBtn);
 
   //Build Divs
@@ -163,25 +163,27 @@ const createOrgElement = (siteObj) => {
   bar.append(barActions);
 
   barEditForm.append(`
-    <div class="${org_id}-add-form" style="display: none;">
-        <form id="formAddSite_${org_id}">
+    <div class="${org_id}-add-form add-site-form" style="display: none;">
+      <form id="formAddSite_${org_id}">
+        <div class="site-details-container">
           <input  type="text" name="url" placeholder="Site URL">
           <input  type="email" name="account_email" placeholder="Associated Email">
           <input  type="text" name="login_name" placeholder="Login Name">
           <input  type="text" name="tags" placeholder="Tags">
-          <div>
-            <label for="lowerCase">Lower Case Letters</label>
-            <input type="checkbox" checked="true" name="lowerCase" value="true">
-            <label for="upperCase">Upper Case Letters</label>
-            <input type="checkbox" checked="true" name="upperCase" value="true">
-            <label for="digits">Numbers</label>
-            <input type="checkbox" checked="true" name="numbers" value="true">
-            <label for="symbols">Symbols</label>
-            <input type="checkbox" checked="true" name="symbols" value="true">
-            <input type="text" name="length" value="20">
-          </div>
-          <button type="submit" name="${org_id}" class="btn btn-primary addSiteBtn">Add Site</button>
-        </form>
+        </div>
+        <div class="pass-gen-container">
+          <label for="lowerCase">Lower Case Letters</label>
+          <input type="checkbox" checked="true" name="lowerCase" value="true">
+          <label for="upperCase">Upper Case Letters</label>
+          <input type="checkbox" checked="true" name="upperCase" value="true">
+          <label for="digits">Numbers</label>
+          <input type="checkbox" checked="true" name="numbers" value="true">
+          <label for="symbols">Symbols</label>
+          <input type="checkbox" checked="true" name="symbols" value="true">
+          <input type="text" name="length" value="20">
+        </div>
+        <button type="submit" name="${org_id}" class="btn btn-primary addSiteBtn">Add Site</button>
+      </form>
     </div>`);
     barEditForm.append(`<div class="${org_id}-share-form" style="display: none;">`);
 
@@ -249,8 +251,3 @@ const createOrgElement = (siteObj) => {
 
   return container;
 }
-
-const createAddSiteForm = () => {
-
-};
-

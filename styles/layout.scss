@@ -20,6 +20,20 @@ $lightRed: #E74C3C;
   font-weight: 200;
 }
 
+@mixin transition-out {
+  -webkit-transition: all ease-out 0.2s;
+  -moz-transition: all ease-out 0.2s;
+  -o-transition: all ease-out 0.2s;
+  transition: all ease-out 0.2s;
+}
+
+@mixin transition-in {
+  -webkit-transition: all ease-in 0.2s;
+  -moz-transition: all ease-in 0.2s;
+  -o-transition: all ease-in 0.2s;
+  transition: all ease-in 0.2s;
+}
+
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -44,7 +58,12 @@ header#main-header {
 
     a.navbar-brand {
       @include strong-text;
+      @include transition-out;
       font-size: 2.2em;
+      &:hover {
+        opacity: 0.8;
+        @include transition-in;
+      }
     }
 
     .nav-login-register {
@@ -71,7 +90,6 @@ section.nav-org-bar {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  // padding: 1em;
   color: white;
 
   .orgs-in-bar {
@@ -86,9 +104,11 @@ section.nav-org-bar {
       height: 100%;
       display: flex;
       align-items: center;
+      @include transition-out;
       &:hover {
         background-color: $lightGrey;
         cursor: pointer;
+        @include transition-in;
       }
 
       i {
@@ -131,6 +151,12 @@ main.container {
       user-select: none;
       vertical-align: middle;
       white-space: nowrap;
+      width: 300px;
+      @include transition-out;
+      &:focus {
+        background-color: #fbfbf8;
+        @include transition-in;
+      }
     }
 
   }
@@ -146,9 +172,7 @@ main.container {
       width: 100%;
       background-color: $lightRed;
       color: white;
-      // padding: 0 1em;
       display: flex;
-      // margin: 0 10px;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
@@ -160,14 +184,11 @@ main.container {
         .specific-org {
           margin-right: 1.5em;
           padding: 1em;
-          // &:hover {
-          //   background-color: $darkRed;
-          //   cursor: pointer;
-          // }
 
           i {
             padding-right: 0.8em;
           }
+
         }
 
       }
@@ -180,9 +201,11 @@ main.container {
         span {
           height: 100%;
           padding: 1em;
+          @include transition-out;
           &:hover {
             background-color: $darkRed;
             cursor: pointer;
+            @include transition-in;
           }
 
           a {
@@ -206,24 +229,16 @@ main.container {
 }
 
 article.sites {
-
   display: flex;
   flex-direction: column;
   height: 233px;
   width: 350px;
   margin: 10px;
-
-  -webkit-transition: all ease-out 0.2s;
-  -moz-transition: all ease-out 0.2s;
-  -o-transition: all ease-out 0.2s;
-  transition: all ease-out 0.2s;
+  @include transition-out;
 
   &:hover {
     box-shadow: 4px 4px $darkGrey;
-    -webkit-transition: all ease-in 0.2s;
-    -moz-transition: all ease-in 0.2s;
-    -o-transition: all ease-in 0.2s;
-    transition: all ease-in 0.2s;
+    @include transition-in;
   }
 
   header {
@@ -453,4 +468,6 @@ table.table {
   }
 
 }
+
+
 
