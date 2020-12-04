@@ -72,6 +72,10 @@ header#main-header {
       justify-content: center;
       align-items: center;
 
+      span {
+          display: none;
+      }
+
       form {
         margin-left: 0.5em;
       }
@@ -172,9 +176,13 @@ main.container {
 
   section.search-filter {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin: 10px;
+
+    .filter {
+      display: none;
+    }
 
     input[type="search"] {
       border: 2px $darkGrey solid;
@@ -233,6 +241,7 @@ main.container {
         display: flex;
         justify-content: center;
         align-items: center;
+        font-size: 0.2em;
 
         span {
           height: 100%;
@@ -268,10 +277,14 @@ main.container {
 article.sites {
   display: flex;
   flex-direction: column;
-  height: 233px;
-  width: 350px;
+  height: 303.3px;
+  width: 455px;
   margin: 10px;
   @include transition-out;
+
+  img {
+    width: 100%;
+  }
 
   &:hover {
     box-shadow: 4px 4px $darkGrey;
@@ -568,6 +581,67 @@ table.table {
 
   tbody tr.invite-user-row {
     background-color: rgb(245, 245, 245);
+  }
+
+}
+
+
+
+// for mobile vvvvv - might change flex direcrtion to row for each card?
+// article.sites {
+//   flex-grow: 1;
+// }
+
+@media only screen and (min-width: 765px) {
+  // for tablet (2 column per row)
+  article.sites {
+    height: 446.6px;
+    width: 670px;
+  }
+
+}
+
+@media only screen and (min-width: 990px) {
+  // for tablet (2 column per row)
+  article.sites {
+    height: 296.6px;
+    width: 445px;
+  }
+
+  .new-site {
+    font-size: unset;
+  }
+
+}
+
+@media only screen and (min-width: 1200px) {
+  // width styling that we have now (for desktop)
+
+  article.sites {
+    height: 233px;
+    width: 350px;
+  }
+
+  .new-site {
+    font-size: unset;
+  }
+
+  header#main-header {
+    nav {
+      .nav-login-register {
+        span {
+          display: flex;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  section.search-filter {
+    .filter {
+      display: flex;
+    }
+
   }
 
 }
