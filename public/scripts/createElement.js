@@ -151,7 +151,7 @@ const createOrgElement = (orgObj, orgUsers) => {
         <i>Add new user to organization:</i>
         </td>
         <td>
-          <form class="inline formAddUser">
+          <form class="inline formAddUser_${id}">
             <input type="email" name="userEmail" class="emailInputTable" placeholder="Email">
           </form>
         </td>
@@ -161,13 +161,14 @@ const createOrgElement = (orgObj, orgUsers) => {
       </tr>`);
 
     for (let user of orgUsers) {
-      // console.log("URSER", user, `<td>${user['last_name']}, ${user.first_name}</td>`)
+      // console.log("URSER", user)
       let uName = $(`<td>${user.last_name}, ${user.first_name}</td>`)
-      let uEmail = $(`<td>${user.email}</td>`)
+      let uEmail = $(`<td class="${id}-email">${user.email}</td>`)
       let uDelete = $(`
         <td>
-        <form>
-          <button type="delete" class="btn btn-outline-danger tableShareForm">Delete</button>
+        <form name="${user.user_id}">
+          <button type="delete" class="btn btn-outline-danger tableShareForm delBtn" name="${id}">Delete
+           </button>
         </form>
         </td>
         `)

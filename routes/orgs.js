@@ -103,14 +103,7 @@ module.exports = (db) => {
     .post("/new", (req, res) => {
       //Get Cookie for User ID
       const { userId } = req.session;
-      console.log(">>>>>>>>>>>>>>>>>>>>>>ORG/NEW.body", req.body)
       newOrg(userId, req.body.org_name)
-
-
-      // dbHelpers.addOrg(req.body.org_name)
-      //   .then(org => {
-      //     console.log(org);
-      //   })
         .catch((err) => {
           console.log(err);
         });
@@ -133,6 +126,14 @@ module.exports = (db) => {
       dbHelpers.addSite(site)
         .then(site => {
           console.log(site);
+        })
+        .catch(err => { console.log(err) });
+    })
+    .post("/:orgId/users/:userId", (req, res) => {
+      const { userId, orgId } = req.params;
+      dbHelpers.deleteUserFromOrg(userId, orgId)
+        .then(res => {
+          console.log(user);
         })
         .catch(err => { console.log(err) });
     });

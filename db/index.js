@@ -501,6 +501,16 @@ const deleteUser = (userId, email) => {
     .then(res => console.log(`Deleted user`, res.rows));
 }
 
+const deleteUserFromOrg = (userId, orgId) => {
+  console.log(`\n\nDELETING..., user ${userId} from org ${orgId}`)
+  const queryString = (`DELETE FROM org_users WHERE user_id = $1 AND org_id = $2;`);
+  const values = [userId, orgId];
+  pool.query(queryString, values)
+    .then((res) => {
+      return `Deleted user ${userId} from Org ${orgId}`;
+    })
+}
+
 const deleteOrg = (orgId, name) => {
   const queryString = (`DELETE FROM organizations WHERE id = $1 AND name = $2;`);
   const values = [orgId, name];
@@ -550,6 +560,7 @@ module.exports = {
   deleteSite,
   deleteUser,
   deleteOrg,
+  deleteUserFromOrg,
   addUser,
   addOrg,
   addSite,
