@@ -39,13 +39,15 @@ $(document).ready(function () {
 
   $(document).on('click', '.addUserBtn', function (event) {
     event.preventDefault();
-    const org_id = $(this)[0].name
+    const orgId = $(this)[0].name
+    console.log.orgId
     $.ajax({
       method: 'POST',
-      url: `/api/orgs/${org_id}/addUser`,
-      data: $(`.formAddUser_${org_id}`).serialize()
+      url: `/api/orgs/${orgId}/addUser`,
+      data: $(`.formAddUser_${orgId}`).serialize()
     })
-      .then(window.alert('User Added to Org'))
+      // .then(window.alert('User Added to Org'))
+      .then(loadRenderAll())
   });
 
   $(document).on('click', '.addOrgBtn', function (event) {
