@@ -1,16 +1,17 @@
 const createSiteElement = (siteObj) => {
-  const { url, login_name, password } = siteObj;
-  console.log("CREATING ELEMENT", url, login_name, password)
+  const { url, login_name, password, site_id, org_id } = siteObj;
+
+  console.log("CREATING ELEMENT", siteObj)
 
   // creating structure of site container
   const card = $('<article class="sites">');
   const cardHeader = $('<header>');
   const cardFooter = $('<footer>');
 
-  const updateIcons = $('<span class="edit-delete">');
+  const updateIcons = $(`<span class="edit-delete" name="${site_id}">`);
 
-  const editIcon = $('<i class="fas fa-edit"></i>');
-  const deleteIcon = $('<i class="fas fa-trash-alt"></i>');
+  const editIcon = $(`<i class="fas fa-edit cardEdit" name="${org_id}"></i>`);
+  const deleteIcon = $('<i class="fas fa-trash-alt cardDelete"></i>');
 
   updateIcons.append(editIcon);
   updateIcons.append(deleteIcon);

@@ -327,7 +327,7 @@ const getOrgUrls = (id) => {
 const getOrgUrlsWithSiteId = (orgId, siteId) => {
 
   const queryString = `
-    SELECT organizations.id as org_id, sites.id as site_id, url, login_name, account_email, tags, created_date, deleted_date, is_active
+    SELECT organizations.id as org_id, sites.id as site_id, url, login_name, account_email, tags, password, created_date, deleted_date, is_active
     FROM sites
     JOIN organizations ON organizations.id = org_id
     WHERE organizations.id = $1 AND sites.id = $2
@@ -437,14 +437,61 @@ const getOrgsOfUser = (userId) => {
 
 //========= UPDATE =========================
 
-const updateSite = (siteProperty, newValue, siteId) => {
+const updateSite = (siteId, formObject, genNewPass = false) => {
+  console.log("\n>>>>>>>>>>>>>>",formObject)
+  if(genNewPass){
+    values.push(generatePassword())
+  }
+
+  formObject.account_email = formObject['account_email'].toLowerCase();
+
+  formObject.tags = formObject['tags'].toLowerCase();
+
   //Need to adapt for batch update (possibility of multiple values) <<<<<<<<<<<<<<<<<
   const queryString = (`
   UPDATE sites
-  SET $1 = $2
-  WHERE id = $3;
+  SET url = $2,
+  SET login_name = $3,
+  SET account_email = $3,
+  SET tags = $5
+  WHERE id = $1
+  RETURNING *;
   `);
-  const values = [siteProperty, newValue, siteId];
+  const values = [
+    siteId,
+    formObject.url,
+    formObject.login_name,
+    formObject.account_email,
+    formObject.tags,
+    formObject.org_id
+  ];
+  pool.query(queryString, values)
+    .then(res => console.log(`Update Site`, res.rows));
+}
+
+const updatePassword = (siteId, formObject) => {
+  formObject.account_email = formObject['account_email'].toLowerCase();
+
+  formObject.tags = formObject['tags'].toLowerCase();
+
+  //Need to adapt for batch update (possibility of multiple values) <<<<<<<<<<<<<<<<<
+  const queryString = (`
+  UPDATE sites
+  SET url = $2,
+  SET login_name = $3,
+  SET account_email = $3,
+  SET tags = $5
+  WHERE id = $1
+  RETURNING *;
+  `);
+  const values = [
+    siteId,
+    formObject.url,
+    formObject.login_name,
+    formObject.account_email,
+    formObject.tags,
+    formObject.org_id
+  ];
   pool.query(queryString, values)
     .then(res => console.log(`Update Site`, res.rows));
 }

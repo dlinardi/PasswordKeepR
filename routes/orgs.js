@@ -86,13 +86,15 @@ module.exports = (db) => {
         });
     })
     .get("/:id/sites/:sites_id", (req, res) => {
-      dbHelpers.getOrgUrlsWithSiteId(req.params.id, req.params.sites_id)
-        .then(orgs => {
-          if (!orgs) {
-            res.json({ error: `${req.params.id} or ${req.params.sites_id} is not a valid id.` });
-          } else {
-            res.json(orgs);
-          }
+      const reqs = req.params.body
+      console.log("R===============================>>>>\n\n", reqs)
+      // dbHelpers.getOrgUrlsWithSiteId(req.params.id, req.params.sites_id)
+      //   .then(orgs => {
+      //     if (!orgs) {
+      //       res.json({ error: `${req.params.id} or ${req.params.sites_id} is not a valid id.` });
+      //     } else {
+      //       res.json(orgs);
+      //     }
         })
         .catch(err => {
           res
@@ -129,7 +131,23 @@ module.exports = (db) => {
         })
         .catch(err => { console.log(err) });
     })
-    .post("/:orgId/users/:userId", (req, res) => {
+    .post("/:id/sites/delete/:siteId", (req, res) => {
+      const { userId, orgId } = req.params;
+      dbHelpers.deleteSite(userId, orgId)
+        .then(res => {
+          console.log(user);
+        })
+        .catch(err => { console.log(err) });
+    })
+    .post("/:id/sites/edit/:siteId", (req, res) => {
+      const { userId, orgId } = req.params;
+      dbHelpers.updateSite(userId, orgId)
+        .then(res => {
+          console.log(user);
+        })
+        .catch(err => { console.log(err) });
+    })
+    .post("/:orgId/users/delete:userId", (req, res) => {
       const { userId, orgId } = req.params;
       dbHelpers.deleteUserFromOrg(userId, orgId)
         .then(res => {

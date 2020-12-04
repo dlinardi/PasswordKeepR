@@ -495,6 +495,26 @@ header.org-site-head {
       white-space: nowrap;
     }
 
+    input.dynPasswordInput {
+      background-color: $lightGrey;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    div.update-actions {
+      display: flex;
+      align-items: center;
+
+      button {
+        margin-right: 1em;
+      }
+
+    }
+
     input.site-detail-length {
       margin-right: 0.5em;
     }
