@@ -159,7 +159,7 @@ const getAllUserSites = (userId) => {
   //   `;
 
   //Outer Join to show orgs w/o sites
-    const queryString =`
+  const queryString = `
     SELECT sites.url, sites.login_name, sites.account_email, sites.password, sites.tags, orgs.name AS org_name, orgs.id AS org_id
     FROM users
     JOIN org_users on org_users.user_id = users.id
@@ -168,7 +168,7 @@ const getAllUserSites = (userId) => {
     WHERE users.id = $1
     ORDER BY orgs.name, sites.url;
     `;
-const values = [userId];
+  const values = [userId];
 
   return Promise.resolve(pool.query(queryString, values)
     .then(res => {
@@ -185,7 +185,7 @@ const getUserSitesByOrg = (userId, orgId) => {
   console.log("Get all Sites for user:", userId, orgId)
 
   //Outer Join to show orgs w/o sites
-    const queryString =`
+  const queryString = `
     SELECT sites.url, sites.login_name, sites.account_email, sites.password, sites.tags, orgs.name AS org_name, orgs.id AS org_id
     FROM users
     JOIN org_users on org_users.user_id = users.id
@@ -194,12 +194,12 @@ const getUserSitesByOrg = (userId, orgId) => {
     WHERE users.id = $1 AND orgs.id = $2
     ORDER BY orgs.name, sites.url;
     `;
-const values = [userId, orgId];
+  const values = [userId, orgId];
 
   return Promise.resolve(pool.query(queryString, values)
     .then(res => {
       results = res.rows;
-      console.log("==============user/org",results)
+      console.log("==============user/org", results)
       return results
     })
     .catch(err => { console.log(err) })
@@ -438,63 +438,39 @@ const getOrgsOfUser = (userId) => {
 //========= UPDATE =========================
 
 const updateSite = (siteId, formObject, genNewPass = false) => {
-  console.log("\n>>>>>>>>>>>>>>",formObject)
-  if(genNewPass){
-    values.push(generatePassword())
+  console.log("\n>>>>>>>>>>>>>>>>>>>>>>>", formObject, "\n\n")
+  formObject.account_email = formObject['account_email'].toLowerCase();
+  formObject.tags = formObject['tags'].toLowerCase();
+  if (genNewPass) {
+    formObject.password = generatePassword(formObject.length, formObject.lowerCase, formObject.UpperCase, formObject.numbers, formObject.symbols)
   }
-
-  formObject.account_email = formObject['account_email'].toLowerCase();
-
-  formObject.tags = formObject['tags'].toLowerCase();
-
-  //Need to adapt for batch update (possibility of multiple values) <<<<<<<<<<<<<<<<<
-  const queryString = (`
-  UPDATE sites
-  SET url = $2,
-  SET login_name = $3,
-  SET account_email = $3,
-  SET tags = $5
-  WHERE id = $1
-  RETURNING *;
-  `);
   const values = [
     siteId,
     formObject.url,
     formObject.login_name,
     formObject.account_email,
     formObject.tags,
-    formObject.org_id
+    formObject.password
   ];
-  pool.query(queryString, values)
-    .then(res => console.log(`Update Site`, res.rows));
-}
 
-const updatePassword = (siteId, formObject) => {
-  formObject.account_email = formObject['account_email'].toLowerCase();
 
-  formObject.tags = formObject['tags'].toLowerCase();
 
-  //Need to adapt for batch update (possibility of multiple values) <<<<<<<<<<<<<<<<<
+
   const queryString = (`
   UPDATE sites
   SET url = $2,
   SET login_name = $3,
-  SET account_email = $3,
-  SET tags = $5
+  SET account_email = $4,
+  SET tags = $5,
+  SET password = $6
   WHERE id = $1
   RETURNING *;
   `);
-  const values = [
-    siteId,
-    formObject.url,
-    formObject.login_name,
-    formObject.account_email,
-    formObject.tags,
-    formObject.org_id
-  ];
+
   pool.query(queryString, values)
     .then(res => console.log(`Update Site`, res.rows));
 }
+
 
 const updateOrg = (formObject) => {
   const queryString = (`
