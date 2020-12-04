@@ -69,8 +69,13 @@ const ORGrenderOrgWSites = function (sites) {
 
 const renderSearch = (sites) => {
   $(`#vault`).empty()
+
+  $(`#vault`).append('<div class="sites-container sc-search-query">');
+  $(`.sc-search-query`).append('<footer class="card-list">');
+
+
   for (const site of sites) {
-    $(`#vault`).append(createSiteElement(site));
+    $(`.card-list`).append(createSiteElement(site));
   }
 }
 
