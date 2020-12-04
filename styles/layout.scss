@@ -151,19 +151,14 @@ section.nav-org-bar {
     margin-right: 1.5em;
     padding: 0.55em;
     border-radius: 0;
-    &:hover {
-      background-color: $lightGrey;
-      border: none;
-    }
-    &:active {
-      background-color: $lightGrey;
-      border: none;
-    }
-    &:focus {
+    @include transition-out;
+    &:hover, &:active, &:focus {
       background-color: $lightGrey;
       border: none;
       outline: none;
+      @include transition-in;
     }
+
 
     i {
       margin-left: 0.5em;
