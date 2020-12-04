@@ -47,45 +47,46 @@ const createSiteElement = (siteObj) => {
 //====Create Org Elm=================================================================
 
 const createOrgElement = (orgObj, orgUsers) => {
+  if (orgUsers) {
 
-  const { name, id } = orgObj;
-  // creating structure of site container
-  const container = $(`<section class="sites-container ${id}">`)
-  const header = $(`<header class="org-site-head">`)
+    const { name, id } = orgObj;
+    // creating structure of site container
+    const container = $(`<section class="sites-container ${id}">`)
+    const header = $(`<header class="org-site-head">`)
 
-  const bar = $(`<div class="org-bar">`);
-  const barEditForm = $('<div class="org-edit-form">');
+    const bar = $(`<div class="org-bar">`);
+    const barEditForm = $('<div class="org-edit-form">');
 
-  const barDetails = $('<div class="orgs-in-bar">');
-  const barActions = $(' <div class="new-site">');
+    const barDetails = $('<div class="orgs-in-bar">');
+    const barActions = $(' <div class="new-site">');
 
-  //Div 1 (orgs-in-bar)
-  const detailsSpan = $(`<span class="specific-org">${name}</span>`);
+    //Div 1 (orgs-in-bar)
+    const detailsSpan = $(`<span class="specific-org">${name}</span>`);
 
-  const orgIcon = $('<i class="fas fa-user">');
-  detailsSpan.prepend(orgIcon);
+    const orgIcon = $('<i class="fas fa-user">');
+    detailsSpan.prepend(orgIcon);
 
-  // detailsSpan.append(orgName);
+    // detailsSpan.append(orgName);
 
-  //Div 2 (new-org)
-  const addSpan = $(`<span name="${id}" id="${id}-add-form" class="add-site-button">`);
-  const addBtn = $(`<a class="btn add" name="add_site" onclick="this.blur();" role="button">Add Site <i class="fas fa-plus"></i></a>`)
-  addSpan.append(addBtn);
+    //Div 2 (new-org)
+    const addSpan = $(`<span name="${id}" id="${id}-add-form" class="add-site-button">`);
+    const addBtn = $(`<a class="btn add" name="add_site" onclick="this.blur();" role="button">Add Site <i class="fas fa-plus"></i></a>`)
+    addSpan.append(addBtn);
 
-  const shareSpan = $(`<span name="${id}" id="${id}-share-form" class="share-org-button">`);
-  const shareBtn = $(`<a class="btn share" name="share_org" onclick="this.blur();" role="button"> Share <i class="fas fa-plus"></i></a>`);
-  shareSpan.append(shareBtn);
+    const shareSpan = $(`<span name="${id}" id="${id}-share-form" class="share-org-button">`);
+    const shareBtn = $(`<a class="btn share" name="share_org" onclick="this.blur();" role="button"> Share <i class="fas fa-plus"></i></a>`);
+    shareSpan.append(shareBtn);
 
-  //Build Divs
-  barDetails.append(detailsSpan);
-  barActions.append(addSpan);
-  barActions.append(shareSpan);
+    //Build Divs
+    barDetails.append(detailsSpan);
+    barActions.append(addSpan);
+    barActions.append(shareSpan);
 
-  //Build Bar
-  bar.append(barDetails);
-  bar.append(barActions);
+    //Build Bar
+    bar.append(barDetails);
+    bar.append(barActions);
 
-  barEditForm.append(`
+    barEditForm.append(`
     <div class="contain_${id}-add-form" style="display: none;">
         <form id="formAddSite_${id}">
           <input  type="text" name="url" placeholder="Site URL">
@@ -114,11 +115,11 @@ const createOrgElement = (orgObj, orgUsers) => {
         </form>
     </div>`);
 
-  const footer = $(`<footer class="card-list" id="${id}">`);
+    const footer = $(`<footer class="card-list" id="${id}">`);
 
-  // create user table for every org
-  const userTable = $(`<table class="table">`);
-  const tableHead = $(`
+    // create user table for every org
+    const userTable = $(`<table class="table">`);
+    const tableHead = $(`
           <thead>
             <tr>
               <th scope="col">Name</th>
@@ -127,16 +128,16 @@ const createOrgElement = (orgObj, orgUsers) => {
             </tr>
           </thead>
   `);
-  const tableBody = $(`<tbody>`);
+    const tableBody = $(`<tbody>`);
 
-  userTable.append(tableHead);
-  userTable.append(tableBody)
+    userTable.append(tableHead);
+    userTable.append(tableBody)
 
-  for (let user of orgUsers) {
-    // console.log("URSER", user, `<td>${user['last_name']}, ${user.first_name}</td>`)
-    let uName = $(`<td>${user.last_name}, ${user.first_name}</td>`)
-    let uEmail = $(`<td>${user.email}</td>`)
-    let uDelete = $(`
+    for (let user of orgUsers) {
+      // console.log("URSER", user, `<td>${user['last_name']}, ${user.first_name}</td>`)
+      let uName = $(`<td>${user.last_name}, ${user.first_name}</td>`)
+      let uEmail = $(`<td>${user.email}</td>`)
+      let uDelete = $(`
     <td>
     <form >
     <button type="delete" class="btn btn-outline-danger">Delete</button>
@@ -144,19 +145,20 @@ const createOrgElement = (orgObj, orgUsers) => {
     </td>
     `)
 
-    const userRows = $(`<tr id="orgUsers_${id}" class="table">`);
-    userRows.append(uName)
-    userRows.append(uEmail)
-    userRows.append(uDelete)
-    tableBody.append(userRows);
+      const userRows = $(`<tr id="orgUsers_${id}" class="table">`);
+      userRows.append(uName)
+      userRows.append(uEmail)
+      userRows.append(uDelete)
+      tableBody.append(userRows);
+    }
+
+    barEditForm.append(userTable);
+
+    header.prepend(bar);
+    header.append(barEditForm);
+    container.append(header);
+    container.append(footer);
+
+    return container;
   }
-
-  barEditForm.append(userTable);
-
-  header.prepend(bar);
-  header.append(barEditForm);
-  container.append(header);
-  container.append(footer);
-
-  return container;
 }

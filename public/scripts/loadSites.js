@@ -67,14 +67,18 @@ const ORGrenderOrgWSites = function (sites) {
   }
 }
 
-
+const renderSearch = (sites) => {
+  $(`#vault`).empty()
+  for (const site of sites) {
+    $(`#vault`).append(createSiteElement(site));
+  }
+}
 
 // ===FETCH AND RENDER ORGS THEN SITES APPEND TO ORG======================================================
 
 
 
 const renderOrgBar = (org, orgUsers) => {
-  // console.log("Render ORG >>>>>>>>>>>")
   $('#vault').append(createOrgElement(org, orgUsers));
   //Ref Prepend switch sql order by to make Alpha on whole render
 };
@@ -91,16 +95,19 @@ const renderOrgSites = (sites, orgId) => {
 
 const fetchUserOrgs = (userId) => {
   $.ajax(`/api/users/${userId}/orgs`, { method: "GET" })  //Fetch userOrgs
+    .then((userOrgs) => {
+      return userOrgs
+    })
 }
 
 
 const loadRenderAll = () => {
-  $.ajax(`/api/users/id`, { method: "GET" })  //Fetch UserId
+  return $.ajax(`/api/users/id`, { method: "GET" })                        //Fetch UserId
     .then((userId) => {
-      $.ajax(`/api/users/${userId}/orgs`, { method: "GET" })  //Fetch userOrgs
-        // return fetchUserOrgs(userId)
+      $.ajax(`/api/users/${userId}/orgs`, { method: "GET" })       //Fetch userOrgs
         .then(userOrgs => {
           //ITERATE ORGS
+          $(`#vault`).empty()
           for (const org of userOrgs) {
             $.ajax(`/api/orgs/${org.id}/users`, { method: "GET" })  //Fetch Users in that Org
               .then(orgUsers => {
@@ -109,7 +116,6 @@ const loadRenderAll = () => {
                 return org
               })
               .then(org => {
-                console.log(">>>>>", org)
                 $.ajax(`/api/orgs/${org.id}/Sites`, { method: "GET" })  //Fetch Sites for that Org and Render
                   .then((sites) => {
                     console.log("Rendering Sites")
