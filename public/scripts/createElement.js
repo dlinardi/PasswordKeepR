@@ -127,7 +127,7 @@ const createOrgElement = (orgObj, orgUsers) => {
     </div>`);
     barEditForm.append(`<div class="${id}-share-form" style="display: none;">`);
 
-    const footer = $(`<footer class="card-list_${id}">`);
+    const footer = $(`<footer class="card-list" id="list-${id}">`);
 
     // create user table for every org
     const userTable = $(`<table class="table ${id}-table" style="display: none;">`);

@@ -85,10 +85,10 @@ const renderOrgBar = (org, orgUsers) => {
 
 const renderOrgSites = (sites, orgId) => {
 
-  $(`.card-list_${orgId}`).empty()
+  $(`#list-${orgId}`).empty()
   for (const site of sites) {
     console.log("SITE", sites, orgId)
-    $(`.card-list_${orgId}`).append(createSiteElement(site));
+    $(`#list-${orgId}`).append(createSiteElement(site));
   }
 };
 
