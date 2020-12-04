@@ -141,7 +141,7 @@ module.exports = (db) => {
       const { userId, siteId } = req.params;
       const form = req.body
       console.log("R===============================>>>>\n\n", form,"\n\n====================")
-      dbHelpers.updateSite(siteId, form, )
+      dbHelpers.updateSite(siteId, form, true)
         .then(res => {
           console.log(user);
         })
