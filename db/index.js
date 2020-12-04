@@ -441,9 +441,21 @@ const updateSite = (siteId, formObject, genNewPass = false) => {
   console.log("\n>>>>>>>>>>>>>>>>>>>>>>>", formObject, "\n\n")
   formObject.account_email = formObject['account_email'].toLowerCase();
   formObject.tags = formObject['tags'].toLowerCase();
+
   if (genNewPass) {
-    formObject.password = generatePassword(formObject.length, formObject.lowerCase, formObject.UpperCase, formObject.numbers, formObject.symbols)
+    formObject.password = generatePassword(formObject.length, formObject.lowerCase, formObject.UpperCase, formObject.numbers, formObject.symbols);
   }
+
+  const queryString = (`
+    UPDATE sites
+    SET url = $2,
+    login_name = $3,
+    account_email = $4,
+    tags = $5,
+    password = $6
+    WHERE id = $1
+    RETURNING *;
+    `);
   const values = [
     siteId,
     formObject.url,
@@ -452,23 +464,12 @@ const updateSite = (siteId, formObject, genNewPass = false) => {
     formObject.tags,
     formObject.password
   ];
-
-
-
-
-  const queryString = (`
-  UPDATE sites
-  SET url = $2,
-  SET login_name = $3,
-  SET account_email = $4,
-  SET tags = $5,
-  SET password = $6
-  WHERE id = $1
-  RETURNING *;
-  `);
-
+  console.log("\n>>>>>>>>>>>>>>>>>>>>>>>", values, "\n\n")
   pool.query(queryString, values)
-    .then(res => console.log(`Update Site`, res.rows));
+    .then(res => {
+      return res.rows;
+    })
+
 }
 
 
