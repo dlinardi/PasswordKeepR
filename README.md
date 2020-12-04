@@ -1,4 +1,4 @@
-# keepr
+# keepr 🔑
 
 **keepr** is a password generator and manager that creates and stores passwords for individuals and groups.
 
