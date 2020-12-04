@@ -176,7 +176,6 @@ $(document).ready(function () {
   });
 
 
-
   // show add site form / show share org form
 
   $(document).on('click', '.add-site-button', function (e) {
@@ -188,7 +187,7 @@ $(document).ready(function () {
     const editForm = $(`.${org_id}-edit-form`);
     const shareForm = $(`.${org_id}-share-form`);
 
-    $('.add-site-form').hide();
+    // $('.add-site-form').hide();
     addForm.fadeToggle();
     shareForm.hide();
     table.hide();
@@ -204,15 +203,12 @@ $(document).ready(function () {
     const editForm = $(`.${org_id}-edit-form`);
     const shareForm = $(`.${org_id}-share-form`);
 
-    $('.add-site-form').hide();
+    // $('.add-site-form').hide();
     shareForm.fadeToggle();
     table.fadeToggle();
     addForm.hide();
     editForm.hide();
 
   });
-
-
-
 
 });
