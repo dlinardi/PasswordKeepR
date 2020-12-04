@@ -1,7 +1,10 @@
 $(document).ready(function () {
   console.log("DOC READY")
 
-  loadAllSites(renderOrgWSites);
+  loadRenderAll();//Takes UserID
+  // ==================================
+  // loadAllSites(renderOrgWSites);
+
 
   $('#search-vault').on('input', function () {
     const userInput = $(this).val();
@@ -10,7 +13,8 @@ $(document).ready(function () {
       search(userInput);
     } else {
       $('.sites-container').remove();
-      loadAllSites(renderOrgWSites);
+      // loadAllSites(renderOrgWSites);
+      loadRenderAll()
     }
   })
 
@@ -30,15 +34,14 @@ $(document).ready(function () {
       data: $(`#formAddSite_${org_id}`).serialize()
     })
       // .then(loadOrgSites(org_id,renderOrgSites))
-      .then($('.sites-container').remove())
-      .then(loadAllSites(renderOrgWSites))
+      .then($(`.site-tiles.${org_id}`).remove())
+      .then(loadRenderOrg(org_id))
     //=======^^^^^^^^^^^^^^^^^^^^^^^================== NEED to render Only org rather than whole container
   });
 
   $(document).on('click', '.addUserBtn', function (event) {
     event.preventDefault();
     const org_id = $(this)[0].name
-
     $.ajax({
       method: 'POST',
       url: `/api/orgs/${org_id}/addUser`,
@@ -54,7 +57,8 @@ $(document).ready(function () {
       url: `/api/orgs/new`,
       data: $(`#formAddOrg`).serialize()
     })
-    .then(loadAllSites(renderOrgWSites))
+      .then(loadRenderAll())
+      //=======^^^^^^^^^^^^^^^^^^^^^^^================== NEED to render Only org rather than whole container
   });
 
   // show add site form / show share org form
@@ -86,5 +90,8 @@ $(document).ready(function () {
     addForm.hide();
 
   });
+
+
+
 
 });

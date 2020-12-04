@@ -11,14 +11,13 @@ const loadSearchResults = (searchQuery, action) => {
 };
 
 const search = (searchQuery) => {
-  $
-  .ajax({
+  $.ajax({
     url: "/search",
     method: "POST",
     data: $(searchQuery).serialize()
   })
   .then(() => {
-    loadSearchResults(searchQuery, renderOrgWSites);
+    loadSearchResults(searchQuery, renderSearch);
   })
   .catch(error => console.log(error));
 };

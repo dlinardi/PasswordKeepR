@@ -1,86 +1,6 @@
-//Test DATA FOR USERS
-let orgUsers = [
-  {
-    user_id: 55,
-    first_name: "Jaiden",
-    last_name: "Cantrell",
-    email: "kingma@icloud.com",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 53,
-    first_name: "Saul",
-    last_name: "Holloway",
-    email: "jonadab@icloud.com",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 45,
-    first_name: "Jamari",
-    last_name: "Kane",
-    email: "shazow@live.com",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 103,
-    first_name: "Emely",
-    last_name: "Kelly",
-    email: "ilial@gmail.com",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 20,
-    first_name: "Talan",
-    last_name: "Meza",
-    email: "glenz@outlook.com",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 102,
-    first_name: "Zoe",
-    last_name: "Norton",
-    email: "duchamp@gmail.com",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 54,
-    first_name: "Xander",
-    last_name: "Santiago",
-    email: "mbswan@verizon.net",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 52,
-    first_name: "Jimmy",
-    last_name: "Steele",
-    email: "andale@msn.com",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 2,
-    first_name: "Suzy",
-    last_name: "Test2",
-    email: "test2@test.ca",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 87,
-    first_name: "Melina",
-    last_name: "Velazquez",
-    email: "sisyphus@att.net",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 56,
-    first_name: "Anahi",
-    last_name: "Walls",
-    email: "mglee@hotmail.com",
-    image: "./images/profile-hex.png"
-  }
-]
-
 const createSiteElement = (siteObj) => {
   const { url, login_name, password } = siteObj;
+  console.log("CREATING ELEMENT", url, login_name, password)
 
   // creating structure of site container
   const card = $('<article class="sites">');
@@ -124,83 +44,83 @@ const createSiteElement = (siteObj) => {
   return card;
 };
 
-const createOrgElement = (siteObj) => {
-  const { org_name, org_id } = siteObj;
-  // creating structure of site container
-  const container = $(`<section class="sites-container ${org_id}">`)
-  const header = $(`<header class="org-site-head">`)
+//====Create Org Elm=================================================================
 
-  const bar = $(`<div class="org-bar">`);
-  const barEditForm = $('<div class="org-edit-form">');
+const createOrgElement = (orgObj, orgUsers) => {
 
-  const barDetails = $('<div class="orgs-in-bar">');
-  const barActions = $(' <div class="new-site">');
+  if (orgUsers) {
+    const { name, id } = orgObj;
+    // creating structure of site container
+    const container = $(`<section class="sites-container ${id}">`)
+    const header = $(`<header class="org-site-head">`)
 
-  //Div 1 (orgs-in-bar)
-  const detailsSpan = $(`<span class="specific-org">${org_name}</span>`);
+    const bar = $(`<div class="org-bar">`);
+    const barEditForm = $('<div class="org-edit-form">');
 
-  const orgIcon = $('<i class="fas fa-user">');
-  detailsSpan.prepend(orgIcon);
+    const barDetails = $('<div class="orgs-in-bar">');
+    const barActions = $(' <div class="new-site">');
 
-  // detailsSpan.append(orgName);
+    //Div 1 (orgs-in-bar)
+    const detailsSpan = $(`<span class="specific-org">${name}</span>`);
 
-  //Div 2 (new-org)
-  const addSpan = $(`<span name="${org_id}" class="add-site-button active">`);
-  const addBtn = $(`<a class="btn add" name="add_site" onclick="this.blur();" role="button">Add Site <i class="fas fa-address-card"></i></a>`)
-  addSpan.append(addBtn);
+    const orgIcon = $('<i class="fas fa-user">');
+    detailsSpan.prepend(orgIcon);
 
-  const shareSpan = $(`<span name="${org_id}" class="share-org-button active">`);
-  const shareBtn = $(`<a class="btn share" name="share_org" onclick="this.blur();" role="button"> Share <i class="fas fa-share"></i></a>`);
-  shareSpan.append(shareBtn);
+    // detailsSpan.append(orgName);
 
-  //Build Divs
-  barDetails.append(detailsSpan);
-  barActions.append(addSpan);
-  barActions.append(shareSpan);
+    //Div 2 (new-org)
+    const addSpan = $(`<span name="${id}" id="${id}-add-form" class="add-site-button">`);
+    const addBtn = $(`<a class="btn add" name="add_site" onclick="this.blur();" role="button">Add Site <i class="fas fa-plus"></i></a>`)
+    addSpan.append(addBtn);
 
-  //Build Bar
-  bar.append(barDetails);
-  bar.append(barActions);
+    const shareSpan = $(`<span name="${id}" id="${id}-share-form" class="share-org-button">`);
+    const shareBtn = $(`<a class="btn share" name="share_org" onclick="this.blur();" role="button"> Share <i class="fas fa-plus"></i></a>`);
+    shareSpan.append(shareBtn);
 
-  barEditForm.append(`
-    <div class="${org_id}-add-form add-site-form" style="display: none;">
-      <form id="formAddSite_${org_id}">
-        <div class="site-details-container">
-          <h4 class="add-new-title">Site Details</h4>
-          <input type="url" name="url" placeholder="Site URL">
-          <input type="email" name="account_email" placeholder="Associated Email">
-          <input type="text" name="login_name" placeholder="Login Name">
-          <input type="text" name="tags" placeholder="Tags">
-        </div>
-        <div class="pass-gen-container">
-          <h4 class="add-new-title">Password Generation Criteria</h4>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="lowerCase" checked="true" name="lowerCase" value="true">
-            <label class="form-check-label" for="lowerCase">Lower Case Letters</label>
+    //Build Divs
+    barDetails.append(detailsSpan);
+    barActions.append(addSpan);
+    barActions.append(shareSpan);
 
-            <input class="form-check-input" type="checkbox" id="upperCase" checked="true" name="upperCase" value="true">
-            <label class="form-check-label" for="upperCase">Upper Case Letters</label>
+    //Build Bar
+    bar.append(barDetails);
+    bar.append(barActions);
 
-            <input class="form-check-input" type="checkbox" id="numbers" checked="true" name="numbers" value="true">
-            <label class="form-check-label" for="numbers">Numbers</label>
-
-            <input class="form-check-input" type="checkbox" id="symbols" checked="true" name="symbols" value="true">
-            <label class="form-check-label" for="symbols">Symbols</label>
-
-            <input type="text" id="length" name="length" value="20" maxlength="2" size="2">
-            <label class="form-check-label" for="length">Length</label>
+    barEditForm.append(`
+    <div class="contain_${id}-add-form" style="display: none;">
+        <form id="formAddSite_${id}">
+          <input  type="text" name="url" placeholder="Site URL">
+          <input  type="email" name="account_email" placeholder="Associated Email">
+          <input  type="text" name="login_name" placeholder="Login Name">
+          <input  type="text" name="tags" placeholder="Tags">
+          <div>
+            <label for="lowerCase">Lower Case Letters</label>
+            <input type="checkbox" checked="true" name="lowerCase" value="true">
+            <label for="upperCase">Upper Case Letters</label>
+            <input type="checkbox" checked="true" name="upperCase" value="true">
+            <label for="digits">Numbers</label>
+            <input type="checkbox" checked="true" name="numbers" value="true">
+            <label for="symbols">Symbols</label>
+            <input type="checkbox" checked="true" name="symbols" value="true">
+            <input type="text" name="length" value="20">
           </div>
-        </div>
-        <button type="submit" name="${org_id}" class="btn btn-success addSiteBtn">Add Site</button>
-      </form>
+          <button type="submit" name="${id}" class="btn btn-primary addSiteBtn">Add Site</button>
+        </form>
+    </div>`);
+    barEditForm.append(`
+    <div class="contain_${id}-share-form" style="display: none;">
+        <form id="formAddUser_${id}">
+        <input type="email" name="userEmail" placeholder="Email">
+        <button type="submit" name="${id}" class="btn btn-primary addUserBtn">Invite</button>
+        </form>
     </div>`);
     barEditForm.append(`<div class="${org_id}-share-form" style="display: none;">`);
 
-  const footer = $(`<footer class="card-list" id="${org_id}">`);
+    const footer = $(`<footer class="card-list_${id}">`);
 
-  // create user table for every org
-  const userTable = $(`<table class="table ${org_id}-table" style="display: none;">`);
-  const tableHead = $(`
+    // create user table for every org
+    const userTable = $(`<table class="table">`);
+    const tableHead = $(`
           <thead>
             <tr>
               <th scope="col">Name</th>
@@ -209,33 +129,16 @@ const createOrgElement = (siteObj) => {
             </tr>
           </thead>
   `);
-  const tableBody = $(`<tbody>`);
+    const tableBody = $(`<tbody>`);
 
-  userTable.append(tableHead);
-  userTable.append(tableBody);
+    userTable.append(tableHead);
+    userTable.append(tableBody)
 
-
-
-  tableBody.append(`
-    <tr class="invite-user-row">
-      <td>
-      <i>Add new user to organization:</i>
-      </td>
-      <td>
-        <form class="inline" id="formAddUser_${org_id}">
-          <input id="emailInputTable" type="email" name="userEmail" placeholder="Email">
-        </form>
-      </td>
-      <td>
-          <button type="submit" name="${org_id}" class="btn btn-outline-success tableShareForm addUserBtn">Invite</button>
-      </td>
-    </tr>`);
-
-  for (let user of orgUsers) {
-    // console.log("URSER", user, `<td>${user['last_name']}, ${user.first_name}</td>`)
-    let uName = $(`<td>${user.last_name}, ${user.first_name}</td>`)
-    let uEmail = $(`<td>${user.email}</td>`)
-    let uDelete = $(`
+    for (let user of orgUsers) {
+      // console.log("URSER", user, `<td>${user['last_name']}, ${user.first_name}</td>`)
+      let uName = $(`<td>${user.last_name}, ${user.first_name}</td>`)
+      let uEmail = $(`<td>${user.email}</td>`)
+      let uDelete = $(`
     <td>
     <form>
       <button type="delete" class="btn btn-outline-danger tableShareForm">Delete</button>
@@ -243,20 +146,20 @@ const createOrgElement = (siteObj) => {
     </td>
     `)
 
-    const userRows = $(`<tr id="orgUsers_${org_id}" class="table">`);
-    userRows.append(uName)
-    userRows.append(uEmail)
-    userRows.append(uDelete)
-    tableBody.append(userRows);
+      const userRows = $(`<tr id="orgUsers_${id}" class="table">`);
+      userRows.append(uName)
+      userRows.append(uEmail)
+      userRows.append(uDelete)
+      tableBody.append(userRows);
+    }
+
+    barEditForm.append(userTable);
+
+    header.prepend(bar);
+    header.append(barEditForm);
+    container.append(header);
+    container.append(footer);
+
+    return container;
   }
-
-
-  barEditForm.append(userTable);
-
-  header.prepend(bar);
-  header.append(barEditForm);
-  container.append(header);
-  container.append(footer);
-
-  return container;
 }
