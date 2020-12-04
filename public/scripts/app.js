@@ -1,9 +1,9 @@
 $(document).ready(function () {
   console.log("DOC READY")
 
-  fetch(2);
-  // fetchRenderOrgBars(2);
-// ==================================
+  loadOrgs(2);//Takes UserID
+  // org(18) //OrgId
+  // ==================================
 
 
   // loadAllSites(renderOrgWSites);
@@ -63,7 +63,7 @@ $(document).ready(function () {
       url: `/api/orgs/new`,
       data: $(`#formAddOrg`).serialize()
     })
-    .then(loadAllSites(renderOrgWSites))
+      .then(loadAllSites(renderOrgWSites))
   });
 
   // show add site form / show share org form

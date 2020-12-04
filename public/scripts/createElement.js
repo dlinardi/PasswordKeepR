@@ -1,86 +1,6 @@
-//Test DATA FOR USERS
-let orgUsersTEST = [
-  {
-    user_id: 55,
-    first_name: "Jaiden",
-    last_name: "Cantrell",
-    email: "kingma@icloud.com",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 53,
-    first_name: "Saul",
-    last_name: "Holloway",
-    email: "jonadab@icloud.com",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 45,
-    first_name: "Jamari",
-    last_name: "Kane",
-    email: "shazow@live.com",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 103,
-    first_name: "Emely",
-    last_name: "Kelly",
-    email: "ilial@gmail.com",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 20,
-    first_name: "Talan",
-    last_name: "Meza",
-    email: "glenz@outlook.com",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 102,
-    first_name: "Zoe",
-    last_name: "Norton",
-    email: "duchamp@gmail.com",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 54,
-    first_name: "Xander",
-    last_name: "Santiago",
-    email: "mbswan@verizon.net",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 52,
-    first_name: "Jimmy",
-    last_name: "Steele",
-    email: "andale@msn.com",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 2,
-    first_name: "Suzy",
-    last_name: "Test2",
-    email: "test2@test.ca",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 87,
-    first_name: "Melina",
-    last_name: "Velazquez",
-    email: "sisyphus@att.net",
-    image: "./images/profile-hex.png"
-  },
-  {
-    user_id: 56,
-    first_name: "Anahi",
-    last_name: "Walls",
-    email: "mglee@hotmail.com",
-    image: "./images/profile-hex.png"
-  }
-]
-
 const createSiteElement = (siteObj) => {
   const { url, login_name, password } = siteObj;
+  console.log("CREATING ELEMENT", url, login_name, password)
 
   // creating structure of site container
   const card = $('<article class="sites">');
@@ -124,12 +44,13 @@ const createSiteElement = (siteObj) => {
   return card;
 };
 
-const createOrgElement = (siteObj, orgUsers) => {
-  console.log("CREATING ELEMENT", siteObj, orgUsers)
+//====Create Org Elm=================================================================
 
-  const { org_name, org_id } = siteObj;
+const createOrgElement = (orgObj, orgUsers) => {
+
+  const { name, id } = orgObj;
   // creating structure of site container
-  const container = $(`<section class="sites-container ${org_id}">`)
+  const container = $(`<section class="sites-container ${id}">`)
   const header = $(`<header class="org-site-head">`)
 
   const bar = $(`<div class="org-bar">`);
@@ -139,7 +60,7 @@ const createOrgElement = (siteObj, orgUsers) => {
   const barActions = $(' <div class="new-site">');
 
   //Div 1 (orgs-in-bar)
-  const detailsSpan = $(`<span class="specific-org">${org_name}</span>`);
+  const detailsSpan = $(`<span class="specific-org">${name}</span>`);
 
   const orgIcon = $('<i class="fas fa-user">');
   detailsSpan.prepend(orgIcon);
@@ -147,11 +68,11 @@ const createOrgElement = (siteObj, orgUsers) => {
   // detailsSpan.append(orgName);
 
   //Div 2 (new-org)
-  const addSpan = $(`<span name="${org_id}" id="${org_id}-add-form" class="add-site-button">`);
+  const addSpan = $(`<span name="${id}" id="${id}-add-form" class="add-site-button">`);
   const addBtn = $(`<a class="btn add" name="add_site" onclick="this.blur();" role="button">Add Site <i class="fas fa-plus"></i></a>`)
   addSpan.append(addBtn);
 
-  const shareSpan = $(`<span name="${org_id}" id="${org_id}-share-form" class="share-org-button">`);
+  const shareSpan = $(`<span name="${id}" id="${id}-share-form" class="share-org-button">`);
   const shareBtn = $(`<a class="btn share" name="share_org" onclick="this.blur();" role="button"> Share <i class="fas fa-plus"></i></a>`);
   shareSpan.append(shareBtn);
 
@@ -165,8 +86,8 @@ const createOrgElement = (siteObj, orgUsers) => {
   bar.append(barActions);
 
   barEditForm.append(`
-    <div class="contain_${org_id}-add-form" style="display: none;">
-        <form id="formAddSite_${org_id}">
+    <div class="contain_${id}-add-form" style="display: none;">
+        <form id="formAddSite_${id}">
           <input  type="text" name="url" placeholder="Site URL">
           <input  type="email" name="account_email" placeholder="Associated Email">
           <input  type="text" name="login_name" placeholder="Login Name">
@@ -182,18 +103,18 @@ const createOrgElement = (siteObj, orgUsers) => {
             <input type="checkbox" checked="true" name="symbols" value="true">
             <input type="text" name="length" value="20">
           </div>
-          <button type="submit" name="${org_id}" class="btn btn-primary addSiteBtn">Add Site</button>
+          <button type="submit" name="${id}" class="btn btn-primary addSiteBtn">Add Site</button>
         </form>
     </div>`);
     barEditForm.append(`
-    <div class="contain_${org_id}-share-form" style="display: none;">
-        <form id="formAddUser_${org_id}">
+    <div class="contain_${id}-share-form" style="display: none;">
+        <form id="formAddUser_${id}">
         <input type="email" name="userEmail" placeholder="Email">
-        <button type="submit" name="${org_id}" class="btn btn-primary addUserBtn">Invite</button>
+        <button type="submit" name="${id}" class="btn btn-primary addUserBtn">Invite</button>
         </form>
     </div>`);
 
-  const footer = $(`<footer class="card-list" id="${org_id}">`);
+  const footer = $(`<footer class="card-list" id="${id}">`);
 
   // create user table for every org
   const userTable = $(`<table class="table">`);
@@ -223,7 +144,7 @@ const createOrgElement = (siteObj, orgUsers) => {
     </td>
     `)
 
-    const userRows = $(`<tr id="orgUsers_${org_id}" class="table">`);
+    const userRows = $(`<tr id="orgUsers_${id}" class="table">`);
     userRows.append(uName)
     userRows.append(uEmail)
     userRows.append(uDelete)
@@ -239,8 +160,3 @@ const createOrgElement = (siteObj, orgUsers) => {
 
   return container;
 }
-
-const createAddSiteForm = () => {
-
-};
-
