@@ -85,15 +85,11 @@ module.exports = (db) => {
             .json({ error: err.message });
         });
     })
-    .get("/:id/sites/:siteId", (req, res) => {
-      const reqs = req.body
-      console.log("R===============================>>>>\n\n", reqs,"\n\n====================")
-      const { id, siteId } = req.params;
-
-      dbHelpers.getOrgUrlsWithSiteId(id, siteId)
+    .get("/:id/sites/:sites_id", (req, res) => {
+      dbHelpers.getOrgUrlsWithSiteId(req.params.id, req.params.sites_id)
         .then(orgs => {
           if (!orgs) {
-            res.json({ error: `${id} or ${siteId} is not a valid id.` });
+            res.json({ error: `${req.params.id} or ${req.params.sites_id} is not a valid id.` });
           } else {
             res.json(orgs);
           }
@@ -126,7 +122,7 @@ module.exports = (db) => {
     .post("/:id/addSite", (req, res) => {
       req.body.org_id = req.params.id;
       const site = req.body;
-      console.log("ROUTE>>>>>>>>>>", site)
+      // console.log("ROUTE>>>>>>>>>>", site)
       dbHelpers.addSite(site)
         .then(site => {
           console.log(site);
@@ -142,8 +138,10 @@ module.exports = (db) => {
         .catch(err => { console.log(err) });
     })
     .post("/:id/sites/edit/:siteId", (req, res) => {
-      const { userId, orgId } = req.params;
-      dbHelpers.updateSite(userId, orgId)
+      const { userId, siteId } = req.params;
+      const form = req.body
+      console.log("R===============================>>>>\n\n", form,"\n\n====================")
+      dbHelpers.updateSite(siteId, form, )
         .then(res => {
           console.log(user);
         })
