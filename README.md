@@ -10,6 +10,7 @@
 ### Known Issues
 - Creating a New Organization requires a refresh in order to show new content
 - User Removal is working, but server sending a 500 status error
+- Responsive design not fully implemented.
 
 ## Screenshots
 !["#"]()
