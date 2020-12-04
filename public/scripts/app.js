@@ -23,7 +23,6 @@ $(document).ready(function () {
   $(document).on('click', '.addSiteBtn', function (event) {
     event.preventDefault();
     const org_id = $(this)[0].name
-    console.log(org_id)
     // POST FORM
     $.ajax({
       method: 'POST',
@@ -39,8 +38,6 @@ $(document).ready(function () {
   $(document).on('click', '.addUserBtn', function (event) {
     event.preventDefault();
     const org_id = $(this)[0].name
-    console.log(org_id)
-    // POST FORM
 
     $.ajax({
       method: 'POST',
@@ -52,7 +49,6 @@ $(document).ready(function () {
 
   $(document).on('click', '.addOrgBtn', function (event) {
     event.preventDefault();
-    // POST FORM
     $.ajax({
       method: 'POST',
       url: `/api/orgs/new`,
@@ -62,14 +58,15 @@ $(document).ready(function () {
   });
 
   // show add site form / show share org form
-  // WORK IN PROGRESS >>>>>>>
 
   $(document).on('click', '.add-site-button', function (e) {
     e.preventDefault();
+
     const org_id = $(this).attr("name");
     const addForm = $(`.${org_id}-add-form`);
     const table = $(`.${org_id}-table`);
     const shareForm = $(`.${org_id}-share-form`);
+
 
     addForm.fadeToggle();
     shareForm.hide();
@@ -78,6 +75,7 @@ $(document).ready(function () {
 
   $(document).on('click', '.share-org-button', function (e) {
     e.preventDefault();
+
     const org_id = $(this).attr("name");
     const addForm = $(`.${org_id}-add-form`);
     const table = $(`.${org_id}-table`);

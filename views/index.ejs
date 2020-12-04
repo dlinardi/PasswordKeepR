@@ -50,13 +50,10 @@
 
     <div class="new-org">
       <span>
-        <a class="btn" href="#" onclick="this.blur();" role="button">
-          New Organization <i class="fas fa-plus"></i>
-        </a>
         <form id="formAddOrg">
-          <input type="text" name="org_name">
-          <button type="submit" class="btn btn-primary addOrgBtn">Add</button>
-          </form>
+          <input class="new-org-input" type="text" name="org_name" maxlength="30" placeholder="New Organization">
+          <button type="submit" onclick="this.blur();" class="addOrgBtn">Add <i class="fas fa-users"></i></button>
+        </form>
       </span>
     </div>
 

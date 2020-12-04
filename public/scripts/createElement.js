@@ -145,11 +145,11 @@ const createOrgElement = (siteObj) => {
   // detailsSpan.append(orgName);
 
   //Div 2 (new-org)
-  const addSpan = $(`<span name="${org_id}" class="add-site-button">`);
+  const addSpan = $(`<span name="${org_id}" class="add-site-button active">`);
   const addBtn = $(`<a class="btn add" name="add_site" onclick="this.blur();" role="button">Add Site <i class="fas fa-address-card"></i></a>`)
   addSpan.append(addBtn);
 
-  const shareSpan = $(`<span name="${org_id}" class="share-org-button">`);
+  const shareSpan = $(`<span name="${org_id}" class="share-org-button active">`);
   const shareBtn = $(`<a class="btn share" name="share_org" onclick="this.blur();" role="button"> Share <i class="fas fa-share"></i></a>`);
   shareSpan.append(shareBtn);
 

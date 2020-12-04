@@ -113,14 +113,60 @@ section.nav-org-bar {
     }
   }
 
-  .new-org a {
+  .new-org {
+
+    input.new-org-input {
+      border: 2px $darkGrey solid;
+      outline: none;
+      padding: 0.5em;
+      cursor: text;
+      overflow: hidden;
+      text-align: initial;
+      text-overflow: ellipsis;
+      user-select: none;
+      vertical-align: middle;
+      white-space: nowrap;
+      width: 300px;
+      background-color: #989898;
+      @include transition-out;
+      &:focus {
+        background-color: #fbfbf8;
+        @include transition-in;
+      }
+    }
+
+    span form#formAddOrg {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+  }
+
+  .new-org button {
     color: white;
+    background-color: $darkGrey;
+    border: none;
     margin-right: 1.5em;
+    padding: 0.55em;
+    border-radius: 0;
     &:hover {
       background-color: $lightGrey;
+      border: none;
+    }
+    &:active {
+      background-color: $lightGrey;
+      border: none;
+    }
+    &:focus {
+      background-color: $lightGrey;
+      border: none;
+      outline: none;
     }
 
     i {
+      margin-left: 0.5em;
       font-size: 0.8em;
     }
   }
@@ -217,6 +263,7 @@ main.container {
             margin-left: 0.4em;
             font-size: 0.8em;
           }
+
         }
       }
     }
@@ -430,8 +477,6 @@ header.org-site-head {
     h4 {
       font-weight: 700;
     }
-
-
 
     form div.site-details-container {
       padding-bottom: 1.5em;
