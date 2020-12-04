@@ -89,27 +89,36 @@ const renderOrgSites = (sites, orgId) => {
   }
 };
 
-const loadOrgs = (userId) => {
+const fetchUserOrgs = (userId) => {
   $.ajax(`/api/users/${userId}/orgs`, { method: "GET" })  //Fetch userOrgs
-    .then(userOrgs => {
-      //ITERATE ORGS
-      for (const org of userOrgs) {
-        $.ajax(`/api/orgs/${org.id}/users`, { method: "GET" })  //Fetch Users in that Org
-          .then(orgUsers => {
-            console.log("Rendering Orgs")
-            renderOrgBar(org, orgUsers)
-            return org
-          })
-          .then(org => {
-            console.log(">>>>>",org)
-            $.ajax(`/api/orgs/${org.id}/Sites`, { method: "GET" })  //Fetch Sites for that Org and Render
-              .then((sites) => {
-                console.log("Rendering Sites")
-                renderOrgSites(sites, org.id)
+}
 
+
+const loadRenderAll = () => {
+  $.ajax(`/api/users/id`, { method: "GET" })  //Fetch UserId
+    .then((userId) => {
+      $.ajax(`/api/users/${userId}/orgs`, { method: "GET" })  //Fetch userOrgs
+        // return fetchUserOrgs(userId)
+        .then(userOrgs => {
+          //ITERATE ORGS
+          for (const org of userOrgs) {
+            $.ajax(`/api/orgs/${org.id}/users`, { method: "GET" })  //Fetch Users in that Org
+              .then(orgUsers => {
+                console.log("Rendering Orgs")
+                renderOrgBar(org, orgUsers)
+                return org
               })
-          })
-      }
+              .then(org => {
+                console.log(">>>>>", org)
+                $.ajax(`/api/orgs/${org.id}/Sites`, { method: "GET" })  //Fetch Sites for that Org and Render
+                  .then((sites) => {
+                    console.log("Rendering Sites")
+                    renderOrgSites(sites, org.id)
+
+                  })
+              })
+          }
+        })
     })
     .catch(error => console.log(error));
 }

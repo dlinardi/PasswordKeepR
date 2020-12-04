@@ -11,8 +11,7 @@ const loadSearchResults = (searchQuery, action) => {
 };
 
 const search = (searchQuery) => {
-  $
-  .ajax({
+  $.ajax({
     url: "/search",
     method: "POST",
     data: $(searchQuery).serialize()

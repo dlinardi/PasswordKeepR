@@ -34,6 +34,12 @@ module.exports = (db) => {
             .json({ error: err.message });
         });
     })
+    .get("/id", (req, res) => {
+      const { userId } = req.session;
+      console.log("USERid",userId)
+      res.json(userId);
+    })
+
     .get("/:id", (req, res) => {
       dbHelpers.getUserWithId(req.params.id)
         .then(users => {

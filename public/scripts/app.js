@@ -1,12 +1,11 @@
 $(document).ready(function () {
   console.log("DOC READY")
 
-  loadOrgs(2);//Takes UserID
-  // org(18) //OrgId
+  loadRenderAll();//Takes UserID
   // ==================================
-
-
   // loadAllSites(renderOrgWSites);
+
+
 
   $('#search-vault').on('input', function () {
     const userInput = $(this).val();
@@ -15,7 +14,8 @@ $(document).ready(function () {
       search(userInput);
     } else {
       $('.sites-container').remove();
-      loadAllSites(renderOrgWSites);
+      // loadAllSites(renderOrgWSites);
+      loadRenderAll()
     }
   })
 
