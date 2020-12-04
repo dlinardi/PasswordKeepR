@@ -6,7 +6,6 @@ $(document).ready(function () {
   // loadAllSites(renderOrgWSites);
 
 
-
   $('#search-vault').on('input', function () {
     const userInput = $(this).val();
     if (userInput) {
@@ -36,17 +35,15 @@ $(document).ready(function () {
       data: $(`#formAddSite_${org_id}`).serialize()
     })
       // .then(loadOrgSites(org_id,renderOrgSites))
-      .then($('.sites-container').remove())
-      .then(loadAllSites(renderOrgWSites))
+      .then($(`.site-tiles.${org_id}`).remove())
+      .then(loadRenderOrg(org_id))
     //=======^^^^^^^^^^^^^^^^^^^^^^^================== NEED to render Only org rather than whole container
   });
 
   $(document).on('click', '.addUserBtn', function (event) {
     event.preventDefault();
     const org_id = $(this)[0].name
-    console.log(org_id)
     // POST FORM
-
     $.ajax({
       method: 'POST',
       url: `/api/orgs/${org_id}/addUser`,
@@ -63,7 +60,8 @@ $(document).ready(function () {
       url: `/api/orgs/new`,
       data: $(`#formAddOrg`).serialize()
     })
-      .then(loadAllSites(renderOrgWSites))
+      .then(loadRenderAll())
+      //=======^^^^^^^^^^^^^^^^^^^^^^^================== NEED to render Only org rather than whole container
   });
 
   // show add site form / show share org form

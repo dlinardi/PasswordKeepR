@@ -36,7 +36,7 @@ module.exports = (db) => {
     })
     .get("/id", (req, res) => {
       const { userId } = req.session;
-      console.log("USERid",userId)
+      console.log("USERid", userId)
       res.json(userId);
     })
 
@@ -70,6 +70,26 @@ module.exports = (db) => {
             .json({ error: err.message });
         });
     })
+
+
+    // .get("/:org_id/sites", (req, res) => {
+    //   const { userId } = req.session;
+    //   const orgId = req.params.id
+    //   console.log("SUER", orgId)
+    //   dbHelpers.getUserSitesByOrg(userId, orgId)
+    //     .then(users => {
+    //       if (!users) {
+    //         res.json({ error: `${req.params.id} is not a valid id.` });
+    //       } else {
+    //         res.json(users);
+    //       }
+    //     })
+    //     .catch(err => {
+    //       res
+    //         .status(500)
+    //         .json({ error: err.message });
+    //     });
+    // })
 
 
 

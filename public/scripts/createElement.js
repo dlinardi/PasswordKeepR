@@ -47,8 +47,8 @@ const createSiteElement = (siteObj) => {
 //====Create Org Elm=================================================================
 
 const createOrgElement = (orgObj, orgUsers) => {
-  if (orgUsers) {
 
+  if (orgUsers) {
     const { name, id } = orgObj;
     // creating structure of site container
     const container = $(`<section class="sites-container ${id}">`)
@@ -115,7 +115,7 @@ const createOrgElement = (orgObj, orgUsers) => {
         </form>
     </div>`);
 
-    const footer = $(`<footer class="card-list" id="${id}">`);
+    const footer = $(`<footer class="card-list_${id}">`);
 
     // create user table for every org
     const userTable = $(`<table class="table">`);

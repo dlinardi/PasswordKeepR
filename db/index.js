@@ -181,8 +181,8 @@ const values = [userId];
 }
 
 
-const getEverything = (userId) => {
-  console.log("Get all Sites for user:", userId)
+const getUserSitesByOrg = (userId, orgId) => {
+  console.log("Get all Sites for user:", userId, orgId)
 
   //Outer Join to show orgs w/o sites
     const queryString =`
@@ -191,15 +191,15 @@ const getEverything = (userId) => {
     JOIN org_users on org_users.user_id = users.id
     left outer JOIN organizations orgs ON org_users.org_id = orgs.id
     left outer  JOIN sites ON sites.org_id = orgs.id
-    WHERE users.id = $1
+    WHERE users.id = $1 AND orgs.id = $2
     ORDER BY orgs.name, sites.url;
     `;
-const values = [userId];
+const values = [userId, orgId];
 
   return Promise.resolve(pool.query(queryString, values)
     .then(res => {
       results = res.rows;
-      // console.log("==============QAllSites",results)
+      console.log("==============user/org",results)
       return results
     })
     .catch(err => { console.log(err) })
@@ -544,6 +544,7 @@ module.exports = {
   getOrgUrlsWithSiteId,
   getUrlWithTags,
   getOrgUsers,
+  getUserSitesByOrg,
   getOrgUsersWithId,
   getOrgsOfUser,
   deleteSite,

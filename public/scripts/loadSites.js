@@ -85,15 +85,16 @@ const renderOrgBar = (org, orgUsers) => {
 
 const renderOrgSites = (sites, orgId) => {
 
-  // $(`#vault.sites-container.${orgId}`).empty()
-
+  $(`.card-list_${orgId}`).empty()
   for (const site of sites) {
     console.log("SITE", sites, orgId)
-    $(`.sites-container.${orgId}`).append(createSiteElement(site));
+    $(`.card-list_${orgId}`).append(createSiteElement(site));
   }
 };
 
+
 const fetchUserOrgs = (userId) => {
+  // Try to Make Modular
   $.ajax(`/api/users/${userId}/orgs`, { method: "GET" })  //Fetch userOrgs
     .then((userOrgs) => {
       return userOrgs
@@ -127,6 +128,17 @@ const loadRenderAll = () => {
         })
     })
     .catch(error => console.log(error));
+}
+
+const loadRenderOrg = (orgId) => {
+  $(`#vault`).empty()
+      $.ajax(`/api/orgs/${orgId}/sites`, { method: "GET" })  //Fetch Sites for that Org and Render
+        .then((sites) => {
+          //Empty Org Container???
+          console.log("Rendering Sites!!!!", sites)
+          renderOrgSites(sites)
+
+        })
 }
 
 
