@@ -157,7 +157,7 @@ const createOrgElement = (orgObj, orgUsers) => {
           </form>
         </td>
         <td>
-            <button type="submit" class="btn btn-outline-success tableShareForm addUserBtn">Invite</button>
+            <button type="submit" class="btn btn-outline-success tableShareForm addUserBtn" name="${id}">Invite</button>
         </td>
       </tr>`);
 
