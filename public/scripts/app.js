@@ -31,7 +31,7 @@ $(document).ready(function () {
     $.ajax({
       method: 'POST',
       url: `/api/orgs/${org_id}/addSite`,
-      data: $(`#formAddSite_${org_id}`).serialize()
+      data: $(`.formAddSite_${org_id}`).serialize()
     })
       // .then(loadOrgSites(org_id,renderOrgSites))
       .then($(`.site-tiles.${org_id}`).remove())

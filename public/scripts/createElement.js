@@ -75,7 +75,7 @@ const createOrgElement = (orgObj, orgUsers) => {
     addSpan.append(addBtn);
 
     const shareSpan = $(`<span name="${id}" class="share-org-button active">`);
-    const shareBtn = $(`<a class="btn share" name="share_org" onclick="this.blur();" role="button"> Share <i class="fas fa-share"></i></a>`);
+    const shareBtn = $(`<a class="btn share" name="share_org" onclick="this.blur();" role="button"> Edit <i class="fas fa-share"></i></a>`);
     shareSpan.append(shareBtn);
 
     //Build Divs
