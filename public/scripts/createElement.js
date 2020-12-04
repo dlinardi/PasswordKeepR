@@ -114,7 +114,7 @@ const createOrgElement = (orgObj, orgUsers) => {
         <button type="submit" name="${id}" class="btn btn-primary addUserBtn">Invite</button>
         </form>
     </div>`);
-    barEditForm.append(`<div class="${org_id}-share-form" style="display: none;">`);
+    barEditForm.append(`<div class="${id}-share-form" style="display: none;">`);
 
     const footer = $(`<footer class="card-list_${id}">`);
 
