@@ -69,12 +69,12 @@ const createOrgElement = (orgObj, orgUsers) => {
     // detailsSpan.append(orgName);
 
     //Div 2 (new-org)
-    const addSpan = $(`<span name="${id}" id="${id}-add-form" class="add-site-button">`);
-    const addBtn = $(`<a class="btn add" name="add_site" onclick="this.blur();" role="button">Add Site <i class="fas fa-plus"></i></a>`)
+    const addSpan = $(`<span name="${id}" class="add-site-button active">`);
+    const addBtn = $(`<a class="btn add" name="add_site" onclick="this.blur();" role="button">Add Site <i class="fas fa-address-card"></i></a>`)
     addSpan.append(addBtn);
 
-    const shareSpan = $(`<span name="${id}" id="${id}-share-form" class="share-org-button">`);
-    const shareBtn = $(`<a class="btn share" name="share_org" onclick="this.blur();" role="button"> Share <i class="fas fa-plus"></i></a>`);
+    const shareSpan = $(`<span name="${id}" class="share-org-button active">`);
+    const shareBtn = $(`<a class="btn share" name="share_org" onclick="this.blur();" role="button"> Share <i class="fas fa-share"></i></a>`);
     shareSpan.append(shareBtn);
 
     //Build Divs
@@ -87,25 +87,36 @@ const createOrgElement = (orgObj, orgUsers) => {
     bar.append(barActions);
 
     barEditForm.append(`
-    <div class="contain_${id}-add-form" style="display: none;">
-        <form id="formAddSite_${id}">
-          <input  type="text" name="url" placeholder="Site URL">
-          <input  type="email" name="account_email" placeholder="Associated Email">
-          <input  type="text" name="login_name" placeholder="Login Name">
-          <input  type="text" name="tags" placeholder="Tags">
-          <div>
-            <label for="lowerCase">Lower Case Letters</label>
-            <input type="checkbox" checked="true" name="lowerCase" value="true">
-            <label for="upperCase">Upper Case Letters</label>
-            <input type="checkbox" checked="true" name="upperCase" value="true">
-            <label for="digits">Numbers</label>
-            <input type="checkbox" checked="true" name="numbers" value="true">
-            <label for="symbols">Symbols</label>
-            <input type="checkbox" checked="true" name="symbols" value="true">
-            <input type="text" name="length" value="20">
+    <div class="${id}-add-form add-site-form" style="display: none;">
+      <form id="formAddSite_${id}">
+        <div class="site-details-container">
+          <h4 class="add-new-title">Site Details</h4>
+          <input type="url" name="url" placeholder="Site URL">
+          <input type="email" name="account_email" placeholder="Associated Email">
+          <input type="text" name="login_name" placeholder="Login Name">
+          <input type="text" name="tags" placeholder="Tags">
+        </div>
+        <div class="pass-gen-container">
+          <h4 class="add-new-title">Password Generation Criteria</h4>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="lowerCase" checked="true" name="lowerCase" value="true">
+            <label class="form-check-label" for="lowerCase">Lower Case Letters</label>
+
+            <input class="form-check-input" type="checkbox" id="upperCase" checked="true" name="upperCase" value="true">
+            <label class="form-check-label" for="upperCase">Upper Case Letters</label>
+
+            <input class="form-check-input" type="checkbox" id="numbers" checked="true" name="numbers" value="true">
+            <label class="form-check-label" for="numbers">Numbers</label>
+
+            <input class="form-check-input" type="checkbox" id="symbols" checked="true" name="symbols" value="true">
+            <label class="form-check-label" for="symbols">Symbols</label>
+
+            <input type="text" id="length" name="length" value="20" maxlength="2" size="2">
+            <label class="form-check-label" for="length">Length</label>
           </div>
-          <button type="submit" name="${id}" class="btn btn-primary addSiteBtn">Add Site</button>
-        </form>
+        </div>
+        <button type="submit" name="${id}" class="btn btn-success addSiteBtn">Add Site</button>
+      </form>
     </div>`);
     barEditForm.append(`
     <div class="contain_${id}-share-form" style="display: none;">
@@ -116,10 +127,10 @@ const createOrgElement = (orgObj, orgUsers) => {
     </div>`);
     barEditForm.append(`<div class="${id}-share-form" style="display: none;">`);
 
-    const footer = $(`<footer class="card-list_${id}">`);
+    const footer = $(`<footer class="card-list" id="list-${id}">`);
 
     // create user table for every org
-    const userTable = $(`<table class="table">`);
+    const userTable = $(`<table class="table ${id}-table" style="display: none;">`);
     const tableHead = $(`
           <thead>
             <tr>
@@ -128,23 +139,38 @@ const createOrgElement = (orgObj, orgUsers) => {
               <th scope="col"></th>
             </tr>
           </thead>
-  `);
+    `);
     const tableBody = $(`<tbody>`);
 
     userTable.append(tableHead);
-    userTable.append(tableBody)
+    userTable.append(tableBody);
+
+    tableBody.append(`
+      <tr class="invite-user-row">
+        <td>
+        <i>Add new user to organization:</i>
+        </td>
+        <td>
+          <form class="inline" id="formAddUser_${id}">
+            <input id="emailInputTable" type="email" name="userEmail" placeholder="Email">
+          </form>
+        </td>
+        <td>
+            <button type="submit" name="${id}" class="btn btn-outline-success tableShareForm addUserBtn">Invite</button>
+        </td>
+      </tr>`);
 
     for (let user of orgUsers) {
       // console.log("URSER", user, `<td>${user['last_name']}, ${user.first_name}</td>`)
       let uName = $(`<td>${user.last_name}, ${user.first_name}</td>`)
       let uEmail = $(`<td>${user.email}</td>`)
       let uDelete = $(`
-    <td>
-    <form>
-      <button type="delete" class="btn btn-outline-danger tableShareForm">Delete</button>
-    </form>
-    </td>
-    `)
+        <td>
+        <form>
+          <button type="delete" class="btn btn-outline-danger tableShareForm">Delete</button>
+        </form>
+        </td>
+        `)
 
       const userRows = $(`<tr id="orgUsers_${id}" class="table">`);
       userRows.append(uName)
