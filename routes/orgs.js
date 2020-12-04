@@ -85,16 +85,18 @@ module.exports = (db) => {
             .json({ error: err.message });
         });
     })
-    .get("/:id/sites/:sites_id", (req, res) => {
-      const reqs = req.params.body
-      console.log("R===============================>>>>\n\n", reqs)
-      // dbHelpers.getOrgUrlsWithSiteId(req.params.id, req.params.sites_id)
-      //   .then(orgs => {
-      //     if (!orgs) {
-      //       res.json({ error: `${req.params.id} or ${req.params.sites_id} is not a valid id.` });
-      //     } else {
-      //       res.json(orgs);
-      //     }
+    .get("/:id/sites/:siteId", (req, res) => {
+      const reqs = req.body
+      console.log("R===============================>>>>\n\n", reqs,"\n\n====================")
+      const { id, siteId } = req.params;
+
+      dbHelpers.getOrgUrlsWithSiteId(id, siteId)
+        .then(orgs => {
+          if (!orgs) {
+            res.json({ error: `${id} or ${siteId} is not a valid id.` });
+          } else {
+            res.json(orgs);
+          }
         })
         .catch(err => {
           res
