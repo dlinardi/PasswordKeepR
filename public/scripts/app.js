@@ -165,6 +165,7 @@ $(document).ready(function () {
     e.preventDefault();
     const orgId = $(this).attr("name");
     const siteId = $(this).parent().attr("name");
+    const editForm = $(`.${orgId}-edit-form`);
 
     $.ajax({
       method: 'POST',
@@ -172,6 +173,8 @@ $(document).ready(function () {
       data: $(`.formEditSite_${orgId}`).serialize()
     })
       .then(loadRenderOrg(orgId));
+
+    editForm.hide();
 
   });
 
